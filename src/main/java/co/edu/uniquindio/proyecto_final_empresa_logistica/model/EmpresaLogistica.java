@@ -97,12 +97,9 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     public boolean agregarUsuario(Usuario usuario) {
         boolean centinela = false;
         if (!verificarUsuario(usuario.getId())) {
-            if (verificarUsuario(usuario.getId())) {
-                usuarios.add(usuario);
-
-                centinela = true;
-            }
-
+            usuarios.add(usuario);
+            centinela = true;
+            System.out.println("Usuario agregado com sucesso" + centinela);
         }
         return centinela;
     }

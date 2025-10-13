@@ -66,7 +66,7 @@ public class UsuarioViewController {
 
     @FXML
     void onAgregarUsuario() {
-        actualizarUsuario();
+        agregarUsuario();
 
     }
 
@@ -118,7 +118,7 @@ public class UsuarioViewController {
     }
     private Usuario buildUsuario() {
 
-        Usuario usuario = new Usuario(txtNombreCompleto.getText(), txtPasswore.getText(), txtIdUsuario.getText(),  txtCorreoElectronico.getText(), txtNumeroTelefono.getText());
+        Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombreCompleto.getText(), txtCorreoElectronico.getText(),  txtNumeroTelefono.getText(), txtPasswore.getText());
         return usuario;
 
     }
@@ -132,13 +132,14 @@ public class UsuarioViewController {
     }
     private void agregarUsuario() {
         Usuario usuario = buildUsuario();
+        System.out.println(usuario);
         if (usuarioController.agregarUsuario(usuario)) {
             usuarios.add(usuario);
             limpiarCamposUsuario();
         }
     }
-    private void obtenerUsuario(String id) {
-        usuarios.addAll(usuarioController.obtenerUsuario(id));
+    private void obtenerUsuario() {
+        usuarios.addAll(usuarioController.obtenerUsuario());
     }
     private void mostrarInfoUsuario(Usuario usuario) {
         if (usuario != null) {
@@ -172,7 +173,7 @@ public class UsuarioViewController {
         initDataBinding();
 
         // Obtiene la lista
-        obtenerUsuario(txtIdUsuario.getText());
+        obtenerUsuario();
 
         // Limpiar la tabla
         tblListUsuarios.getItems().clear();

@@ -1,11 +1,14 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.controller;
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 
 import java.util.Collection;
 
 public class UsuarioController {
+
+    ModelFactory modelFactory = ModelFactory.getInstance();
     EmpresaLogistica empresaLogistica;
 
     public UsuarioController(EmpresaLogistica empresaLogistica) {
@@ -13,19 +16,19 @@ public class UsuarioController {
     }
 
     public boolean agregarUsuario(Usuario usuario) {
-        return empresaLogistica.agregarUsuario(usuario);
+        return modelFactory.agregarUsuario(usuario);
     }
 
-    public Collection<Usuario> obtenerUsuario(String id) {
-        return empresaLogistica.getUsuarios();
+    public Collection<Usuario> obtenerUsuario() {
+        return modelFactory.listaUsuarios();
     }
 
     public boolean eliminarUsuario(String id) {
-        return empresaLogistica.eliminarUsuario(id);
+        return modelFactory.eliminarUsuario(id);
     }
 
     public boolean actualizarUsuario(String id, Usuario actualizado) {
-        return empresaLogistica.actualizarUsuario(id, actualizado);
+        return modelFactory.actualizarUsuario(id, actualizado);
     }
 
     public boolean verificarUsuario(String id) {

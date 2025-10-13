@@ -6,6 +6,8 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 
+import java.util.Collection;
+
 public class ModelFactory implements IModelFactoryServices {
 
     private static ModelFactory instance;
@@ -74,7 +76,12 @@ public class ModelFactory implements IModelFactoryServices {
 
     @Override
     public boolean agregarUsuario(Usuario  usuario) {
-        return false;
+        System.out.println("Model Factory");
+        return empresaLogistica.agregarUsuario(usuario);
+    }
+
+    public Collection<Usuario> listaUsuarios() {
+        return empresaLogistica.getUsuarios();
     }
 
     @Override
@@ -84,12 +91,12 @@ public class ModelFactory implements IModelFactoryServices {
 
     @Override
     public boolean eliminarUsuario(String id) {
-        return false;
+        return empresaLogistica.eliminarUsuario(id);
     }
 
     @Override
     public boolean actualizarUsuario(String id, Usuario actualizado) {
-        return false;
+        return empresaLogistica.actualizarUsuario(id, actualizado);
     }
 
     @Override
