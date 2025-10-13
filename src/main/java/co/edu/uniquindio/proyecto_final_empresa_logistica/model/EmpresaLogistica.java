@@ -1,10 +1,12 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
-public class EmpresaLogistica {
+public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
     private String nombre;
     private Collection<Administrador> administradores;
@@ -89,5 +91,70 @@ public class EmpresaLogistica {
 
         }
         return tipo;
+    }
+
+    @Override
+    public boolean agregarUsuario(Usuario usuario) {
+        boolean centinela = false;
+        if (!verificarUsuario(usuario.getId())) {
+            if (verificarUsuario(usuario.getId())) {
+                usuarios.add(usuario);
+
+                centinela = true;
+            }
+
+        }
+        return centinela;
+    }
+
+    @Override
+    public Usuario obtenerUsuario(String id) {
+        for(Usuario usuario : usuarios) {
+            if (usuario.getId().equals(id)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean eliminarUsuario(String id) {
+        boolean centinela = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equals(id)) {
+                usuarios.remove(usuario);
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    @Override
+    public boolean actualizarUsuario(String id, Usuario actualizado) {
+        boolean centinela = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equals(id)) {
+                usuario.setNombre(actualizado.getNombre());
+                usuario.setCorreo(actualizado.getCorreo());
+                usuario.setId(actualizado.getId());
+                usuario.setPassword(actualizado.getPassword());
+                usuario.setTelefono(actualizado.getTelefono());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    @Override
+    public boolean verificarUsuario(String id) {
+        boolean centinela = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
     }
 }

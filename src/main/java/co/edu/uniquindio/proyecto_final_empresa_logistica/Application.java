@@ -6,7 +6,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.LoginVi
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController;
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {

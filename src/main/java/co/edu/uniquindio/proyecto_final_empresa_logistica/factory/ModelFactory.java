@@ -73,7 +73,7 @@ public class ModelFactory implements IModelFactoryServices {
     }
 
     @Override
-    public boolean agregarUsuario(String id, String nombre, String correo, String telefono, String password) {
+    public boolean agregarUsuario(Usuario  usuario) {
         return false;
     }
 
@@ -88,7 +88,12 @@ public class ModelFactory implements IModelFactoryServices {
     }
 
     @Override
-    public boolean actualizarUsuario(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
+    public boolean actualizarUsuario(String id, Usuario actualizado) {
+        return false;
+    }
+
+    @Override
+    public boolean verificarUsuario(String id) {
         return false;
     }
 }

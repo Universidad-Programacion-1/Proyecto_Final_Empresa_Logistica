@@ -4,18 +4,13 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 
 public interface IUsuarioServices {
 
-    boolean agregarUsuario(String id,
-                           String nombre,
-                           String correo,
-                           String telefono,
-                           String password);
+    boolean agregarUsuario(Usuario usuario);
 
     Usuario obtenerUsuario(String id);
 
     boolean eliminarUsuario(String id);
 
-    boolean actualizarUsuario(String DNI, String nuevoNombre,
-                              String nuevoCorreo,
-                              String nuevoTelefono,
-                              String nuevoPassword);
+    boolean actualizarUsuario(String id,
+                              Usuario actualizado);
+    boolean verificarUsuario(String id);
 }
