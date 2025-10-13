@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController">
+    <children>
+        <SplitPane layoutX="-3.0" orientation="VERTICAL" prefHeight="746.0" prefWidth="891.0">
+            <items>
+                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="889.0">
+                    <children>
+                        <Pane prefHeight="746.0" prefWidth="888.0" style="-fx-border-image-width: 1px;">
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <children>
+                                <Label layoutX="258.0" layoutY="14.0" text="Crear Usuario">
+                                    <font>
+                                        <Font name="System Bold" size="64.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="76.0" layoutY="145.0" prefHeight="27.0" prefWidth="102.0" text="Cedula:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="76.0" layoutY="201.0" prefHeight="27.0" prefWidth="156.0" text="Nombre Completo:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="76.0" layoutY="252.0" prefHeight="27.0" prefWidth="156.0" text="Correo Electronico:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="461.0" layoutY="201.0" prefHeight="27.0" prefWidth="168.0" text="Contraseña:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="461.0" layoutY="143.0" prefHeight="27.0" prefWidth="168.0" text="Numero de telefono:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+            
+                                <TextField fx:id="txtIdUsuario" layoutX="259.0" layoutY="143.0" prefHeight="31.0" prefWidth="168.0" promptText="Cedula" />
+                                <TextField fx:id="txtCorreoElectronico" layoutX="259.0" layoutY="250.0" prefHeight="31.0" prefWidth="168.0" promptText="Correo Electronico" />
+                                <TextField fx:id="txtNombreCompleto" layoutX="259.0" layoutY="199.0" prefHeight="31.0" prefWidth="168.0" promptText="Nombre Completo" />
+                                <Button fx:id="btnActualizarUsuario" layoutX="504.0" layoutY="320.0" mnemonicParsing="false" onAction="#onActualizarUsuario" text="Actualizar Usuario" />
+                                <Button fx:id="btnAgregarUsuario" layoutX="279.0" layoutY="320.0" mnemonicParsing="false" onAction="#onAgregarUsuario" text="Agregar Usuario" />
+                                <TextField fx:id="txtNumeroTelefono" layoutX="644.0" layoutY="141.0" prefHeight="31.0" prefWidth="168.0" promptText="Numero de telefono" />
+                                <Button fx:id="btnEliminarUsuario" layoutX="380.0" layoutY="653.0" mnemonicParsing="false" onAction="#onEliminarUsuario" text="Eliminar Usuario" />
+                                <TextField fx:id="txtPasswore" layoutX="644.0" layoutY="199.0" prefHeight="31.0" prefWidth="168.0" promptText="Contraseña" />
+                            </children>
+                        </Pane>
+                        <TableView fx:id="tblListUsuarios" layoutX="188.0" layoutY="388.0" prefHeight="247.0" prefWidth="538.0">
+                            <columns>
+                                <TableColumn fx:id="tbcIdUsuario" prefWidth="137.0" text="Cedula" />
+                                <TableColumn fx:id="tbcNombre" prefWidth="127.0" text="Nombre" />
+                                <TableColumn fx:id="tbcCorreo" minWidth="0.0" prefWidth="141.0" text="Correo" />
+                                <TableColumn fx:id="tbcTelefono" prefWidth="132.0" text="Telefono" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

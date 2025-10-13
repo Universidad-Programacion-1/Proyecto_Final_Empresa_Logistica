@@ -1,20 +1,20 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.services;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
 
-public interface IUsuarioServices {
+public interface IRepartidorServices {
 
-    boolean agregarUsuario(String id,
+    boolean agregarRepartidor(String id,
                            String nombre,
                            String correo,
                            String telefono,
                            String password);
 
-    Usuario obtenerUsuario(String id);
+    Repartidor obtenerRepartidor(String id);
 
-    boolean eliminarUsuario(String id);
+    boolean eliminarRepartidor(String id);
 
-    boolean actualizarUsuario(String DNI, String nuevoNombre,
+    boolean actualizarRepartidor(String DNI, String nuevoNombre,
                               String nuevoCorreo,
                               String nuevoTelefono,
                               String nuevoPassword);
