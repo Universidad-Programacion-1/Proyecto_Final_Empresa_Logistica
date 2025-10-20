@@ -120,4 +120,14 @@ public class ModelFactory implements IModelFactoryServices {
     public double calcularPrecioCriterios(long peso, long distancia) {
         return totalCriterio.totalCalculadoCriterio(peso, distancia);
     }
+
+    @Override
+    public String getDescripcion() {
+        return "";
+    }
+
+    @Override
+    public double getCosto() {
+        return 0;
+    }
 }
