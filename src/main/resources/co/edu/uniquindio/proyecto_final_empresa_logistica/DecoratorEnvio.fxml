@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController">
+   <children>
+      <SplitPane layoutX="6.0" orientation="VERTICAL" prefHeight="447.0" prefWidth="768.0">
+        <items>
+          <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="445.0" prefWidth="674.0">
+               <children>
+                  <Pane layoutX="-10.0" layoutY="-5.0" prefHeight="455.0" prefWidth="787.0" style="-fx-border-image-width: 1px;">
+                     <effect>
+                        <Blend />
+                     </effect>
+                     <children>
+                        <Label layoutX="31.0" layoutY="25.0" prefHeight="80.0" prefWidth="609.0" text="Marca el tipo de empaquetado, el peso y la distancia de tu envio.">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="124.0" layoutY="92.0" prefHeight="17.0" prefWidth="92.0" text="Envio con:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="124.0" layoutY="126.0" prefHeight="25.0" prefWidth="140.0" text="Empaque de cartón">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="124.0" layoutY="163.0" prefHeight="27.0" prefWidth="166.0" text="Emboltura impermeable ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="btnAgregarUsuario" layoutX="307.0" layoutY="343.0" mnemonicParsing="false" onAction="#onAgregarUsuario" text="Calcular" />
+                        <Label layoutX="124.0" layoutY="201.0" prefHeight="27.0" prefWidth="140.0" text="Plastico de burbujas">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <CheckBox fx:id="chbEmbolturaCarton" layoutX="383.0" layoutY="168.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="chbEmpaqueCarton" layoutX="383.0" layoutY="130.0" mnemonicParsing="false" />
+                        <CheckBox fx:id="chbPlasticoBurbujas" layoutX="383.0" layoutY="206.0" mnemonicParsing="false" />
+                        <Label layoutX="120.0" layoutY="376.0" prefHeight="27.0" prefWidth="65.0" text="Costo:">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblCosto" layoutX="192.0" layoutY="376.0" opacity="0.09" prefHeight="27.0" prefWidth="140.0" />
+                        <Label layoutX="124.0" layoutY="254.0" prefHeight="27.0" prefWidth="44.0" text="Peso:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="124.0" layoutY="290.0" prefHeight="27.0" prefWidth="65.0" text="Distancia:">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtPeso" layoutX="226.0" layoutY="255.0" prefHeight="25.0" prefWidth="149.0" />
+                        <TextField fx:id="txtDistancia" layoutX="226.0" layoutY="291.0" />
+                        <Line endX="100.0" layoutX="226.0" layoutY="240.0" startX="-100.0" />
+                        <Line endX="100.0" layoutX="433.0" layoutY="240.0" startX="-100.0" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

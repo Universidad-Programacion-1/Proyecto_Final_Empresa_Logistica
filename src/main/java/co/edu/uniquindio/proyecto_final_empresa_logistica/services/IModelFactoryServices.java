@@ -1,4 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.services;
 
-public interface IModelFactoryServices extends IAdministradorServices, IRepartidorServices, IUsuarioServices{
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.IEnvio;
+
+public interface IModelFactoryServices extends IAdministradorServices, IRepartidorServices, IUsuarioServices, IEnvio {
 }

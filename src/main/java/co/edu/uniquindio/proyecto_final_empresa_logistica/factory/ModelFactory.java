@@ -91,4 +91,14 @@ public class ModelFactory implements IModelFactoryServices {
     public boolean actualizarUsuario(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
         return false;
     }
+
+    @Override
+    public String getDescripcion() {
+        return "";
+    }
+
+    @Override
+    public double getCosto() {
+        return 0;
+    }
 }

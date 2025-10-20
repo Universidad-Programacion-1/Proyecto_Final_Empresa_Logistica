@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 
 public abstract class EnvioDecorator implements IEnvio {
     protected IEnvio envioDecorado;
+    EmpaqueCartonDecorator empaqueCartonDecorator;
 
     public EnvioDecorator(IEnvio envio) {
         this.envioDecorado = envio;
@@ -11,7 +12,7 @@ public abstract class EnvioDecorator implements IEnvio {
 
     @Override
     public String getDescripcion() {
-        return envioDecorado.getDescripcion();
+        return empaqueCartonDecorator.getDescripcion();
     }
 
     @Override
