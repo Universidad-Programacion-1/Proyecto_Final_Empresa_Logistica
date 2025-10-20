@@ -25,7 +25,6 @@ public class ModelFactory implements IModelFactoryServices {
         }
         return instance;
     }
-
     public void inicializarDatos(){
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
@@ -34,72 +33,57 @@ public class ModelFactory implements IModelFactoryServices {
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
     }
-
     public int login (String correo, String password) {
         return empresaLogistica.login(correo, password);
     }
-
-
     @Override
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
         return empresaLogistica.agregarAdministrador(id, nombre, correo, telefono, password);
     }
-
     @Override
     public Administrador obtenerAdministrador(String id) {
         return null;
     }
-
     @Override
     public boolean eliminarAdministrador(String id) {
         return false;
     }
-
     @Override
     public boolean actualizarAdministrador(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
         return false;
     }
-
     @Override
     public boolean agregarRepartidor(String id, String nombre, String correo, String telefono, String password) {
         return false;
     }
-
     @Override
     public Repartidor obtenerRepartidor(String id) {
         return null;
     }
-
     @Override
     public boolean eliminarRepartidor(String id) {
         return false;
     }
-
     @Override
     public boolean actualizarRepartidor(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
         return false;
     }
-
     @Override
     public boolean agregarUsuario(Usuario  usuario) {
         System.out.println("Model Factory");
         return empresaLogistica.agregarUsuario(usuario);
     }
-
     public Collection<Usuario> listaUsuarios() {
         return empresaLogistica.getUsuarios();
     }
-
     @Override
     public Usuario obtenerUsuario(String id) {
         return null;
     }
-
     @Override
     public boolean eliminarUsuario(String id) {
         return empresaLogistica.eliminarUsuario(id);
     }
-
     @Override
     public boolean actualizarUsuario(String id, Usuario actualizado) {
         return empresaLogistica.actualizarUsuario(id, actualizado);
@@ -112,23 +96,18 @@ public class ModelFactory implements IModelFactoryServices {
 //    public double calcularPrecioCriteriosPeso( long peso, long distancia){
 //        return criterioPeso.calcularPrecioCriterios( peso,  distancia);
 //    }
-
     @Override
     public boolean verificarUsuario(String id) {
         return false;
     }
-
     @Override
     public double calcularPrecioCriterios(long peso, long distancia) {
         return totalCriterio.precioTotalCriterio(peso, distancia);
     }
-
-
     @Override
     public String descripcion() {
         return envioDecorado.descripcion();
     }
-
     @Override
     public double costo() {
         return envioDecorado.costo();

@@ -4,6 +4,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.UsuarioController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import javafx.fxml.FXML;
@@ -57,8 +58,33 @@ public class EnvioViewController {
         return envioController.costoTotal(peso, distancia);
     }
     private void mostrarCostoTotal() {
-        lblCosto.setText(String.valueOf(enviarInformacion()));
+        try {
+            long peso = Long.parseLong(txtPeso.getText());
+            long distancia = Long.parseLong(txtDistancia.getText());
 
+
+            double costoBase = envioController.costoTotal(peso, distancia);
+
+
+            IEnvio envio = new EnvioBase(costoBase);
+
+
+            if (chbEmpaqueCarton.isSelected()) {
+                envio = new EmpaqueCartonDecorator(envio);
+            }
+            if (chbPlasticoBurbujas.isSelected()) {
+                envio = new PlasticoBurbujaDecorator(envio);
+            }
+            if (chbEmbolturaCarton.isSelected()) {
+                envio = new EnvolturaImpermeableDecorator(envio);
+            }
+
+
+            lblCosto.setText("$ " + envio.costo());
+
+        } catch (NumberFormatException e) {
+            lblCosto.setText("Datos inválidos");
+        }
     }
     private void empaque(){
         if (chbEmpaqueCarton.isSelected()) {
