@@ -59,6 +59,8 @@ public class UsuarioViewController {
     @FXML
     private TextField txtCorreoElectronico;
 
+
+
     @FXML
     void onActualizarUsuario() {
         actualizarUsuario();
