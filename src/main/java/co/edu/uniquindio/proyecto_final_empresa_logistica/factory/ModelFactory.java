@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.ConexionBD.Conexion;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
@@ -12,6 +13,8 @@ import java.util.Collection;
 public class ModelFactory implements IModelFactoryServices {
 
     private static ModelFactory instance;
+    Conexion conexion = Conexion.getInstancia();
+
     EmpresaLogistica empresaLogistica;
     TotalCriterio totalCriterio;
     TotalCriterio totalCriterio1;
@@ -36,7 +39,10 @@ public class ModelFactory implements IModelFactoryServices {
     }
 
     public int login (String correo, String password) {
-        return empresaLogistica.login(correo, password);
+        conexion.conectar();
+        int c = empresaLogistica.login(correo, password);;
+        conexion.desconectar();
+        return c;
     }
 
 
