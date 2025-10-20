@@ -1,9 +1,7 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Administrador;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
@@ -16,6 +14,8 @@ public class ModelFactory implements IModelFactoryServices {
     private static ModelFactory instance;
     EmpresaLogistica empresaLogistica;
     TotalCriterio totalCriterio;
+    TotalCriterio totalCriterio1;
+    EnvioDecorator envioDecorado;
 
     private ModelFactory() {}
 
@@ -30,6 +30,8 @@ public class ModelFactory implements IModelFactoryServices {
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         empresaLogistica.getAdministradores().add(administrador);
+        TotalCriterio totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
+        this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
     }
 
@@ -118,16 +120,17 @@ public class ModelFactory implements IModelFactoryServices {
 
     @Override
     public double calcularPrecioCriterios(long peso, long distancia) {
-        return totalCriterio.totalCalculadoCriterio(peso, distancia);
+        return totalCriterio.precioTotalCriterio(peso, distancia);
+    }
+
+
+    @Override
+    public String descripcion() {
+        return envioDecorado.descripcion();
     }
 
     @Override
-    public String getDescripcion() {
-        return "";
-    }
-
-    @Override
-    public double getCosto() {
-        return 0;
+    public double costo() {
+        return envioDecorado.costo();
     }
 }

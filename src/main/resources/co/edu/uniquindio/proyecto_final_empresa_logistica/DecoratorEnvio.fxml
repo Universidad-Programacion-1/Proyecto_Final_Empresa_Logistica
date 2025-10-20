@@ -9,7 +9,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="603.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.EnvioViewController">
    <children>
       <SplitPane layoutX="6.0" orientation="VERTICAL" prefHeight="447.0" prefWidth="768.0">
         <items>
@@ -40,7 +40,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnAgregarUsuario" layoutX="307.0" layoutY="343.0" mnemonicParsing="false" onAction="#onAgregarUsuario" text="Calcular" />
+                        <Button fx:id="btnCalcular" layoutX="307.0" layoutY="343.0" mnemonicParsing="false" onAction="#onCalcular" text="Calcular" />
                         <Label layoutX="124.0" layoutY="201.0" prefHeight="27.0" prefWidth="140.0" text="Plastico de burbujas">
                            <font>
                               <Font size="15.0" />

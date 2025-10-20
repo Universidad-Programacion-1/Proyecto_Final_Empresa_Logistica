@@ -5,7 +5,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.IEnvio;
 
 import java.time.LocalDate;
 
-public class Envio implements IEnvio {
+public class Envio {
 
     private String idEnvio;
     private String origen;
@@ -43,8 +43,5 @@ public class Envio implements IEnvio {
     public LocalDate getFechaCreacion() {return fechaCreacion;}
     public LocalDate getFechaEstimadaEntrega() {return fechaEstimadaEntrega;}
 
-    @Override
-    public String getDescripcion() {
-        return "Envío desde " + origen + " hasta " + destino + " (" + peso + "kg)";
-    }
+
 }

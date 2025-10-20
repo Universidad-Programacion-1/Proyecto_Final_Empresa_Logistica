@@ -1,9 +1,11 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.decorator;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 
 public abstract class EnvioDecorator implements IEnvio {
     protected IEnvio envioDecorado;
+
     EmpaqueCartonDecorator empaqueCartonDecorator;
 
     public EnvioDecorator(IEnvio envio) {
@@ -11,12 +13,12 @@ public abstract class EnvioDecorator implements IEnvio {
     }
 
     @Override
-    public String getDescripcion() {
-        return empaqueCartonDecorator.getDescripcion();
+    public String descripcion() {
+        return envioDecorado.descripcion();
     }
 
     @Override
-    public double getCosto() {
-        return envioDecorado.getCosto();
+    public double costo() {
+        return envioDecorado.costo();
     }
 }

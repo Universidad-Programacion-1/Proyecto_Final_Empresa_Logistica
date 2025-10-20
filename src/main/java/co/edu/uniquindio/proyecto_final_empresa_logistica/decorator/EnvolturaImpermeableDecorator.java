@@ -6,12 +6,12 @@ public class EnvolturaImpermeableDecorator extends EnvioDecorator {
     }
 
     @Override
-    public String getDescripcion() {
-        return envioDecorado.getDescripcion() + " + Envoltura impermeable";
+    public String descripcion() {
+        return envioDecorado.descripcion() + " + Envoltura impermeable";
     }
 
     @Override
-    public double getCosto() {
-        return envioDecorado.getCosto() + 2500;
+    public double costo() {
+        return envioDecorado.costo() + 2500;
     }
 }

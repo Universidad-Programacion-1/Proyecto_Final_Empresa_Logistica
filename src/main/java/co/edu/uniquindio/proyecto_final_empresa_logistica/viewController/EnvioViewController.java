@@ -1,6 +1,11 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.UsuarioController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -8,6 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class EnvioViewController {
+
+    EnvioController envioController;
+    TotalCriterio totalCriterio;
+    private Application application;
+    Envio selectedEnvio;
 
     @FXML
     private TextField txtPeso;
@@ -30,9 +40,37 @@ public class EnvioViewController {
     @FXML
     private Label lblCosto;
 
+
+
     @FXML
     void onCalcular() {
+        mostrarCostoTotal();
+    }
+    @FXML
+    void initialize() {
+        envioController = new EnvioController(application.empresaLogistica);
+    }
+
+    private double enviarInformacion() {
+        long peso = Long.parseLong(txtPeso.getText());
+        long distancia = Long.parseLong(txtDistancia.getText());
+        return envioController.costoTotal(peso, distancia);
+    }
+    private void mostrarCostoTotal() {
+        lblCosto.setText(String.valueOf(enviarInformacion()));
 
     }
+    private void empaque(){
+        if (chbEmpaqueCarton.isSelected()) {
+            envioController.costoEnvio();
+        }
+        if (chbPlasticoBurbujas.isSelected()) {
+            envioController.costoEnvio();
+        }
+        if (chbEmbolturaCarton.isSelected()) {
+            envioController.costoEnvio();
+        }
+    }
+
 
 }

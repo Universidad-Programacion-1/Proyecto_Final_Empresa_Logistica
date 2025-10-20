@@ -7,12 +7,12 @@ public class PlasticoBurbujaDecorator extends EnvioDecorator{
     }
 
     @Override
-    public String getDescripcion() {
-        return envioDecorado.getDescripcion() + " + Plástico de burbujas";
+    public String descripcion() {
+        return envioDecorado.descripcion() + " + Plástico de burbujas";
     }
 
     @Override
-    public double getCosto() {
-        return envioDecorado.getCosto() + 1500;
+    public double costo() {
+        return envioDecorado.costo() + 1500;
     }
 }
