@@ -5,6 +5,9 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 
 import java.util.Collection;
 
@@ -12,6 +15,7 @@ public class ModelFactory implements IModelFactoryServices {
 
     private static ModelFactory instance;
     EmpresaLogistica empresaLogistica;
+    TotalCriterio totalCriterio;
 
     private ModelFactory() {}
 
@@ -98,9 +102,22 @@ public class ModelFactory implements IModelFactoryServices {
     public boolean actualizarUsuario(String id, Usuario actualizado) {
         return empresaLogistica.actualizarUsuario(id, actualizado);
     }
+//    @Override
+//    public double calcularPrecioCriteriosDistancia( long peso, long distancia){
+//        return criterioDistancia.calcularPrecioCriterios( peso,  distancia);
+//    }
+//    @Override
+//    public double calcularPrecioCriteriosPeso( long peso, long distancia){
+//        return criterioPeso.calcularPrecioCriterios( peso,  distancia);
+//    }
 
     @Override
     public boolean verificarUsuario(String id) {
         return false;
+    }
+
+    @Override
+    public double calcularPrecioCriterios(long peso, long distancia) {
+        return totalCriterio.totalCalculadoCriterio(peso, distancia);
     }
 }
