@@ -31,7 +31,11 @@ public class ModelFactory implements IModelFactoryServices {
     public void inicializarDatos(){
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
+        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", true, "Quindio");
+        Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         empresaLogistica.getAdministradores().add(administrador);
+        empresaLogistica.getRepartidores().add(repartidor);
+        empresaLogistica.getUsuarios().add(usuario);
         TotalCriterio totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
@@ -59,7 +63,7 @@ public class ModelFactory implements IModelFactoryServices {
         return false;
     }
     @Override
-    public boolean agregarRepartidor(String id, String nombre, String correo, String telefono, String password) {
+    public boolean agregarRepartidor(Repartidor repartidor) {
         return false;
     }
     @Override
@@ -71,49 +75,51 @@ public class ModelFactory implements IModelFactoryServices {
         return false;
     }
     @Override
-    public boolean actualizarRepartidor(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
+    public boolean actualizarRepartidor(String id, Repartidor repartidor ) {
         return false;
     }
+    public Collection<Repartidor> listaRepartidor() {return empresaLogistica.getRepartidores();}
+
     @Override
     public boolean agregarUsuario(Usuario  usuario) {
         System.out.println("Model Factory");
         return empresaLogistica.agregarUsuario(usuario);
     }
+
     public Collection<Usuario> listaUsuarios() {
         return empresaLogistica.getUsuarios();
     }
+
     @Override
     public Usuario obtenerUsuario(String id) {
         return null;
     }
+
     @Override
     public boolean eliminarUsuario(String id) {
         return empresaLogistica.eliminarUsuario(id);
     }
+
     @Override
     public boolean actualizarUsuario(String id, Usuario actualizado) {
         return empresaLogistica.actualizarUsuario(id, actualizado);
     }
-//    @Override
-//    public double calcularPrecioCriteriosDistancia( long peso, long distancia){
-//        return criterioDistancia.calcularPrecioCriterios( peso,  distancia);
-//    }
-//    @Override
-//    public double calcularPrecioCriteriosPeso( long peso, long distancia){
-//        return criterioPeso.calcularPrecioCriterios( peso,  distancia);
-//    }
+
     @Override
     public boolean verificarUsuario(String id) {
         return false;
     }
+
     @Override
     public double calcularPrecioCriterios(long peso, long distancia) {
         return totalCriterio.precioTotalCriterio(peso, distancia);
     }
+
     @Override
     public String descripcion() {
         return envioDecorado.descripcion();
     }
+
     @Override
     public double costo() {
         return envioDecorado.costo();

@@ -77,7 +77,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         for (Usuario usuario : usuarios) {
-            if (usuario.getCorreo().equals(correo) && usuario.getCorreo().equals(contrasena)) {
+            if (usuario.getCorreo().equals(correo) && usuario.getPassword().equals(contrasena)) {
                 tipo = 2;
                 tipoPersona = tipo;
             }
