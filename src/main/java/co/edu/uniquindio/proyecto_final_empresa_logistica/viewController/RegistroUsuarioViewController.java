@@ -64,6 +64,9 @@ public class RegistroUsuarioViewController {
 
     private Usuario buildUsuario() {
         Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombreCompleto.getText(), txtCorreoElectronico.getText(),  txtNumeroTelefono.getText(), txtPassword.getText());
+        System.out.println("Agregando usuario "+ usuario.getPassword());
+        System.out.println("Agregando usuario "+ usuario.getCorreo());
+
         return usuario;
     }
 

@@ -124,4 +124,17 @@ public class ModelFactory implements IModelFactoryServices {
     public double costo() {
         return envioDecorado.costo();
     }
+
+    public Usuario getUsuario(){
+        return empresaLogistica.getUsuario1();
+    }
+
+    public boolean agregarDireccion(String direccion) {
+        return empresaLogistica.agregarDireccion(direccion);
+    }
+
+    public boolean eliminarDireccion(String direccion) {
+        return empresaLogistica.eliminarDireccion(direccion);
+    }
+
 }

@@ -22,11 +22,11 @@ public class Application extends javafx.application.Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Gestion de Empresa Logistica");
+        inicializarData();
         openViewLogin();
     }
 
     public void openViewLogin() {
-        inicializarData();
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Application.class.getResource("login.fxml"));
@@ -45,16 +45,20 @@ public class Application extends javafx.application.Application {
 
     public void newVista(int tipo) throws IOException {
         String nombrefxml = "";
+        String title = "";
         if (tipo == 1) {
             nombrefxml = "MenuAdministrador.fxml";
+            title = "Gestion de Empresa Logistica Administrador";
         } else if (tipo == 2) {
             nombrefxml = "MenuUsuario.fxml";
+            title = "Gestion de Empresa Logistica Usuario";
         } else if (tipo == 3) {
             nombrefxml = "MenuRepartidor.fxml";
+            title = "Gestion de Empresa Logistica Repartidor";
         }
 
         Stage newStage = new Stage();
-        newStage.setTitle("Gestion de Empresa Logistica");
+        newStage.setTitle(title);
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(nombrefxml));
         Scene scene = new Scene((Parent)fxmlLoader.load(), (double)500.0F, (double)500.0F);
         newStage.setScene(scene);

@@ -68,7 +68,8 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
     public int login(String correo, String contrasena){
         int tipo = 0;
-        System.out.println("Iniciando login" + administradores);
+        System.out.println("Iniciando login" + correo);
+        System.out.println("Iniciando login" + contrasena);
         for (Administrador administrador : administradores) {
             if (administrador.getCorreo().equals(correo) && administrador.getPassword().equals(contrasena)) {
                 tipo = 1;
@@ -77,9 +78,12 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         for (Usuario usuario : usuarios) {
+            System.out.println("Iniciando usuario "+ usuario.getPassword());
+            System.out.println("Iniciando usuario "+ usuario.getCorreo());
             if (usuario.getCorreo().equals(correo) && usuario.getPassword().equals(contrasena)) {
                 tipo = 2;
                 tipoPersona = tipo;
+                usuario1 = usuario;
             }
         }
         for (Repartidor repartidor : repartidores ) {
@@ -99,7 +103,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         if (!verificarUsuario(usuario.getId())) {
             usuarios.add(usuario);
             centinela = true;
-            System.out.println("Usuario agregado com sucesso" + centinela);
+            System.out.println("Usuario agregado com sucesso " + centinela);
         }
         return centinela;
     }
@@ -134,8 +138,6 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             if (usuario.getId().equals(id)) {
                 usuario.setNombre(actualizado.getNombre());
                 usuario.setCorreo(actualizado.getCorreo());
-                usuario.setId(actualizado.getId());
-                usuario.setPassword(actualizado.getPassword());
                 usuario.setTelefono(actualizado.getTelefono());
                 centinela = true;
                 break;
@@ -153,5 +155,33 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         return centinela;
+    }
+
+    public boolean agregarDireccion(String direccion) {
+        boolean centinela = false;
+        System.out.println("Iniciando agregarDireccion" + direccion);
+        if(direccion != null) {
+            usuario1.getDirecciones().add(direccion);
+            centinela = true;
+
+            System.out.println("Direccion agregado com sucesso " + usuario1.getDirecciones());
+        }
+        return centinela;
+    }
+
+    public boolean eliminarDireccion(String direccion) {
+        boolean centinela = usuario1.getDirecciones().removeIf(d -> d.equals(direccion));
+        if (centinela) {
+            System.out.println("Dirección eliminada con éxito: " + direccion);
+        }
+        return centinela;
+    }
+
+    public Usuario getUsuario1() {
+        return usuario1;
+    }
+
+    public void setUsuario1(Usuario usuario1) {
+        this.usuario1 = usuario1;
     }
 }
