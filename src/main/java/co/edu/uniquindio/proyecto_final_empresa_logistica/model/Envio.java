@@ -18,10 +18,11 @@ public class Envio {
     private LocalDate fechaCreacion;
     private LocalDate fechaEstimadaEntrega;
     private Repartidor repartidor;
+    private Usuario usuario;
 
     public Envio(String idEnvio, String destino, String origen, double peso,
                  String dimenciones, double costo, LocalDate fechaCreacion,
-                 LocalDate fechaEstimadaEntrega) {
+                 LocalDate fechaEstimadaEntrega, Usuario usuario) {
 
         this.idEnvio = idEnvio;
         this.destino = destino;
@@ -36,7 +37,7 @@ public class Envio {
 
     public Envio(String idEnvio, String destino, String origen, double peso,
                  String dimenciones, double costo, LocalDate fechaCreacion,
-                 LocalDate fechaEstimadaEntrega, Repartidor repartidor) {
+                 LocalDate fechaEstimadaEntrega, Repartidor repartidor, Usuario usuario) {
 
         this.idEnvio = idEnvio;
         this.destino = destino;
@@ -63,6 +64,7 @@ public class Envio {
     public LocalDate getFechaEstimadaEntrega() {return fechaEstimadaEntrega;}
     public Repartidor getRepartidor() {return repartidor;}
     public TipoEstadoEnvio getTipoEstadoEnvio() {return tipoEstadoEnvio;}
+    public Usuario getUsuario() {return usuario;}
 
     public void setTipoEstadoEnvio(TipoEstadoEnvio estado) { this.tipoEstadoEnvio = estado; }
 

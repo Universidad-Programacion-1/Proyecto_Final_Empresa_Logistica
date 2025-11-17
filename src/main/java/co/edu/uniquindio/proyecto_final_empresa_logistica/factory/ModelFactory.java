@@ -2,13 +2,14 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.ConexionBD.Conexion;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.Persistencia;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
@@ -56,7 +57,7 @@ public class ModelFactory implements IModelFactoryServices {
     }
 
     private ModelFactory() {
-        
+
         this.empresaLogistica = Persistencia.cargarRecursoXML();
         if (this.empresaLogistica == null) {
 
@@ -64,10 +65,10 @@ public class ModelFactory implements IModelFactoryServices {
             inicializarDatos();
             guardarResourceXML();
         }
-        
+
         this.totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
 
-        
+
     }
 
     private void guardarResourceXML() {
@@ -81,14 +82,12 @@ public class ModelFactory implements IModelFactoryServices {
         }
         return instance;
     }
-
-
     public void inicializarDatos(){
         LocalDate fecha = LocalDate.now();
         System.out.println("Inicializando ModelFactory");
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
-        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", true, "Quindio");
+        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
         Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         Envio envio = new EnvioBuilder()
                 .idEnvio("1")
@@ -100,6 +99,7 @@ public class ModelFactory implements IModelFactoryServices {
                 .fechaCreacion(fecha)
                 .fechaEstimadaEntrega(fecha)
                 .repartidor(repartidor)
+                .usuario(usuario)
                 .build1();
         empresaLogistica.agregarEnvio(envio);
         empresaLogistica.getAdministradores().add(administrador);
@@ -109,38 +109,31 @@ public class ModelFactory implements IModelFactoryServices {
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
     }
-
     public int login (String correo, String password) {
         conexion.conectar();
         int c = empresaLogistica.login(correo, password);;
         conexion.desconectar();
         return c;
     }
-
-
     @Override
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
         return empresaLogistica.agregarAdministrador(id, nombre, correo, telefono, password);
     }
-
     @Override
     public Administrador obtenerAdministrador(String id) {
         return null;
     }
-
     @Override
     public boolean eliminarAdministrador(String id) {
         return false;
     }
-
     @Override
     public boolean actualizarAdministrador(String DNI, String nuevoNombre, String nuevoCorreo, String nuevoTelefono, String nuevoPassword) {
         return false;
     }
-
     @Override
     public boolean agregarRepartidor(Repartidor repartidor) {
-        return false;
+        return empresaLogistica.agregarRepartidor(repartidor);
     }
 
     @Override
@@ -149,14 +142,11 @@ public class ModelFactory implements IModelFactoryServices {
     }
 
     @Override
-    public boolean eliminarRepartidor(String id) {
-        return false;
-    }
+    public boolean eliminarRepartidor(String id) {return empresaLogistica.eliminarRepartidor(id);}
 
     @Override
-    public boolean actualizarRepartidor(String id, Repartidor repartidor ) {
-        return false;
-    }
+    public boolean actualizarRepartidor(String id, Repartidor repartidor ) {return empresaLogistica.actualizarRepartidor(id, repartidor);}
+
     public Collection<Repartidor> listaRepartidor() {return empresaLogistica.getRepartidores();}
 
     @Override
@@ -179,19 +169,10 @@ public class ModelFactory implements IModelFactoryServices {
         return empresaLogistica.eliminarUsuario(id);
     }
 
-
     @Override
     public boolean actualizarUsuario(String id, Usuario actualizado) {
         return empresaLogistica.actualizarUsuario(id, actualizado);
     }
-//    @Override
-//    public double calcularPrecioCriteriosDistancia( long peso, long distancia){
-//        return criterioDistancia.calcularPrecioCriterios( peso,  distancia);
-//    }
-//    @Override
-//    public double calcularPrecioCriteriosPeso( long peso, long distancia){
-//        return criterioPeso.calcularPrecioCriterios( peso,  distancia);
-//    }
 
     @Override
     public boolean verificarUsuario(String id) {
