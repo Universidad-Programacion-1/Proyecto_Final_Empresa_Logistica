@@ -2,12 +2,13 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.ConexionBD.Conexion;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.Persistencia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
@@ -24,7 +25,56 @@ public class ModelFactory implements IModelFactoryServices {
     TotalCriterio totalCriterio1;
     EnvioDecorator envioDecorado;
 
-    private ModelFactory() {}
+    public Envio crearEnvio(String id, String origen, String destino, double peso, String dimensiones,
+                            double costoBase, boolean carton, boolean burbuja, boolean impermeable,
+                            String idRepartidor, String idUsuario) {
+
+        Envio envioNuevo = Envio.builder()
+                .idEnvio(id)
+                .origen(origen)
+                .destino(destino)
+                .peso(peso)
+                .dimenciones(dimensiones)
+                .costo(costoBase)
+                .tipoEstadoEnvio(TipoEstadoEnvio.Solicitado)
+                .fechaCreacion(java.time.LocalDate.now())
+                .build();
+
+        IEnvio envioDecorado = new EnvioBase(costoBase);
+        if (carton) envioDecorado = new EmpaqueCartonDecorator(envioDecorado);
+        if (burbuja) envioDecorado = new PlasticoBurbujaDecorator(envioDecorado);
+        if (impermeable) envioDecorado = new EnvolturaImpermeableDecorator(envioDecorado);
+
+        for(Usuario u : empresaLogistica.getUsuarios()){
+            if(u.getId().equals(idUsuario)){
+                break;
+            }
+        }
+        empresaLogistica.getEnvios().add(envioNuevo);
+        guardarResourceXML(); // Guardar en archivo
+
+        return envioNuevo;
+    }
+
+    private ModelFactory() {
+
+        this.empresaLogistica = Persistencia.cargarRecursoXML();
+        if (this.empresaLogistica == null) {
+
+            this.empresaLogistica = new EmpresaLogistica("UQ Logistica");
+            inicializarDatos();
+            guardarResourceXML();
+        }
+
+        this.totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
+
+
+    }
+
+    private void guardarResourceXML() {
+        Persistencia.guardarRecursoXML(this.empresaLogistica);
+    }
+
 
     public static ModelFactory getInstance() {
         if (instance == null) {
@@ -134,6 +184,7 @@ public class ModelFactory implements IModelFactoryServices {
         return totalCriterio.precioTotalCriterio(peso, distancia);
     }
 
+
     @Override
     public String descripcion() {
         return envioDecorado.descripcion();
@@ -178,4 +229,5 @@ public class ModelFactory implements IModelFactoryServices {
 
         return empresaLogistica.cotizarEnvio(origen, destino, peso, volumen, prioridad);
     }
+
 }

@@ -1,7 +1,5 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.decorator;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
-
 public class EmpaqueCartonDecorator extends EnvioDecorator{
 
 
