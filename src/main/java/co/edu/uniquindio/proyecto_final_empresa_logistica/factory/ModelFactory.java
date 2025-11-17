@@ -2,7 +2,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.ConexionBD.Conexion;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
