@@ -140,28 +140,43 @@ public class UsuarioViewController {
             limpiarCamposUsuario();
         }
     }
-    private void obtenerUsuario() {
-        usuarios.addAll(usuarioController.obtenerUsuario());
+    private void obtenerUsuarios() {
+        usuarios.addAll(usuarioController.obtenerUsuarios());
     }
     private void mostrarInfoUsuario(Usuario usuario) {
         if (usuario != null) {
-
-
             txtIdUsuario.setText(String.valueOf(usuario.getId()));
             txtNombreCompleto.setText(String.valueOf(usuario.getNombre()));
-            txtPasswore.setText(String.valueOf(usuario.getPassword()));
             txtCorreoElectronico.setText(String.valueOf(usuario.getCorreo()));
             txtNumeroTelefono.setText(String.valueOf(usuario.getTelefono()));
         }
     }
     private void initDataBinding() {
 
+        tbcNombre.setCellValueFactory(cellData -> {
+            Usuario usuario = cellData.getValue();
+            return new SimpleStringProperty(usuario != null ? usuario.getNombre() : "");
+        });
 
-        tbcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
-        tbcIdUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
-        tbcTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
-        tbcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorreo()));
-        //Password
+        tbcIdUsuario.setCellValueFactory(cellData -> {
+            Usuario usuario = cellData.getValue();
+            return new SimpleStringProperty(usuario != null ? usuario.getId() : "");
+        });
+
+        tbcTelefono.setCellValueFactory(cellData -> {
+            Usuario usuario = cellData.getValue();
+            return new SimpleStringProperty(usuario != null ? usuario.getTelefono() : "");
+        });
+
+        tbcCorreo.setCellValueFactory(cellData -> {
+            Usuario usuario = cellData.getValue();
+            return new SimpleStringProperty(usuario != null ? usuario.getCorreo() : "");
+        });
+
+//        tbcNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+//        tbcIdUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+//        tbcTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
+//        tbcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorreo()));
     }
 
     private void listenerSelection() {
@@ -175,7 +190,7 @@ public class UsuarioViewController {
         initDataBinding();
 
         // Obtiene la lista
-        obtenerUsuario();
+        obtenerUsuarios();
 
         // Limpiar la tabla
         tblListUsuarios.getItems().clear();

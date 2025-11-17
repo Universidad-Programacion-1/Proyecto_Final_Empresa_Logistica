@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     private Collection<Administrador> administradores;
     private Collection<Usuario> usuarios;
     private Collection<Repartidor> repartidores;
+    private Collection<Envio> envios;
     int tipoPersona;
     Usuario usuario1;
     Administrador administrador1;
@@ -25,6 +27,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         this.administradores = new LinkedList<>();
         this.usuarios = new LinkedList<>();
         this.repartidores = new LinkedList<>();
+        this.envios = new LinkedList<>();
     }
 
 
@@ -43,6 +46,8 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     public Collection<Repartidor> getRepartidores() {
         return repartidores;
     }
+
+    public Collection<Envio> getEnvios() {return envios;}
 
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
 
@@ -68,7 +73,8 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
     public int login(String correo, String contrasena){
         int tipo = 0;
-        System.out.println("Iniciando login" + administradores);
+        System.out.println("Iniciando login" + correo);
+        System.out.println("Iniciando login" + contrasena);
         for (Administrador administrador : administradores) {
             if (administrador.getCorreo().equals(correo) && administrador.getPassword().equals(contrasena)) {
                 tipo = 1;
@@ -77,9 +83,12 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         for (Usuario usuario : usuarios) {
-            if (usuario.getCorreo().equals(correo) && usuario.getCorreo().equals(contrasena)) {
+            System.out.println("Iniciando usuario "+ usuario.getPassword());
+            System.out.println("Iniciando usuario "+ usuario.getCorreo());
+            if (usuario.getCorreo().equals(correo) && usuario.getPassword().equals(contrasena)) {
                 tipo = 2;
                 tipoPersona = tipo;
+                usuario1 = usuario;
             }
         }
         for (Repartidor repartidor : repartidores ) {
@@ -99,7 +108,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         if (!verificarUsuario(usuario.getId())) {
             usuarios.add(usuario);
             centinela = true;
-            System.out.println("Usuario agregado com sucesso" + centinela);
+            System.out.println("Usuario agregado com sucesso " + centinela);
         }
         return centinela;
     }
@@ -134,8 +143,6 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             if (usuario.getId().equals(id)) {
                 usuario.setNombre(actualizado.getNombre());
                 usuario.setCorreo(actualizado.getCorreo());
-                usuario.setId(actualizado.getId());
-                usuario.setPassword(actualizado.getPassword());
                 usuario.setTelefono(actualizado.getTelefono());
                 centinela = true;
                 break;
@@ -151,6 +158,69 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             if (usuario.getId().equals(id)) {
                 centinela = true;
             }
+        }
+        return centinela;
+    }
+
+    public boolean agregarDireccion(String direccion) {
+        boolean centinela = false;
+        System.out.println("Iniciando agregarDireccion" + direccion);
+        if(direccion != null) {
+            usuario1.getDirecciones().add(direccion);
+            centinela = true;
+
+            System.out.println("Direccion agregado com sucesso " + usuario1.getDirecciones());
+        }
+        return centinela;
+    }
+
+    public boolean eliminarDireccion(String direccion) {
+        boolean centinela = usuario1.getDirecciones().removeIf(d -> d.equals(direccion));
+        if (centinela) {
+            System.out.println("Dirección eliminada con éxito: " + direccion);
+        }
+        return centinela;
+    }
+
+    public Usuario getUsuario1() {
+        return usuario1;
+    }
+
+    public Repartidor getRepartidor1() {
+        return repartidor1;
+    }
+
+    public Collection<Envio> obtenerEnviosRepartidor(String idRepartidor) {
+        Collection<Envio> enviosRepartidor = new ArrayList<>();
+        for (Envio envio : envios) {
+            System.out.println("Obteniendo envios"+ envio.getRepartidor().getId()+ "id "+  idRepartidor);
+            if (envio.getRepartidor().getId().equals(idRepartidor)) {
+                enviosRepartidor.add(envio);
+            }
+        }
+        return enviosRepartidor;
+    }
+
+    public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
+        boolean centinela = false;
+        for (Envio envio : envios) {
+            System.out.println("Id.getebvio  "+ envio.getIdEnvio());
+            System.out.println("Id  "+ id);
+            if (envio.getIdEnvio().equals(id)) {
+                System.out.println("entro a if "+ estado);
+                envio.setTipoEstadoEnvio(estado);
+                centinela = true;
+            }
+        }
+        return  centinela;
+    }
+
+    public boolean agregarEnvio(Envio envio) {
+        boolean centinela = false;
+        if (envio != null) {
+            envios.add(envio);
+            centinela = true;
+            System.out.println("Envio agregado com sucesso " + centinela);
         }
         return centinela;
     }

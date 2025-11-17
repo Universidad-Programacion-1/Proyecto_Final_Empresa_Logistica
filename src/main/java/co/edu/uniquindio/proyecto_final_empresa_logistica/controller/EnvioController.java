@@ -3,7 +3,13 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.controller;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
+
+import java.util.Collection;
 
 public class EnvioController {
     ModelFactory modelFactory = ModelFactory.getInstance();
@@ -23,5 +29,23 @@ public class EnvioController {
     public double costoEnvio() {
         return modelFactory.costo();
     }
+
+    public Collection<Envio> obtenerEnvios() {
+        return modelFactory.listaEnvios();
+    }
+
+    public Collection<Envio> obtenerEnviosRepartidor(String idRepartidor) {
+        return modelFactory.obtenerEnviosRepartidor(idRepartidor);
+    }
+
+    public Repartidor obtenerRepartidor() {
+        return modelFactory.getRepartidor();
+    }
+
+    public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
+        return modelFactory.actualizarEstadoEnvio(id, estado);
+    }
+
+
 
 }

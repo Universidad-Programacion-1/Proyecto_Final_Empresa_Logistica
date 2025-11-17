@@ -3,8 +3,11 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.LoginViewController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RegistroUsuarioViewController;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController;
 import java.io.IOException;
@@ -19,11 +22,11 @@ public class Application extends javafx.application.Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Gestion de Empresa Logistica");
+        inicializarData();
         openViewLogin();
     }
 
     public void openViewLogin() {
-        inicializarData();
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Application.class.getResource("login.fxml"));
@@ -40,27 +43,39 @@ public class Application extends javafx.application.Application {
         }
     }
 
-    public void openMenuAdministrador() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("MenuAdministrador.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 1000);
-        primaryStage.setTitle("Menu Administrador!");
+    public void newVista(int tipo) throws IOException {
+        String nombrefxml = "";
+        String title = "";
+        if (tipo == 1) {
+            nombrefxml = "MenuAdministrador.fxml";
+            title = "Gestion de Empresa Logistica Administrador";
+        } else if (tipo == 2) {
+            nombrefxml = "MenuUsuario.fxml";
+            title = "Gestion de Empresa Logistica Usuario";
+        } else if (tipo == 3) {
+            nombrefxml = "MenuRepartidor.fxml";
+            title = "Gestion de Empresa Logistica Repartidor";
+        }
+
+        Stage newStage = new Stage();
+        newStage.setTitle(title);
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(nombrefxml));
+        Scene scene = new Scene((Parent)fxmlLoader.load(), (double)500.0F, (double)500.0F);
+        newStage.setScene(scene);
+        newStage.show();
+    }
+
+    public void openRegistroUsuario() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Application.class.getResource("RegistroUsuario.fxml"));
+        AnchorPane rootLayout = (AnchorPane) loader.load();
+        RegistroUsuarioViewController registroUsuarioViewController = loader.getController();
+        registroUsuarioViewController.setApp(this);
+
+        Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-    }
-    public void openMenuUsuario() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("MenuUsuario.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-        primaryStage.setTitle("Menu Usuario!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public void openMenuRepartidor() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("MenuRepartidor.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 500, 500);
-        primaryStage.setTitle("Menu Repartidor!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
     }
     public void inicializarData(){
         modelFactory.inicializarDatos();

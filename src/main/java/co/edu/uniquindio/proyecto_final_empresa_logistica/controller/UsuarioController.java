@@ -19,7 +19,7 @@ public class UsuarioController {
         return modelFactory.agregarUsuario(usuario);
     }
 
-    public Collection<Usuario> obtenerUsuario() {
+    public Collection<Usuario> obtenerUsuarios() {
         return modelFactory.listaUsuarios();
     }
 
@@ -33,5 +33,18 @@ public class UsuarioController {
 
     public boolean verificarUsuario(String id) {
         return empresaLogistica.verificarUsuario(id);
+    }
+
+
+    public Usuario obtenerUsuario() {
+        return modelFactory.getUsuario();
+    }
+
+    public boolean eliminarDireccion(String direccion) {
+        return modelFactory.eliminarDireccion(direccion);
+    }
+
+    public boolean agregarDireccion( String direccion) {
+        return modelFactory.agregarDireccion(direccion);
     }
 }

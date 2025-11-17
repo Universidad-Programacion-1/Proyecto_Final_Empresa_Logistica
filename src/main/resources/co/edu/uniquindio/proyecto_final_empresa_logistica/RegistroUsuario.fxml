@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RegistroUsuarioViewController"
+            prefWidth="400.0" prefHeight="500.0">
+
+    <Button text="X" onAction="#onVolver"
+            layoutX="360.0" layoutY="10.0"
+            prefWidth="30.0" prefHeight="30.0"
+            style="-fx-background-color: #FF4C4C;
+               -fx-text-fill: white;
+               -fx-font-weight: bold;
+               -fx-font-size: 14px;
+               -fx-background-radius: 15px;
+               -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 1);"/>
+
+
+    <VBox alignment="TOP_CENTER" spacing="20" prefWidth="350.0"
+          AnchorPane.topAnchor="30.0" AnchorPane.leftAnchor="25.0"
+          AnchorPane.rightAnchor="25.0" AnchorPane.bottomAnchor="30.0">
+
+        <Label text="Crear Cuenta">
+            <font>
+                <Font name="System Bold" size="28.0"/>
+            </font>
+        </Label>
+
+        <GridPane hgap="10" vgap="15">
+            <Label text="Cédula:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtIdUsuario" promptText="Cédula" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+            <Label text="Nombre Completo:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNombreCompleto" promptText="Nombre Completo" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+            <Label text="Correo Electrónico:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtCorreoElectronico" promptText="Correo Electrónico" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+            <Label text="Número de Teléfono:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+            <TextField fx:id="txtNumeroTelefono" promptText="Número de Teléfono" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+            <Label text="Contraseña:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+            <PasswordField fx:id="txtPassword" promptText="Contraseña" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <Button fx:id="btnRegistrarUsuario" text="Continuar" onAction="#onAgregarUsuario"
+                style="-fx-background-color: #3382FA; -fx-text-fill: white;" prefWidth="180.0" prefHeight="40.0"/>
+    </VBox>
+</AnchorPane>
