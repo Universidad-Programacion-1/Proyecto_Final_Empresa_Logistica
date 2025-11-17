@@ -49,6 +49,7 @@ public class ModelFactory implements IModelFactoryServices {
                 .fechaCreacion(fecha)
                 .fechaEstimadaEntrega(fecha)
                 .repartidor(repartidor)
+                .usuario(usuario)
                 .build1();
         empresaLogistica.agregarEnvio(envio);
         empresaLogistica.getAdministradores().add(administrador);
