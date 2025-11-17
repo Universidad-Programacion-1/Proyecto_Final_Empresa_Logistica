@@ -7,22 +7,25 @@ import javafx.scene.control.*;
 public class CotizarTarifaViewController {
 
     @FXML
-    private TextField txtOrigen;
+    private ComboBox<String> comboOrigen;
+
     @FXML
-    private TextField txtDestino;
+    private ComboBox<String> comboDestino;
+
     @FXML
     private TextField txtPeso;
 
     @FXML
     private ComboBox<String> comboVolumen;
+
     @FXML
     private ComboBox<String> comboPrioridad;
 
     @FXML
-    private Button btnCalcular;
+    private Label lblResultado;
 
     @FXML
-    private Label lblResultado;
+    private Button btnCalcular;
 
     private ModelFactory modelFactory = ModelFactory.getInstance();
 
@@ -30,18 +33,21 @@ public class CotizarTarifaViewController {
     public void initialize() {
         comboVolumen.getItems().addAll("PEQUEÑO", "MEDIANO", "GRANDE");
         comboPrioridad.getItems().addAll("NORMAL", "EXPRESS", "URGENTE");
+
+        comboOrigen.getItems().addAll("Armenia", "Cali", "Medellín", "Bogotá");
+        comboDestino.getItems().addAll("Armenia", "Cali", "Medellín", "Bogotá");
     }
 
     @FXML
     private void calcularTarifa() {
         try {
-            String origen = txtOrigen.getText();
-            String destino = txtDestino.getText();
+            String origen = comboOrigen.getValue();
+            String destino = comboDestino.getValue();
             String volumen = comboVolumen.getValue();
             String prioridad = comboPrioridad.getValue();
             double peso = Double.parseDouble(txtPeso.getText());
 
-            if (origen.isEmpty() || destino.isEmpty() || volumen == null || prioridad == null) {
+            if (origen == null || destino == null || volumen == null || prioridad == null) {
                 lblResultado.setText("Complete todos los campos.");
                 return;
             }

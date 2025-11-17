@@ -6,6 +6,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
@@ -281,11 +282,42 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     }
 
     public long calcularDistancia(String origen, String destino) {
+
         if (origen.equalsIgnoreCase(destino)) {
             return 5;
         }
-        return (long) (Math.random() * 300 + 50);
+
+        Map<String, Long> destinos = DISTANCIAS.get(origen);
+
+        if (destinos != null) {
+            return destinos.getOrDefault(destino, 100L); // si no existe, valor por defecto
+        }
+
+        return 100L; // origen no encontrado
     }
+
+    private static final Map<String, Map<String, Long>> DISTANCIAS = Map.of(
+            "Armenia", Map.of(
+                    "Cali", 180L,
+                    "Medellin", 250L,
+                    "Bogota", 290L
+            ),
+            "Cali", Map.of(
+                    "Armenia", 180L,
+                    "Medellin", 420L,
+                    "Bogota", 460L
+            ),
+            "Medellin", Map.of(
+                    "Armenia", 250L,
+                    "Cali", 420L,
+                    "Bogota", 420L
+            ),
+            "Bogota", Map.of(
+                    "Armenia", 290L,
+                    "Cali", 460L,
+                    "Medellin", 420L
+            )
+    );
 
     public double cotizarEnvio(String origen, String destino, double peso, String volumen, String prioridad) {
 
