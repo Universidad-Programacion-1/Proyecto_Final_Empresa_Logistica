@@ -17,7 +17,7 @@ public class TotalCriterio {
 
     public double precioTotalCriterio(long peso, long distancia) {
         double precioTotal = 0;
-        precioTotal = criterioDistancia.calcularPrecioCriterios( peso,  distancia)+criterioPeso.calcularPrecioCriterios( peso,  distancia);
+        precioTotal = criterioDistancia.calcularPrecioCriterios( peso,  distancia)+criterioPeso.calcularPrecioCriterios( peso,  distancia)+ envioDecorado.costo();
 
         return precioTotal;
     }

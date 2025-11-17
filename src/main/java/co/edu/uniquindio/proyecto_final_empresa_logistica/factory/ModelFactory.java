@@ -1,6 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
@@ -31,6 +31,7 @@ public class ModelFactory implements IModelFactoryServices {
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         empresaLogistica.getAdministradores().add(administrador);
         TotalCriterio totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
+        EnvioDecorator envioDecorator = new EnvioDecorator(new EmpaqueCartonDecorator(), new EnvolturaImpermeableDecorator(), new PlasticoBurbujaDecorator());
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
     }
