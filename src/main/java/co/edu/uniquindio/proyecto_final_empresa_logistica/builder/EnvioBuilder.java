@@ -1,6 +1,8 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.builder;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
 
@@ -12,9 +14,10 @@ public class EnvioBuilder {
     protected double peso;
     protected String dimenciones;
     protected double costo;
-    //protected TipoEstadoEnvio tipoEstadoEnvio;
+    protected TipoEstadoEnvio tipoEstadoEnvio;
     protected LocalDate fechaCreacion;
     protected LocalDate fechaEstimadaEntrega;
+    private Repartidor repartidor;
 
     public EnvioBuilder idEnvio(String idEnvio) {
         this.idEnvio = idEnvio;
@@ -47,10 +50,10 @@ public class EnvioBuilder {
     }
 
 
-    //public EnvioBuilder tipoEstadoEnvio(TipoEstadoEnvio tipoEstadoEnvio) {
-    //    this.tipoEstadoEnvio = tipoEstadoEnvio;
-    //    return this;
-    //}
+    public EnvioBuilder tipoEstadoEnvio(TipoEstadoEnvio tipoEstadoEnvio) {
+        this.tipoEstadoEnvio = tipoEstadoEnvio;
+        return this;
+    }
 
     public EnvioBuilder fechaCreacion(LocalDate fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
@@ -62,9 +65,16 @@ public class EnvioBuilder {
         return this;
     }
 
-
+    public EnvioBuilder repartidor(Repartidor repartidor) {
+        this.repartidor = repartidor;
+        return this;
+    }
 
     public Envio build() {
         return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega);
+    }
+
+    public Envio build1() {
+        return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega, repartidor);
     }
 }

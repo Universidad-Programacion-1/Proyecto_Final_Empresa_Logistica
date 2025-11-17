@@ -65,7 +65,6 @@ public class LoginViewController {
 
     @FXML
     void initialize() {
-
         loginController = new LoginController(app.empresaLogistica);
     }
 
@@ -74,5 +73,11 @@ public class LoginViewController {
         int tipo = this.loginController.login(this.txtCorreo.getText(), this.txtContrasena.getText());
         System.out.println("Tipo persona " + tipo);
         this.app.newVista(tipo);
+        limpiarCampos();
+    }
+
+    private void limpiarCampos() {
+        txtContrasena.clear();
+        txtCorreo.clear();
     }
 }

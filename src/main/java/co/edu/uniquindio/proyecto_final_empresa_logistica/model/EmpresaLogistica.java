@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     private Collection<Administrador> administradores;
     private Collection<Usuario> usuarios;
     private Collection<Repartidor> repartidores;
+    private Collection<Envio> envios;
     int tipoPersona;
     Usuario usuario1;
     Administrador administrador1;
@@ -25,6 +27,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         this.administradores = new LinkedList<>();
         this.usuarios = new LinkedList<>();
         this.repartidores = new LinkedList<>();
+        this.envios = new LinkedList<>();
     }
 
 
@@ -43,6 +46,8 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     public Collection<Repartidor> getRepartidores() {
         return repartidores;
     }
+
+    public Collection<Envio> getEnvios() {return envios;}
 
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
 
@@ -181,7 +186,42 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return usuario1;
     }
 
-    public void setUsuario1(Usuario usuario1) {
-        this.usuario1 = usuario1;
+    public Repartidor getRepartidor1() {
+        return repartidor1;
+    }
+
+    public Collection<Envio> obtenerEnviosRepartidor(String idRepartidor) {
+        Collection<Envio> enviosRepartidor = new ArrayList<>();
+        for (Envio envio : envios) {
+            System.out.println("Obteniendo envios"+ envio.getRepartidor().getId()+ "id "+  idRepartidor);
+            if (envio.getRepartidor().getId().equals(idRepartidor)) {
+                enviosRepartidor.add(envio);
+            }
+        }
+        return enviosRepartidor;
+    }
+
+    public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
+        boolean centinela = false;
+        for (Envio envio : envios) {
+            System.out.println("Id.getebvio  "+ envio.getIdEnvio());
+            System.out.println("Id  "+ id);
+            if (envio.getIdEnvio().equals(id)) {
+                System.out.println("entro a if "+ estado);
+                envio.setTipoEstadoEnvio(estado);
+                centinela = true;
+            }
+        }
+        return  centinela;
+    }
+
+    public boolean agregarEnvio(Envio envio) {
+        boolean centinela = false;
+        if (envio != null) {
+            envios.add(envio);
+            centinela = true;
+            System.out.println("Envio agregado com sucesso " + centinela);
+        }
+        return centinela;
     }
 }

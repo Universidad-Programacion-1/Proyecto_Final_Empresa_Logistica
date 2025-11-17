@@ -27,11 +27,11 @@
                                         <Font size="18.0" />
                                     </font>
                                 </Label>
-                                <Button fx:id="btnActualizarEstado" layoutX="376.0" layoutY="319.0" mnemonicParsing="false" onAction="#onActualizarUsuario" text="Actualizar Estado" />
+                                <Button fx:id="btnActualizarEstado" layoutX="376.0" layoutY="319.0" mnemonicParsing="false" onAction="#onActualizarEstado" text="Actualizar Estado" />
                         <ComboBox fx:id="cbxEstadoEnvio" layoutX="430.0" layoutY="141.0" prefWidth="150.0" />
                             </children>
                         </Pane>
-                        <TableView fx:id="tblListUsuarios" layoutX="14.0" layoutY="388.0" prefHeight="247.0" prefWidth="866.0">
+                        <TableView fx:id="tblListEnvios" layoutX="14.0" layoutY="388.0" prefHeight="247.0" prefWidth="866.0">
                             <columns>
                                 <TableColumn fx:id="tbcId" prefWidth="72.0" text="Id" />
                                 <TableColumn fx:id="tbcOrigen" prefWidth="76.0" text="Origen" />

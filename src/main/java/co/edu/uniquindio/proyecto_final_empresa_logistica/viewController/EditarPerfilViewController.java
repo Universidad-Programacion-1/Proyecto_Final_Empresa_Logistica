@@ -162,15 +162,13 @@ public class EditarPerfilViewController {
     }
     private void initView() {
 
-        // Obtiene la lista
         obtenerUsuario();
 
+        // Traer los datos del cliente a la tabla
         initDataBinding();
 
+        // Obtiene la lista
         obtenerDirecciones();
-
-
-
 
         // Limpiar la tabla
         tblListDirecciones.getItems().clear();

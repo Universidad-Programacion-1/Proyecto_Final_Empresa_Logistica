@@ -1,13 +1,16 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.factory;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.ConexionBD.Conexion;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactoryServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 public class ModelFactory implements IModelFactoryServices {
@@ -29,10 +32,24 @@ public class ModelFactory implements IModelFactoryServices {
         return instance;
     }
     public void inicializarDatos(){
+        LocalDate fecha = LocalDate.now();
+        System.out.println("Inicializando ModelFactory");
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", true, "Quindio");
         Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
+        Envio envio = new EnvioBuilder()
+                .idEnvio("1")
+                .destino("La Tebaida")
+                .origen("Armenia")
+                .peso(10)
+                .dimenciones("5x3")
+                .costo(100.000)
+                .fechaCreacion(fecha)
+                .fechaEstimadaEntrega(fecha)
+                .repartidor(repartidor)
+                .build1();
+        empresaLogistica.agregarEnvio(envio);
         empresaLogistica.getAdministradores().add(administrador);
         empresaLogistica.getRepartidores().add(repartidor);
         empresaLogistica.getUsuarios().add(usuario);
@@ -137,4 +154,19 @@ public class ModelFactory implements IModelFactoryServices {
         return empresaLogistica.eliminarDireccion(direccion);
     }
 
+    public Collection<Envio> listaEnvios() {
+        return empresaLogistica.getEnvios();
+    }
+
+    public Collection<Envio> obtenerEnviosRepartidor(String idRepartidor) {
+        return empresaLogistica.obtenerEnviosRepartidor(idRepartidor);
+    }
+
+    public Repartidor getRepartidor() {
+        return empresaLogistica.getRepartidor1();
+    }
+
+    public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
+        return empresaLogistica.actualizarEstadoEnvio(id, estado);
+    }
 }
