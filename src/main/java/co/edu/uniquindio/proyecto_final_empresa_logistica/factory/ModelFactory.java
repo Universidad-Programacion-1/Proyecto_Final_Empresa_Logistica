@@ -118,4 +118,10 @@ public class ModelFactory implements IModelFactoryServices {
     public double costo() {
         return envioDecorado.costo();
     }
+    @Override
+    public double cotizarEnvio(String origen, String destino, double peso,
+                               String volumen, String prioridad) {
+
+        return empresaLogistica.cotizarEnvio(origen, destino, peso, volumen, prioridad);
+    }
 }

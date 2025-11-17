@@ -1,8 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
-
 import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.IEnvio;
-
 import java.time.LocalDate;
 
 public class Envio {

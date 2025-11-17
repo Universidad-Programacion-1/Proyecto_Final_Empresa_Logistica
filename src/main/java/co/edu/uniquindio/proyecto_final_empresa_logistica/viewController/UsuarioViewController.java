@@ -59,24 +59,17 @@ public class UsuarioViewController {
     @FXML
     private TextField txtCorreoElectronico;
 
-
-
     @FXML
     void onActualizarUsuario() {
         actualizarUsuario();
     }
 
     @FXML
-    void onAgregarUsuario() {
-        agregarUsuario();
-
-    }
+    void onAgregarUsuario() {agregarUsuario();}
 
     @FXML
-    void onEliminarUsuario() {
-        eliminarUsuario();
+    void onEliminarUsuario() {eliminarUsuario();}
 
-    }
     @FXML
     void onOpenMenu() {
         application.openViewLogin();

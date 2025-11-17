@@ -46,14 +46,12 @@ public class EnvioBuilder {
         return this;
     }
 
-
     //public EnvioBuilder tipoEstadoEnvio(TipoEstadoEnvio tipoEstadoEnvio) {
     //    this.tipoEstadoEnvio = tipoEstadoEnvio;
     //    return this;
     //}
 
-    public EnvioBuilder fechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public EnvioBuilder fechaCreacion(LocalDate fechaCreacion) {this.fechaCreacion = fechaCreacion;
         return this;
     }
 
@@ -61,8 +59,6 @@ public class EnvioBuilder {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
         return this;
     }
-
-
 
     public Envio build() {
         return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega);
