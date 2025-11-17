@@ -31,7 +31,11 @@ public class ModelFactory implements IModelFactoryServices {
     public void inicializarDatos(){
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
+        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", true, "Quindio");
+        Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         empresaLogistica.getAdministradores().add(administrador);
+        empresaLogistica.getRepartidores().add(repartidor);
+        empresaLogistica.getUsuarios().add(usuario);
         TotalCriterio totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
@@ -117,11 +121,5 @@ public class ModelFactory implements IModelFactoryServices {
     @Override
     public double costo() {
         return envioDecorado.costo();
-    }
-    @Override
-    public double cotizarEnvio(String origen, String destino, double peso,
-                               String volumen, String prioridad) {
-
-        return empresaLogistica.cotizarEnvio(origen, destino, peso, volumen, prioridad);
     }
 }

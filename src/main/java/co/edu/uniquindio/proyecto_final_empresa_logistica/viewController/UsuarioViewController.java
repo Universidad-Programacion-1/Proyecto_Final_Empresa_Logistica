@@ -137,6 +137,7 @@ public class UsuarioViewController {
         usuarios.addAll(usuarioController.obtenerUsuario());
     }
     private void mostrarInfoUsuario(Usuario usuario) {
+
         if (usuario != null) {
 
 

@@ -2,7 +2,6 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.LoginController;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +22,9 @@ public class LoginViewController {
 
     @FXML
     private URL location;
+
+    @FXML
+    private Label txtLogin;
 
     @FXML
     private Button btnIniciarSesion;
@@ -50,9 +52,16 @@ public class LoginViewController {
         //app.openViewOlvidoContrasena();
     }
 
+    @FXML
+    void onLogin() throws IOException {
+        this.app.openRegistroUsuario();
+    }
+
     public void setApp(Application app) {
+        System.out.println("setApp"+app);
         this.app = app;
     }
+
 
     @FXML
     void initialize() {
@@ -62,15 +71,8 @@ public class LoginViewController {
 
     private void redirect() throws IOException {
         System.out.println("Entro a redirec "+ txtCorreo.getText()+ txtContrasena.getText());
-          int tipo = loginController.login(txtCorreo.getText(), txtContrasena.getText());
-//        System.out.println("Tipo persona "+ tipo);
-//
-        if (tipo == 1) {
-            app.openMenuAdministrador();
-        }else if (tipo == 2) {
-            app.openMenuUsuario();
-        }else if (tipo == 3) {
-            app.openMenuRepartidor();
-        }
+        int tipo = this.loginController.login(this.txtCorreo.getText(), this.txtContrasena.getText());
+        System.out.println("Tipo persona " + tipo);
+        this.app.newVista(tipo);
     }
 }
