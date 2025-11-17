@@ -151,6 +151,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return centinela;
     }
 
+
     @Override
     public boolean verificarUsuario(String id) {
         boolean centinela = false;

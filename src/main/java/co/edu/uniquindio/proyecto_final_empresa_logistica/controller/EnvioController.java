@@ -29,6 +29,13 @@ public class EnvioController {
     public double costoEnvio() {
         return modelFactory.costo();
     }
+    public Envio crearEnvio(String id, String origen, String destino, double peso, String dimensiones,
+                            double costoBase, boolean carton, boolean burbuja, boolean impermeable,
+                            String idRepartidor, String idUsuario){
+        return modelFactory.crearEnvio( id,  origen,  destino,  peso, dimensiones,
+         costoBase,  carton,  burbuja,  impermeable,
+         idRepartidor, idUsuario);
+    }
 
     public Collection<Envio> obtenerEnvios() {
         return modelFactory.listaEnvios();
@@ -45,6 +52,7 @@ public class EnvioController {
     public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
         return modelFactory.actualizarEstadoEnvio(id, estado);
     }
+
 
 
 

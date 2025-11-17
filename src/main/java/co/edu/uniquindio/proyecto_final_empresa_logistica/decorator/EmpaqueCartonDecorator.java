@@ -3,7 +3,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.decorator;
 public class EmpaqueCartonDecorator extends EnvioDecorator{
 
 
-    public EmpaqueCartonDecorator() {
+    public EmpaqueCartonDecorator(IEnvio envioDecorado) {
         super(envioDecorado);
     }
 
