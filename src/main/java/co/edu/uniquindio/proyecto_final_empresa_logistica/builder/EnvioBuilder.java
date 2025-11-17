@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.builder;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
@@ -18,6 +19,7 @@ public class EnvioBuilder {
     protected LocalDate fechaCreacion;
     protected LocalDate fechaEstimadaEntrega;
     private Repartidor repartidor;
+    private Usuario usuario;
 
     public EnvioBuilder idEnvio(String idEnvio) {
         this.idEnvio = idEnvio;
@@ -70,11 +72,16 @@ public class EnvioBuilder {
         return this;
     }
 
+    public EnvioBuilder usuario(Usuario usuario) {
+        this.usuario = usuario;
+        return this;
+    }
+
     public Envio build() {
-        return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega);
+        return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega, usuario);
     }
 
     public Envio build1() {
-        return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega, repartidor);
+        return new Envio(idEnvio, origen, destino, peso, dimenciones, costo, fechaCreacion, fechaEstimadaEntrega, repartidor,  usuario);
     }
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="615.0" prefWidth="548.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.EditarPerfilRepartidorViewController">
+    <children>
+        <SplitPane layoutY="-7.0" orientation="VERTICAL" prefHeight="607.0" prefWidth="550.0">
+            <items>
+                <AnchorPane prefHeight="639.0" prefWidth="548.0">
+                    <children>
+                        <Pane prefHeight="640.0" prefWidth="548.0" style="-fx-border-image-width: 1px;">
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <children>
+                                <Label layoutX="160.0" layoutY="30.0" text="Editar Perfil">
+                                    <font>
+                                        <Font name="System Bold" size="36.0" />
+                                    </font>
+                                </Label>
+
+                                <Label layoutX="60.0" layoutY="125.0" prefHeight="27.0" prefWidth="156.0" text="Nombre Completo:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtNombreCompleto" layoutX="281.0" layoutY="123.0" prefHeight="31.0" prefWidth="199.0" promptText="Nombre Completo" />
+
+                                <Label layoutX="60.0" layoutY="176.0" prefHeight="27.0" prefWidth="156.0" text="Correo Electronico:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtCorreoElectronico" layoutX="281.0" layoutY="174.0" prefHeight="31.0" prefWidth="199.0" promptText="Correo Electronico" />
+
+                                <Label layoutX="60.0" layoutY="226.0" prefHeight="27.0" prefWidth="168.0" text="Numero de telefono:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtNumeroTelefono" layoutX="281.0" layoutY="224.0" prefHeight="31.0" prefWidth="199.0" promptText="Numero de telefono" />
+
+                                <Label layoutX="60.0" layoutY="278.0" prefHeight="27.0" prefWidth="156.0" text="Zona de Cobertura:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtZonaCobertura" layoutX="281.0" layoutY="276.0" prefHeight="31.0" prefWidth="199.0" promptText="Zona de Cobertura" />
+                        <Button fx:id="btnActualizarPerfil" layoutX="190.0" layoutY="419.0" mnemonicParsing="false" onAction="#onActualizarPerfil" prefHeight="31.0" prefWidth="139.0" text="ActualizarPerfil" />
+                        <ComboBox fx:id="cbxEstadoDisponible" layoutX="281.0" layoutY="331.0" prefHeight="31.0" prefWidth="199.0" />
+                        <Label layoutX="61.0" layoutY="333.0" prefHeight="27.0" prefWidth="199.0" text="Estado de Disponibilidad">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

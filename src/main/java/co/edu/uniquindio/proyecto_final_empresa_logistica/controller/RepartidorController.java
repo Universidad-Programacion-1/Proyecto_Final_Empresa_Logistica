@@ -20,8 +20,12 @@ public class RepartidorController {
         return modelFactory.agregarRepartidor(repartidor);
     }
 
-    public Collection<Repartidor> obtenerRepartidor() {
+    public Collection<Repartidor> obtenerRepartidores() {
         return modelFactory.listaRepartidor();
+    }
+
+    public Repartidor obtenerRepartidor() {
+        return modelFactory.getRepartidor();
     }
 
     public boolean eliminarRepartidor(String id) {
