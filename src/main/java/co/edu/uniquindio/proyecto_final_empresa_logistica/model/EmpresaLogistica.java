@@ -224,4 +224,20 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         }
         return centinela;
     }
+
+    public long calcularDistancia(String origen, String destino) {
+        if (origen.equalsIgnoreCase(destino)) {
+            return 5;
+        }
+        return (long) (Math.random() * 300 + 50);
+    }
+
+    public double cotizarEnvio(String origen, String destino, double peso, String volumen, String prioridad) {
+
+        long distancia = calcularDistancia(origen, destino);
+
+        Tarifa tarifa = new Tarifa(distancia, prioridad, volumen, (long) peso);
+
+        return tarifa.calcularTarifa();
+    }
 }

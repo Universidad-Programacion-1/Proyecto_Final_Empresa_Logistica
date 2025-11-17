@@ -65,6 +65,19 @@
                         </SplitPane>
                     </content>
                 </Tab>
+                <Tab text="Cotizar Envío">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <SplitPane orientation="VERTICAL">
+                                    <items>
+                                        <fx:include source="CotizarTarifa.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
             </tabs>
         </TabPane>
     </children>

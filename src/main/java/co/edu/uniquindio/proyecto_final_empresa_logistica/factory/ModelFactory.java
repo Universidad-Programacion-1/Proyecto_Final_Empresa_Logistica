@@ -169,4 +169,11 @@ public class ModelFactory implements IModelFactoryServices {
     public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
         return empresaLogistica.actualizarEstadoEnvio(id, estado);
     }
+
+
+    public double cotizarEnvio(String origen, String destino, double peso,
+                               String volumen, String prioridad) {
+
+        return empresaLogistica.cotizarEnvio(origen, destino, peso, volumen, prioridad);
+    }
 }
