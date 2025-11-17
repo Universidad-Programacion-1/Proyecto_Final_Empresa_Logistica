@@ -1,7 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.builder.EnvioBuilder;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.IEnvio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
@@ -67,7 +66,4 @@ public class Envio {
     public Usuario getUsuario() {return usuario;}
 
     public void setTipoEstadoEnvio(TipoEstadoEnvio estado) { this.tipoEstadoEnvio = estado; }
-
-
-
 }

@@ -3,13 +3,14 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.LoginViewController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.OlvidoContrasenaViewController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RegistroUsuarioViewController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.UsuarioViewController;
+
 import java.io.IOException;
 
 public class Application extends javafx.application.Application {
@@ -77,6 +78,20 @@ public class Application extends javafx.application.Application {
         primaryStage.show();
 
     }
+
+    public void openOlvidoContrasena() throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Application.class.getResource("OlvidoContrasena.fxml"));
+        javafx.scene.layout.VBox rootLayout = (javafx.scene.layout.VBox) loader.load();
+        OlvidoContrasenaViewController olvideContrasenaViewController = loader.getController();
+        olvideContrasenaViewController.setApp(this);
+
+        Scene scene = new Scene(rootLayout);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+    }
+
     public void inicializarData(){
         modelFactory.inicializarDatos();
     }

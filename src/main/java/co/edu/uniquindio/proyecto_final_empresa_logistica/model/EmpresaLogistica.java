@@ -279,4 +279,25 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         }
         return centinela;
     }
+
+    public boolean validarCorreoTelefono(String correo, String telefono) {
+        boolean centinela = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCorreo().equals(correo) && usuario.getTelefono().equals(telefono)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
+
+    public boolean contrasenaTemporal(String password, String correo) {
+        boolean centinela = false;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCorreo().equals(correo)) {
+                usuario.setPassword(password);
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
 }

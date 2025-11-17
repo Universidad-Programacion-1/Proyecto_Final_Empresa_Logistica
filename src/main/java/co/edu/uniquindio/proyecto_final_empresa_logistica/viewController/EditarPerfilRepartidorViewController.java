@@ -2,26 +2,18 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.RepartidorController;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.UsuarioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-
-import java.util.ArrayList;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class EditarPerfilRepartidorViewController {
 
     RepartidorController repartidorController;
     Repartidor repartidor;
     private Application app;
-    //ObservableList<String> direcciones = FXCollections.observableArrayList();
-    //String selectedDireccion;
-
 
     @FXML
     private Button btnActualizarPerfil;

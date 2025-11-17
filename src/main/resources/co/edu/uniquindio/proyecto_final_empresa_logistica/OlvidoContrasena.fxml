@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="370.0" spacing="20.0" style="-fx-background-color: #F4F6F8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.OlvidoContrasenaViewController">
+   <children>
+   
+       <Label fx:id="txtTitleLogin" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Olvide Contraseña" textAlignment="CENTER" />
+
+       <GridPane alignment="TOP_CENTER" hgap="10" vgap="15">
+      <children>
+              <Label alignment="TOP_CENTER" prefHeight="21.0" prefWidth="117.0" text="Correo" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <TextField fx:id="txtCorreo" prefWidth="200.0" promptText="Ingrese el correo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      
+              <Label alignment="TOP_CENTER" prefHeight="21.0" prefWidth="135.0" text="Telefono" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+              <TextField fx:id="txtTelefono" prefHeight="31.0" prefWidth="168.0" promptText="Ingrese el telefono" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+       </GridPane>
+   
+       <Button fx:id="btnEnviarCorreo" onAction="#onEnviarCorreo" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #3382FA; -fx-text-fill: white; -fx-font-size: 14px;" text="Enviar Correo" />
+   
+       <Label fx:id="txtVolver" onMouseClicked="#onVolver" style="-fx-cursor: hand;" text="Volver" textFill="#3382FA" underline="true">
+           <font>
+               <Font size="20.0" />
+           </font>
+       </Label>
+   </children>
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>

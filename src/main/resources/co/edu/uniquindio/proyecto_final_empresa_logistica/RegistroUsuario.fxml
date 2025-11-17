@@ -2,8 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
+<?import javafx.scene.text.Font?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RegistroUsuarioViewController"
             prefWidth="400.0" prefHeight="500.0">

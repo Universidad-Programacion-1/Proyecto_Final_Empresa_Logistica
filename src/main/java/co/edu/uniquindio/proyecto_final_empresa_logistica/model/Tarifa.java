@@ -1,7 +1,5 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
-
 public class Tarifa {
 
     private long distancia;

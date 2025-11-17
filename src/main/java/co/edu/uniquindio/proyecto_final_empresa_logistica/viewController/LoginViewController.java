@@ -47,9 +47,8 @@ public class LoginViewController {
     }
 
     @FXML
-    void onOlvidoContrasena() {
-
-        //app.openViewOlvidoContrasena();
+    void onOlvidoContrasena() throws IOException {
+        app.openOlvidoContrasena();
     }
 
     @FXML

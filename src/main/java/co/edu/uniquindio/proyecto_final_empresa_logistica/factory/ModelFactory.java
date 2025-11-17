@@ -38,7 +38,7 @@ public class ModelFactory implements IModelFactoryServices {
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
-        Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
+        Usuario usuario = new Usuario("123", "Alejo", "carlosa.ruiza@uqvirtual.edu.co", "321", "12345");
         Envio envio = new EnvioBuilder()
                 .idEnvio("1")
                 .destino("La Tebaida")
@@ -170,5 +170,13 @@ public class ModelFactory implements IModelFactoryServices {
 
     public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
         return empresaLogistica.actualizarEstadoEnvio(id, estado);
+    }
+
+    public boolean validarCorreoTelefono(String correo, String telefono) {
+        return empresaLogistica.validarCorreoTelefono(correo, telefono);
+    }
+
+    public boolean contrasenaTemporal(String password, String correo) {
+        return empresaLogistica.contrasenaTemporal(password, correo);
     }
 }

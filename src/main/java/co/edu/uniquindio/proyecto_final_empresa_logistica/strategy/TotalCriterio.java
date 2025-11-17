@@ -1,6 +1,5 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.strategy;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EmpaqueCartonDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 
 public class TotalCriterio {

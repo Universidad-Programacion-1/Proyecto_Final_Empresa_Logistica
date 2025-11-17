@@ -1,12 +1,9 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.controller;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.util.Collection;

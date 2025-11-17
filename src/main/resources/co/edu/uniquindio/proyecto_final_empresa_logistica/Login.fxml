@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" prefHeight="400.0" prefWidth="370.0"
-      xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.LoginViewController"
-      style="-fx-background-color: #F4F6F8;">
-
-    <Label fx:id="txtTitleLogin" text="Iniciar Sesión" textAlignment="CENTER"
-           style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-
-    <GridPane hgap="10" vgap="15" alignment="CENTER">
-        <Label text="Usuario:" GridPane.rowIndex="0" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <TextField fx:id="txtCorreo" promptText="Ingrese el correo" GridPane.rowIndex="0" GridPane.columnIndex="1"
-                   prefWidth="200.0"/>
-
-        <Label text="Contraseña:" GridPane.rowIndex="1" GridPane.columnIndex="0" alignment="CENTER_RIGHT"/>
-        <PasswordField fx:id="txtContrasena" promptText="Ingrese la contraseña" GridPane.rowIndex="1" GridPane.columnIndex="1"
-                       prefWidth="200.0"/>
-    </GridPane>
-
-    <Button fx:id="btnIniciarSesion" text="Iniciar sesión" onAction="#onIniciarSesion"
-            style="-fx-background-color: #3382FA; -fx-text-fill: white; -fx-font-size: 14px;"
-            prefWidth="180.0" prefHeight="40.0"/>
-
-    <Label fx:id="txtOlvidoContrasena" text="¿Olvidó la contraseña?" onMouseClicked="#onOlvidoContrasena"
-           textFill="#3382FA" underline="true" style="-fx-cursor: hand;">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
-
-    <Label fx:id="txtLogin" text="Crear Cuenta" onMouseClicked="#onLogin"
-           textFill="#123487" underline="true" style="-fx-cursor: hand;">
-        <font>
-            <Font size="14.0"/>
-        </font>
-    </Label>
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="370.0" spacing="20.0" style="-fx-background-color: #F4F6F8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.LoginViewController">
+   <children>
+   
+       <Label fx:id="txtTitleLogin" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Iniciar Sesión" textAlignment="CENTER" />
+   
+       <GridPane alignment="CENTER" hgap="10" vgap="15">
+      <children>
+              <Label alignment="CENTER_RIGHT" text="Correo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <TextField fx:id="txtCorreo" prefWidth="200.0" promptText="Ingrese el correo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      
+              <Label alignment="CENTER_RIGHT" text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+              <PasswordField fx:id="txtContrasena" prefWidth="200.0" promptText="Ingrese la contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
+       </GridPane>
+   
+       <Button fx:id="btnIniciarSesion" onAction="#onIniciarSesion" prefHeight="40.0" prefWidth="180.0" style="-fx-background-color: #3382FA; -fx-text-fill: white; -fx-font-size: 14px;" text="Iniciar sesión" />
+   
+       <Label fx:id="txtOlvidoContrasena" onMouseClicked="#onOlvidoContrasena" style="-fx-cursor: hand;" text="¿Olvidó la contraseña?" textFill="#3382FA" underline="true">
+           <font>
+               <Font size="14.0" />
+           </font>
+       </Label>
+   
+       <Label fx:id="txtLogin" onMouseClicked="#onLogin" style="-fx-cursor: hand;" text="Crear Cuenta" textFill="#123487" underline="true">
+           <font>
+               <Font size="14.0" />
+           </font>
+       </Label>
+   </children>
 
     <padding>
-        <Insets top="20.0" right="20.0" bottom="20.0" left="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 </VBox>

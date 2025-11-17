@@ -3,13 +3,8 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.UsuarioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class RegistroUsuarioViewController {

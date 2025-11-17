@@ -3,7 +3,6 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.controller;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 
 import java.util.Collection;
 

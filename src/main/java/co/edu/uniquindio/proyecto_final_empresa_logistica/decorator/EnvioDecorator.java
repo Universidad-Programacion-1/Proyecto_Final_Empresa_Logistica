@@ -1,8 +1,5 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.decorator;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
-
 public abstract class EnvioDecorator implements IEnvio {
     protected IEnvio envioDecorado;
 
