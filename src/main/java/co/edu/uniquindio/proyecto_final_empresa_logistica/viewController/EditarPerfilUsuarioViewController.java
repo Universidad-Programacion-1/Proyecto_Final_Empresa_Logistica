@@ -13,10 +13,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
-public class EditarPerfilViewController {
+public class EditarPerfilUsuarioViewController {
 
     UsuarioController usuarioController;
     Usuario usuario;

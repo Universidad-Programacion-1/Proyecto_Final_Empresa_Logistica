@@ -148,7 +148,15 @@ public class PaquetesRepartidorViewController {
             if (index >= 0) {
                 envios.set(index, selectedEnvio);
             }
+            tblListEnvios.refresh();
+            limpiarSeleccion();
+            limpiarCampo();
         }
+    }
+
+    private void limpiarSeleccion() {
+        tblListEnvios.getSelectionModel().clearSelection();
+        limpiarCampo();
     }
 
     private void initView() {
@@ -172,10 +180,18 @@ public class PaquetesRepartidorViewController {
     }
 
 
+    private void limpiarCampo() {
+        cbxEstadoEnvio.setValue(null);
+    }
+
     @FXML
     void initialize() {
         envioController = new EnvioController(app.empresaLogistica);
-        cbxEstadoEnvio.getItems().addAll(TipoEstadoEnvio.values());
+        cbxEstadoEnvio.getItems().addAll(
+            TipoEstadoEnvio.En_Ruta,
+            TipoEstadoEnvio.Entregado,
+            TipoEstadoEnvio.Incidencia
+        );
         initView();
     }
 

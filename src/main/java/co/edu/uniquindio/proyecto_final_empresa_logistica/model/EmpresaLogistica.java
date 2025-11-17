@@ -162,6 +162,61 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return centinela;
     }
 
+    @Override
+    public boolean agregarRepartidor(Repartidor repartidor) {
+        boolean centinela = false;
+        if (!verificarUsuario(repartidor.getId())) {
+            repartidores.add(repartidor);
+            centinela = true;
+            System.out.println("Usuario agregado com sucesso " + centinela);
+        }
+        return centinela;
+    }
+    @Override
+    public Repartidor obtenerRepartidor(String id) {
+        return null;
+    }
+
+    @Override
+    public boolean eliminarRepartidor(String id) {
+        boolean centinela = false;
+        for (Repartidor repartidor : repartidores) {
+            if (repartidor.getId().equals(id)) {
+                repartidores.remove(repartidor);
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    @Override
+    public boolean actualizarRepartidor(String id, Repartidor actualizado ) {
+        boolean centinela = false;
+        for (Repartidor repartidor : repartidores) {
+            if (repartidor.getId().equals(id)) {
+                repartidor.setNombre(actualizado.getNombre());
+                repartidor.setCorreo(actualizado.getCorreo());
+                repartidor.setTelefono(actualizado.getTelefono());
+                repartidor.setZonaCobertura(actualizado.getZonaCobertura());
+                repartidor.setEstadoDisponible(actualizado.getEstadoDisponible());
+                centinela = true;
+                break;
+            }
+        }
+        return centinela;
+    }
+
+    public boolean verificarRepartidor(String id) {
+        boolean centinela = false;
+        for (Repartidor repartidor : repartidores) {
+            if (repartidor.getId().equals(id)) {
+                centinela = true;
+            }
+        }
+        return centinela;
+    }
+
     public boolean agregarDireccion(String direccion) {
         boolean centinela = false;
         System.out.println("Iniciando agregarDireccion" + direccion);

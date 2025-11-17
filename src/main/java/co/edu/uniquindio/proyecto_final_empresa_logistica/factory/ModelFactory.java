@@ -8,6 +8,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IModelFactory
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioDistancia;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CriterioPeso;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ public class ModelFactory implements IModelFactoryServices {
         System.out.println("Inicializando ModelFactory");
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
-        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", true, "Quindio");
+        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
         Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         Envio envio = new EnvioBuilder()
                 .idEnvio("1")
@@ -81,20 +82,20 @@ public class ModelFactory implements IModelFactoryServices {
     }
     @Override
     public boolean agregarRepartidor(Repartidor repartidor) {
-        return false;
+        return empresaLogistica.agregarRepartidor(repartidor);
     }
+
     @Override
     public Repartidor obtenerRepartidor(String id) {
         return null;
     }
+
     @Override
-    public boolean eliminarRepartidor(String id) {
-        return false;
-    }
+    public boolean eliminarRepartidor(String id) {return empresaLogistica.eliminarRepartidor(id);}
+
     @Override
-    public boolean actualizarRepartidor(String id, Repartidor repartidor ) {
-        return false;
-    }
+    public boolean actualizarRepartidor(String id, Repartidor repartidor ) {return empresaLogistica.actualizarRepartidor(id, repartidor);}
+
     public Collection<Repartidor> listaRepartidor() {return empresaLogistica.getRepartidores();}
 
     @Override

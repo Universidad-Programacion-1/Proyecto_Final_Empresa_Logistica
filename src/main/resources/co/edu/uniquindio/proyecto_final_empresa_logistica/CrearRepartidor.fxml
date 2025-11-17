@@ -21,7 +21,7 @@
                                </Label>
    
                                <Label layoutX="76.0" layoutY="145.0" text="Cédula:" />
-                               <TextField fx:id="txtIdUsuario" layoutX="259.0" layoutY="143.0" promptText="Cédula" />
+                               <TextField fx:id="txtIdRepartidor" layoutX="259.0" layoutY="143.0" promptText="Cédula" />
    
                                <Label layoutX="76.0" layoutY="201.0" text="Nombre Completo:" />
                                <TextField fx:id="txtNombreCompleto" layoutX="259.0" layoutY="199.0" promptText="Nombre Completo" />
@@ -40,13 +40,13 @@
    
                                <Label layoutX="461.0" layoutY="252.0" text="Estado" />
    
-                               <Button fx:id="btnAgregarRepartidor" layoutX="279.0" layoutY="358.0" onAction="#onAgregarUsuario" text="Agregar Repartidor" />
-                               <Button fx:id="btnActualizarRepartidor" layoutX="489.0" layoutY="358.0" onAction="#onActualizarUsuario" text="Actualizar Repartidor" />
-                               <Button fx:id="btnEliminarRepartidor" layoutX="380.0" layoutY="683.0" onAction="#onEliminarUsuario" text="Eliminar Repartidor" />
+                               <Button fx:id="btnAgregarRepartidor" layoutX="279.0" layoutY="358.0" onAction="#onAgregarRepartidor" text="Agregar Repartidor" />
+                               <Button fx:id="btnActualizarRepartidor" layoutX="489.0" layoutY="358.0" onAction="#onActualizarRepartidor" text="Actualizar Repartidor" />
+                               <Button fx:id="btnEliminarRepartidor" layoutX="380.0" layoutY="683.0" onAction="#onEliminarRepartidor" text="Eliminar Repartidor" />
    
-                               <TableView fx:id="tblListUsuarios" layoutX="43.0" layoutY="415.0" prefHeight="247.0" prefWidth="815.0">
+                               <TableView fx:id="tblListRepartidor" layoutX="43.0" layoutY="415.0" prefHeight="247.0" prefWidth="815.0">
                                    <columns>
-                                       <TableColumn fx:id="tbcIdUsuario" prefWidth="137.0" text="Cédula" />
+                                       <TableColumn fx:id="tbcIdRepartidor" prefWidth="137.0" text="Cédula" />
                                        <TableColumn fx:id="tbcNombre" prefWidth="127.0" text="Nombre" />
                                        <TableColumn fx:id="tbcCorreo" prefWidth="141.0" text="Correo" />
                                        <TableColumn fx:id="tbcTelefono" prefWidth="132.0" text="Teléfono" />
