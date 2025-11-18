@@ -1,63 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
 <AnchorPane prefHeight="717.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RepartidorViewController">
-   <children>
-       <SplitPane layoutX="-3.0" orientation="VERTICAL" prefHeight="746.0" prefWidth="891.0">
-           <items>
-               <AnchorPane prefHeight="726.0" prefWidth="889.0">
-                   <children>
-                       <Pane prefHeight="746.0" prefWidth="888.0">
-                           <children>
-                               <Label layoutX="258.0" layoutY="14.0" text="Crear Repartidor">
-                                   <font>
-                                       <Font name="System Bold" size="48.0" />
-                                   </font>
-                               </Label>
-   
-                               <Label layoutX="76.0" layoutY="145.0" text="Cédula:" />
-                               <TextField fx:id="txtIdRepartidor" layoutX="259.0" layoutY="143.0" promptText="Cédula" />
-   
-                               <Label layoutX="76.0" layoutY="201.0" text="Nombre Completo:" />
-                               <TextField fx:id="txtNombreCompleto" layoutX="259.0" layoutY="199.0" promptText="Nombre Completo" />
-   
-                               <Label layoutX="76.0" layoutY="252.0" text="Correo Electrónico:" />
-                               <TextField fx:id="txtCorreoElectronico" layoutX="259.0" layoutY="250.0" promptText="Correo Electrónico" />
-   
-                               <Label layoutX="461.0" layoutY="143.0" text="Número de Teléfono:" />
-                               <TextField fx:id="txtNumeroTelefono" layoutX="644.0" layoutY="141.0" promptText="Número de Teléfono" />
-   
-                               <Label layoutX="461.0" layoutY="201.0" text="Contraseña:" />
-                               <PasswordField fx:id="txtPassword" layoutX="644.0" layoutY="199.0" promptText="Contraseña" />
-   
-                               <Label layoutX="259.0" layoutY="307.0" text="Zona de Cobertura" />
-                               <TextField fx:id="txtZonaCobertura" layoutX="451.0" layoutY="305.0" promptText="Zona de Cobertura" />
-   
-                               <Label layoutX="461.0" layoutY="252.0" text="Estado" />
-   
-                               <Button fx:id="btnAgregarRepartidor" layoutX="279.0" layoutY="358.0" onAction="#onAgregarRepartidor" text="Agregar Repartidor" />
-                               <Button fx:id="btnActualizarRepartidor" layoutX="489.0" layoutY="358.0" onAction="#onActualizarRepartidor" text="Actualizar Repartidor" />
-                               <Button fx:id="btnEliminarRepartidor" layoutX="380.0" layoutY="683.0" onAction="#onEliminarRepartidor" text="Eliminar Repartidor" />
-   
-                               <TableView fx:id="tblListRepartidor" layoutX="43.0" layoutY="415.0" prefHeight="247.0" prefWidth="815.0">
-                                   <columns>
-                                       <TableColumn fx:id="tbcIdRepartidor" prefWidth="137.0" text="Cédula" />
-                                       <TableColumn fx:id="tbcNombre" prefWidth="127.0" text="Nombre" />
-                                       <TableColumn fx:id="tbcCorreo" prefWidth="141.0" text="Correo" />
-                                       <TableColumn fx:id="tbcTelefono" prefWidth="132.0" text="Teléfono" />
-                                       <TableColumn fx:id="tbcEstado" prefWidth="114.0" text="Estado" />
-                                       <TableColumn fx:id="tbcZonaCobertura" prefWidth="163.0" text="Zona de Cobertura" />
-                                   </columns>
-                               </TableView>
-                        <ComboBox fx:id="cbxEstado" layoutX="644.0" layoutY="247.0" prefWidth="150.0" />
-                           </children>
-                       </Pane>
-                   </children>
-               </AnchorPane>
-           </items>
-       </SplitPane>
-   </children>
+    <children>
+        <SplitPane layoutX="-3.0" orientation="VERTICAL" prefHeight="746.0" prefWidth="891.0">
+            <items>
+                <AnchorPane prefHeight="726.0" prefWidth="889.0">
+                    <children>
+                        <Pane prefHeight="746.0" prefWidth="888.0">
+                            <children>
+                                <Label layoutX="258.0" layoutY="14.0" text="Crear Repartidor">
+                                    <font>
+                                        <Font name="System Bold" size="48.0" />
+                                    </font>
+                                </Label>
+
+                                <Label layoutX="76.0" layoutY="145.0" text="Cédula:" />
+                                <TextField fx:id="txtIdRepartidor" layoutX="259.0" layoutY="143.0" promptText="Cédula" />
+
+                                <Label layoutX="76.0" layoutY="201.0" text="Nombre Completo:" />
+                                <TextField fx:id="txtNombreCompleto" layoutX="259.0" layoutY="199.0" promptText="Nombre Completo" />
+
+                                <Label layoutX="76.0" layoutY="252.0" text="Correo Electrónico:" />
+                                <TextField fx:id="txtCorreoElectronico" layoutX="259.0" layoutY="250.0" promptText="Correo Electrónico" />
+
+                                <Label layoutX="461.0" layoutY="143.0" text="Número de Teléfono:" />
+                                <TextField fx:id="txtNumeroTelefono" layoutX="644.0" layoutY="141.0" promptText="Número de Teléfono" />
+
+                                <Label layoutX="461.0" layoutY="201.0" text="Contraseña:" />
+                                <PasswordField fx:id="txtPassword" layoutX="644.0" layoutY="199.0" promptText="Contraseña" />
+
+                                <Label layoutX="259.0" layoutY="307.0" text="Zona de Cobertura" />
+                                <TextField fx:id="txtZonaCobertura" layoutX="451.0" layoutY="305.0" promptText="Zona de Cobertura" />
+
+                                <Label layoutX="461.0" layoutY="252.0" text="Estado" />
+
+                                <ComboBox fx:id="cbxEstado" layoutX="644.0" layoutY="247.0" prefWidth="150.0" />
+
+                                <Button fx:id="btnAgregarRepartidor" layoutX="279.0" layoutY="358.0" onAction="#onAgregarRepartidor" text="Agregar Repartidor" />
+                                <Button fx:id="btnActualizarRepartidor" layoutX="489.0" layoutY="358.0" onAction="#onActualizarRepartidor" text="Actualizar Repartidor" />
+                                <Button fx:id="btnEliminarRepartidor" layoutX="380.0" layoutY="683.0" onAction="#onEliminarRepartidor" text="Eliminar Repartidor" />
+
+                                <TableView fx:id="tblListRepartidor" layoutX="43.0" layoutY="415.0" prefHeight="247.0" prefWidth="815.0">
+                                    <columns>
+                                        <TableColumn fx:id="tbcIdRepartidor" prefWidth="137.0" text="Cédula" />
+                                        <TableColumn fx:id="tbcNombre" prefWidth="127.0" text="Nombre" />
+                                        <TableColumn fx:id="tbcCorreo" prefWidth="141.0" text="Correo" />
+                                        <TableColumn fx:id="tbcTelefono" prefWidth="132.0" text="Teléfono" />
+                                        <TableColumn fx:id="tbcEstado" prefWidth="114.0" text="Estado" />
+                                        <TableColumn fx:id="tbcZonaCobertura" prefWidth="163.0" text="Zona de Cobertura" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>
