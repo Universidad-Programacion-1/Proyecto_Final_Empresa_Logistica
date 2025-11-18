@@ -23,14 +23,11 @@
         </TableView>
 
         <Label layoutX="24.0" layoutY="330.0" text="Cambiar Estado del Envío Seleccionado:" />
-
         <ComboBox fx:id="cbxEstadoEnvio" layoutX="24.0" layoutY="355.0" prefWidth="200.0" promptText="Seleccionar Estado" />
-
         <Button fx:id="btnActualizarEstado" layoutX="240.0" layoutY="355.0" mnemonicParsing="false" onAction="#onActualizarEstado" style="-fx-background-color: #3498db;" text="Actualizar Estado" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="12.0" />
             </font>
         </Button>
-
     </children>
 </AnchorPane>

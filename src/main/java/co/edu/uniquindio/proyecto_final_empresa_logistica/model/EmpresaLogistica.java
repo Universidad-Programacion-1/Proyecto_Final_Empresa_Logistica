@@ -230,6 +230,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return centinela;
     }
 
+
     public boolean eliminarDireccion(String direccion) {
         boolean centinela = usuario1.getDirecciones().removeIf(d -> d.equals(direccion));
         if (centinela) {
