@@ -68,8 +68,8 @@ public class ModelFactory implements IModelFactoryServices {
         if (this.empresaLogistica == null) {
 
             this.empresaLogistica = new EmpresaLogistica("UQ Logistica");
-            inicializarDatos();
-            guardarResourceXML();
+            //inicializarDatos();
+            //guardarResourceXML();
         } else {
             if (this.empresaLogistica.getListaPagos() == null) {
                 this.empresaLogistica.setListaPagos(new ArrayList<>());
@@ -92,11 +92,11 @@ public class ModelFactory implements IModelFactoryServices {
     }
     public void inicializarDatos(){
         LocalDate fecha = LocalDate.now();
-        System.out.println("Inicializando ModelFactory");
+        System.out.println("Inicializando ModelFactory------------------------------------------------------------------------------------------------------------------------------------------------------");
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
-        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.disponible, "Quindio");
-        Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
+        Repartidor repartidor = new Repartidor("1234", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.disponible, "Quindio");
+        Usuario usuario = new Usuario("1235", "Alejo", "alejo", "321", "12345");
         Usuario usuario2 = new Usuario("2", "Usuario Dos", "usuario2@mail.com", "321", "12345");
 
         Envio envio = new EnvioBuilder()
@@ -113,7 +113,7 @@ public class ModelFactory implements IModelFactoryServices {
                 .build1();
         empresaLogistica.agregarEnvio(envio);
         empresaLogistica.getAdministradores().add(administrador);
-        empresaLogistica.getRepartidores().add(repartidor);
+        empresaLogistica.agregarRepartidor(repartidor);
         empresaLogistica.getUsuarios().add(usuario);
         empresaLogistica.getUsuarios().add(usuario2);
 
@@ -264,7 +264,7 @@ public class ModelFactory implements IModelFactoryServices {
             empresaLogistica.getListaPagos().add(nuevoPago);
 
             envio.setTipoEstadoEnvio(TipoEstadoEnvio.Pagado);
-            guardarResourceXML();
+            //guardarResourceXML();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

@@ -100,8 +100,6 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
     public int login(String correo, String contrasena){
         int tipo = 0;
-        System.out.println("Iniciando login" + correo);
-        System.out.println("Iniciando login" + contrasena);
         for (Administrador administrador : administradores) {
             if (administrador.getCorreo().equals(correo) && administrador.getPassword().equals(contrasena)) {
                 tipo = 1;
@@ -110,8 +108,6 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         for (Usuario usuario : usuarios) {
-            System.out.println("Iniciando usuario "+ usuario.getPassword());
-            System.out.println("Iniciando usuario "+ usuario.getCorreo());
             if (usuario.getCorreo().equals(correo) && usuario.getPassword().equals(contrasena)) {
                 tipo = 2;
                 tipoPersona = tipo;
@@ -195,7 +191,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         if (!verificarUsuario(repartidor.getId())) {
             repartidores.add(repartidor);
             centinela = true;
-            System.out.println("Usuario agregado com sucesso " + centinela);
+            System.out.println("Repartidor agregado com sucesso " + centinela);
         }
         return centinela;
     }
