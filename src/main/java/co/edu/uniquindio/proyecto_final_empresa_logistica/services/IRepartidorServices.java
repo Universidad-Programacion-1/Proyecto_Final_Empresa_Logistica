@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.services;
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
 
 import java.util.Collection;
@@ -10,6 +11,7 @@ public interface IRepartidorServices {
 
     Repartidor obtenerRepartidor(String id);
     Collection<Repartidor> obtenerRepartidoresDisponibles();
+    Collection<Envio> obtenerEnviosRepartidor(String idRepartidor);
 
     boolean eliminarRepartidor(String id);
 

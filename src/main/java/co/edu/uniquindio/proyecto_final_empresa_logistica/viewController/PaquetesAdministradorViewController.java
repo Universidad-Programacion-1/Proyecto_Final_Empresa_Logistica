@@ -95,9 +95,6 @@ public class PaquetesAdministradorViewController {
         tblListEnvios.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             selectedEnvio = newVal;
             if (selectedEnvio != null) {
-
-
-
                 cbxEstadoEnvio.setValue(selectedEnvio.getTipoEstadoEnvio());
 
             }

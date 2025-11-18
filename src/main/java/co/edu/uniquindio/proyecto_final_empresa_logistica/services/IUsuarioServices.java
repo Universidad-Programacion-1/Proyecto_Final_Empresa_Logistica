@@ -1,6 +1,9 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.services;
 
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
+
+import java.util.Collection;
 
 public interface IUsuarioServices {
 
@@ -13,4 +16,6 @@ public interface IUsuarioServices {
     boolean actualizarUsuario(String id,
                               Usuario actualizado);
     boolean verificarUsuario(String id);
+
+
 }
