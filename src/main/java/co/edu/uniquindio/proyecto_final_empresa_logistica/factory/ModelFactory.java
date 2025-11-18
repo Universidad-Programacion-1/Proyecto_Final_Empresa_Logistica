@@ -30,19 +30,23 @@ public class ModelFactory implements IModelFactoryServices {
                             double costoBase, boolean carton, boolean burbuja, boolean impermeable,
                             String idRepartidor, String idUsuario) {
 
-        IEnvio envioDecorado = new EnvioBase(costoBase);
-        if (carton) envioDecorado = new EmpaqueCartonDecorator(envioDecorado);
-        if (burbuja) envioDecorado = new PlasticoBurbujaDecorator(envioDecorado);
-        if (impermeable) envioDecorado = new EnvolturaImpermeableDecorator(envioDecorado);
-        double costoFinal = envioDecorado.costo();
 
-        Usuario usuarioDelEnvio = null;
-        for (Usuario u : empresaLogistica.getUsuarios()) {
-            if (u.getId().equals(idUsuario)) {
-                usuarioDelEnvio = u;
-                break;
+        Repartidor repartidorEncontrado = null;
+        TipoEstadoEnvio estadoInicial = TipoEstadoEnvio.Solicitado; // Por defecto
+
+
+        if (idRepartidor != null && !idRepartidor.isEmpty()) {
+            repartidorEncontrado = empresaLogistica.obtenerRepartidor(idRepartidor);
+
+            if (repartidorEncontrado != null) {
+
+                estadoInicial = TipoEstadoEnvio.Asignado;
+
+
+                repartidorEncontrado.setEstadoDisponible(TipoEstadoDisponible.En_Ruta);
             }
         }
+
 
         Envio envioNuevo = Envio.builder()
                 .idEnvio(id)
@@ -50,13 +54,17 @@ public class ModelFactory implements IModelFactoryServices {
                 .destino(destino)
                 .peso(peso)
                 .dimenciones(dimensiones)
-                .costo(costoFinal)
-                .tipoEstadoEnvio(TipoEstadoEnvio.Pendiente_Pago)
+                .costo(costoBase)
                 .fechaCreacion(java.time.LocalDate.now())
-                .usuario(usuarioDelEnvio)
+                .fechaEstimadaEntrega(java.time.LocalDate.now().plusDays(3))
+                .tipoEstadoEnvio(estadoInicial)
+                .repartidor(repartidorEncontrado)
                 .build();
 
-        empresaLogistica.getEnvios().add(envioNuevo);
+
+        if (empresaLogistica.getEnvios() != null) {
+            empresaLogistica.getEnvios().add(envioNuevo);
+        }
         guardarResourceXML();
 
         return envioNuevo;

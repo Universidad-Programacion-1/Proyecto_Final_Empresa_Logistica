@@ -284,6 +284,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return usuario1;
     }
 
+
     public Repartidor getRepartidor1() {
         return repartidor1;
     }
@@ -391,14 +392,17 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     }
 
     public Collection<Envio> obtenerEnviosUsuario(String idUsuario) {
-        Collection<Envio> enviosRepartidor = new ArrayList<>();
-        for (Envio envio : envios) {
-            System.out.println("Obteniendo envios"+ envio.getRepartidor().getId()+ "id "+  idUsuario);
-            if (envio.getUsuario().getId().equals(idUsuario)) {
-                enviosRepartidor.add(envio);
+        Collection<Envio> enviosUsuario = new ArrayList<>();
+
+        if (envios != null) {
+            for (Envio envio : envios) {
+
+                if (envio.getUsuario() != null && envio.getUsuario().getId().equals(idUsuario)) {
+                    enviosUsuario.add(envio);
+                }
             }
         }
-        return enviosRepartidor;
+        return enviosUsuario;
     }
 
     private static final Map<String, Map<String, Long>> DISTANCIAS = Map.of(

@@ -4,8 +4,11 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor; // Importante
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CalculoTarifaCompletaStrategy;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.ICalculoTarifaStrategy;
+import javafx.collections.FXCollections; // Importante
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -17,38 +20,25 @@ public class EnvioViewController {
 
     private ICalculoTarifaStrategy calculoStrategy;
 
-    @FXML
-    private TextField txtOrigen;
-    @FXML
-    private TextField txtDestino;
-    @FXML
-    private Button btnCrearEnvio;
-    @FXML
-    private TextField txtPeso;
-    @FXML
-    private Button btnCalcular;
-    @FXML
-    private CheckBox chbPlasticoBurbujas;
-    @FXML
-    private CheckBox chbEmpaqueCarton;
-    @FXML
-    private TextField txtDistancia;
-    @FXML
-    private CheckBox chbEmbolturaCarton;
-    @FXML
-    private Label lblCosto;
-    @FXML
-    private TextField txtVolumen;
-    @FXML
-    private ComboBox<String> cmbPrioridad;
+    @FXML private TextField txtOrigen;
+    @FXML private TextField txtDestino;
+    @FXML private Button btnCrearEnvio;
+    @FXML private TextField txtPeso;
+    @FXML private Button btnCalcular;
+    @FXML private CheckBox chbPlasticoBurbujas;
+    @FXML private CheckBox chbEmpaqueCarton;
+    @FXML private TextField txtDistancia;
+    @FXML private CheckBox chbEmbolturaCarton;
+    @FXML private Label lblCosto;
+    @FXML private TextField txtVolumen; // "Dimensiones" en tu modelo se llama volumen aquí
+    @FXML private ComboBox<String> cmbPrioridad;
 
-    @FXML
-    private CheckBox chbSeguro;
-    @FXML
-    private CheckBox chbFragil;
-    @FXML
-    private CheckBox chbFirma;
+    @FXML private CheckBox chbSeguro;
+    @FXML private CheckBox chbFragil;
+    @FXML private CheckBox chbFirma;
 
+    // --- NUEVO: ComboBox para Repartidores ---
+    @FXML private ComboBox<Repartidor> cbxRepartidores;
 
     @FXML
     void onCalcular() {
@@ -63,6 +53,15 @@ public class EnvioViewController {
 
         cmbPrioridad.getItems().addAll("Baja", "Normal", "Alta", "Express");
         cmbPrioridad.setValue("Normal");
+
+        // --- NUEVO: Cargar repartidores disponibles ---
+        cargarRepartidoresDisponibles();
+    }
+
+    private void cargarRepartidoresDisponibles() {
+        if (envioController.obtenerRepartidoresDisponibles() != null) {
+            cbxRepartidores.setItems(FXCollections.observableArrayList(envioController.obtenerRepartidoresDisponibles()));
+        }
     }
 
     public void setApp(Application application) {
@@ -71,12 +70,18 @@ public class EnvioViewController {
 
     private void mostrarCostoTotal() {
         try {
+            // Validación básica antes de parsear
+            if (txtPeso.getText().isEmpty() || txtDistancia.getText().isEmpty()) {
+                lblCosto.setText("Ingrese peso/distancia");
+                return;
+            }
+
             long peso = Long.parseLong(txtPeso.getText());
             long distancia = Long.parseLong(txtDistancia.getText());
-            String volumen = txtVolumen.getText();
+            String volumen = txtVolumen.getText(); // Usaremos esto como "Dimensiones"
             String prioridad = cmbPrioridad.getValue();
 
-            if (volumen.isEmpty()) {
+            if (volumen == null || volumen.isEmpty()) {
                 lblCosto.setText("Volumen requerido");
                 return;
             }
@@ -114,9 +119,8 @@ public class EnvioViewController {
         }
     }
 
-
     @FXML
-    void onCrearEnvio() {
+    void onCrearEnvio() { // Ya no recibe ActionEvent si no se usa en el FXML con parámetro
         try {
             if (txtOrigen.getText().isEmpty() || txtDestino.getText().isEmpty() ||
                     txtPeso.getText().isEmpty() || txtDistancia.getText().isEmpty() ||
@@ -130,10 +134,11 @@ public class EnvioViewController {
             String destino = txtDestino.getText();
             long peso = Long.parseLong(txtPeso.getText());
             long distancia = Long.parseLong(txtDistancia.getText());
-            String volumen = txtVolumen.getText();
+            String volumen = txtVolumen.getText(); // Esto irá al campo "dimensiones"
             String prioridad = cmbPrioridad.getValue();
-            String idUsuario = "2";
+            String idUsuario = "2"; // Quemado por ahora, idealmente vendría del login
 
+            // --- 1. Calcular Costo Final ---
             double costoBase = calculoStrategy.calcularCostoBase(peso, distancia, volumen, prioridad);
 
             IEnvio envioCalculado = new EnvioBase(costoBase);
@@ -152,17 +157,26 @@ public class EnvioViewController {
 
             String idEnvio = String.valueOf(System.currentTimeMillis());
 
+            // --- 2. Capturar Repartidor Seleccionado ---
+            String idRepartidorSeleccionado = "";
+            if (cbxRepartidores.getValue() != null) {
+                idRepartidorSeleccionado = cbxRepartidores.getValue().getId();
+            }
+
+            // --- 3. Llamar al método crearEnvio actualizado ---
             Envio nuevoEnvio = envioController.crearEnvio(
                     idEnvio, origen, destino, peso, volumen,
                     costoFinal,
                     llevaCarton, llevaBurbuja, llevaImpermeable,
-                    "0", idUsuario
+                    idRepartidorSeleccionado, // Pasamos el ID del repartidor (puede estar vacío)
+                    idUsuario
             );
 
             if(nuevoEnvio != null){
                 nuevoEnvio.setCosto(costoFinal);
                 mostrarMensaje("Éxito", "Envío Creado", "El envío se ha guardado con éxito.\nCosto Total: $" + String.format("%.2f", nuevoEnvio.getCosto()), Alert.AlertType.INFORMATION);
                 limpiarCampos();
+                cargarRepartidoresDisponibles(); // Recargar la lista por si asignamos uno
             }
 
         } catch (NumberFormatException e) {
@@ -184,6 +198,7 @@ public class EnvioViewController {
         chbFragil.setSelected(false);
         chbFirma.setSelected(false);
         lblCosto.setText("$ 0.0");
+        cbxRepartidores.setValue(null); // Limpiar selección de repartidor
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
