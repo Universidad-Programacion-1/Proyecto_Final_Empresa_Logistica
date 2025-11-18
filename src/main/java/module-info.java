@@ -5,6 +5,10 @@ module co.edu.uniquindio.proyecto_final_empresa_logistica {
     requires java.mail;
     requires java.desktop;
 
+    // iText 7
+    requires kernel;
+    requires layout;
+
     opens co.edu.uniquindio.proyecto_final_empresa_logistica to javafx.fxml;
     exports co.edu.uniquindio.proyecto_final_empresa_logistica;
     exports co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="626.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.GenerarReportesUsuarioViewController">
+    <children>
+        <SplitPane layoutX="-3.0" orientation="VERTICAL" prefHeight="626.0" prefWidth="891.0">
+            <items>
+                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="667.0" prefWidth="889.0">
+                    <children>
+                        <Pane prefHeight="647.0" prefWidth="888.0" style="-fx-border-image-width: 1px;">
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <children>
+                                <Label layoutX="282.0" layoutY="56.0" text="Generar Reportes">
+                                    <font>
+                                        <Font name="System Bold" size="36.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="247.0" layoutY="143.0" prefHeight="27.0" prefWidth="168.0" text="Tipo Documento:">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="btnGenerarReportes" layoutX="364.0" layoutY="236.0" mnemonicParsing="false" onAction="#onGenerarReportes" prefHeight="37.0" prefWidth="160.0" text="Generar Reportes" />
+                                <ComboBox fx:id="cbxTipoDocumento" layoutX="427.0" layoutY="141.0" prefWidth="150.0" />
+                              <TableView fx:id="tblListEnvios" layoutX="11.0" layoutY="316.0" prefHeight="247.0" prefWidth="866.0">
+                                  <columns>
+                                      <TableColumn fx:id="tbcId" prefWidth="72.0" text="Id" />
+                                      <TableColumn fx:id="tbcOrigen" prefWidth="76.0" text="Origen" />
+                                      <TableColumn fx:id="tbcDestino" minWidth="0.0" prefWidth="106.0" text="Destino" />
+                                      <TableColumn fx:id="tbcPeso" prefWidth="96.0" text="Peso" />
+                                      <TableColumn fx:id="tbcDimencion" prefWidth="101.0" text="Dimencion" />
+                                      <TableColumn fx:id="tbcCosto" prefWidth="59.0" text="Costo" />
+                                      <TableColumn fx:id="tbcFecha" prefWidth="113.0" text="Fecha" />
+                                      <TableColumn fx:id="tbcFechaEntrega" prefWidth="137.0" text="Fecha de Entrega" />
+                                      <TableColumn fx:id="tbcEstado" prefWidth="105.0" text="Estado" />
+                                  </columns>
+                              </TableView>
+                            </children>
+                        </Pane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

@@ -55,4 +55,15 @@ public class Persona {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Persona{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", correo='" + correo + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

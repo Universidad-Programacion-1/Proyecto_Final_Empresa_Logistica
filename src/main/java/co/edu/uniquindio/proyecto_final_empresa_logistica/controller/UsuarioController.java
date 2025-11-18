@@ -44,7 +44,11 @@ public class UsuarioController {
         return modelFactory.eliminarDireccion(direccion);
     }
 
-    public boolean agregarDireccion( String direccion) {
+    public boolean agregarDireccion(String direccion) {
         return modelFactory.agregarDireccion(direccion);
+    }
+
+    public boolean generarReporteUsuario(String id, String tipoDocumento){
+        return modelFactory.generarReporteUsuario(id, tipoDocumento);
     }
 }

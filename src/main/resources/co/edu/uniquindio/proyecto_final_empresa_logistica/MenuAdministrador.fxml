@@ -58,13 +58,13 @@
                        </AnchorPane>
                    </content>
                </Tab>
-               <Tab text="">
+               <Tab text="Generar Reportes">
                    <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
                            <children>
                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
                                    <items>
-                                       <fx:include source="CrearUsuario.fxml" />
+                                       <fx:include source="GenerarReportesAdministrador.fxml" />
                                    </items>
                                </SplitPane>
                            </children>

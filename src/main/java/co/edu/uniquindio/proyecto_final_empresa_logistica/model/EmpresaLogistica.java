@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -299,5 +300,47 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
             }
         }
         return centinela;
+    }
+
+    public boolean generarDocumentoUsuario(String id, String tipoDocumento){
+        boolean centinela = false;
+        Collection<Envio> enviosUsuario = obtenerEnviosUsuario(id);
+
+        if (tipoDocumento.equals("PDF")){
+            String ruta = "C:/Users/Carlos Andres/Documents/DocumentosProyecto/"+ LocalDate.now() + ".pdf";
+            ReporteEnvios.generarReporte(enviosUsuario, ruta, ReporteEnvios.FormatoReporte.PDF);
+            centinela = true;
+        } else if (tipoDocumento.equals("CSV")) {
+            String ruta = "C:/Users/Carlos Andres/Documents/DocumentosProyecto/"+ LocalDate.now() + ".csv";
+            ReporteEnvios.generarReporte(enviosUsuario, ruta, ReporteEnvios.FormatoReporte.CSV);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public boolean generarReporteAdministrador(String tipoDocumento){
+        boolean centinela = false;
+
+        if (tipoDocumento.equals("PDF")){
+            String ruta = "C:/Users/Carlos Andres/Documents/DocumentosProyecto/"+"Admin"+ LocalDate.now() + ".pdf";
+            ReporteEnvios.generarReporte(envios, ruta, ReporteEnvios.FormatoReporte.PDF);
+            centinela = true;
+        } else if (tipoDocumento.equals("CSV")) {
+            String ruta = "C:/Users/Carlos Andres/Documents/DocumentosProyecto/"+"Admin"+ LocalDate.now() + ".csv";
+            ReporteEnvios.generarReporte(envios, ruta, ReporteEnvios.FormatoReporte.CSV);
+            centinela = true;
+        }
+        return centinela;
+    }
+
+    public Collection<Envio> obtenerEnviosUsuario(String idUsuario) {
+        Collection<Envio> enviosRepartidor = new ArrayList<>();
+        for (Envio envio : envios) {
+            System.out.println("Obteniendo envios"+ envio.getRepartidor().getId()+ "id "+  idUsuario);
+            if (envio.getUsuario().getId().equals(idUsuario)) {
+                enviosRepartidor.add(envio);
+            }
+        }
+        return enviosRepartidor;
     }
 }

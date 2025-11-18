@@ -43,15 +43,19 @@
                         </SplitPane>
                     </content>
                 </Tab>
-                <Tab text="Inventario 1">
+                <Tab text="Generar Reportes">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                        <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL" prefHeight="621.0" prefWidth="931.0">
-                            <items>
-                                <fx:include source="EditarUsuario.fxml" />
-                            </items>
-                        </SplitPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL" prefHeight="621.0" prefWidth="931.0">
+                                    <items>
+                                        <fx:include source="GenerarReportesUsuario.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
                     </content>
+
                 </Tab>
                 <Tab text="Editar Perfil">
                     <content>

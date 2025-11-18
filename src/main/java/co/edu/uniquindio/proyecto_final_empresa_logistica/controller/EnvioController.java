@@ -35,6 +35,10 @@ public class EnvioController {
         return modelFactory.obtenerEnviosRepartidor(idRepartidor);
     }
 
+    public Collection<Envio> obtenerEnviosUsuario(String idUsuario) {
+        return modelFactory.obtenerEnviosUsuario(idUsuario);
+    }
+
     public Repartidor obtenerRepartidor() {
         return modelFactory.getRepartidor();
     }

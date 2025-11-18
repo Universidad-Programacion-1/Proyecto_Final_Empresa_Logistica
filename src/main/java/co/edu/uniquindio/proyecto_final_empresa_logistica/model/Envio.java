@@ -32,6 +32,7 @@ public class Envio {
         this.fechaCreacion = fechaCreacion;
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
         this.tipoEstadoEnvio = TipoEstadoEnvio.Solicitado;
+        this.usuario = usuario;
     }
 
     public Envio(String idEnvio, String destino, String origen, double peso,
@@ -48,6 +49,7 @@ public class Envio {
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
         this.tipoEstadoEnvio = TipoEstadoEnvio.Solicitado;
         this.repartidor = repartidor;
+        this.usuario = usuario;
     }
 
     public static EnvioBuilder builder(){

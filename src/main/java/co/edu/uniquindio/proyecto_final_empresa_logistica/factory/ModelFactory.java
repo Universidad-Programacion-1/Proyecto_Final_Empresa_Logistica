@@ -38,7 +38,7 @@ public class ModelFactory implements IModelFactoryServices {
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
-        Usuario usuario = new Usuario("123", "Alejo", "carlosa.ruiza@uqvirtual.edu.co", "321", "12345");
+        Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         Envio envio = new EnvioBuilder()
                 .idEnvio("1")
                 .destino("La Tebaida")
@@ -164,6 +164,10 @@ public class ModelFactory implements IModelFactoryServices {
         return empresaLogistica.obtenerEnviosRepartidor(idRepartidor);
     }
 
+    public Collection<Envio> obtenerEnviosUsuario(String idUsuario) {
+        return empresaLogistica.obtenerEnviosUsuario(idUsuario);
+    }
+
     public Repartidor getRepartidor() {
         return empresaLogistica.getRepartidor1();
     }
@@ -178,5 +182,13 @@ public class ModelFactory implements IModelFactoryServices {
 
     public boolean contrasenaTemporal(String password, String correo) {
         return empresaLogistica.contrasenaTemporal(password, correo);
+    }
+
+    public boolean generarReporteUsuario(String id, String tipoDocumento){
+        return empresaLogistica.generarDocumentoUsuario(id, tipoDocumento);
+    }
+
+    public boolean generarReporteAdministrador(String tipoDocumento){
+        return empresaLogistica.generarReporteAdministrador(tipoDocumento);
     }
 }
