@@ -35,9 +35,4 @@ public class Repartidor extends Persona {
         this.zonaCobertura = zonaCobertura;
     }
 
-
-    @Override
-    public String toString() {
-        return getNombre();
-    }
 }
