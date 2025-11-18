@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.EnvioViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.EnvioViewController">
     <children>
-        <SplitPane layoutX="6.0" orientation="VERTICAL" prefHeight="515.0" prefWidth="590.0">
+        <SplitPane layoutX="6.0" orientation="VERTICAL" prefHeight="555.0" prefWidth="590.0">
             <items>
-                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="513.0" prefWidth="630.0">
+                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="553.0" prefWidth="630.0">
                     <children>
-                        <Pane layoutX="-10.0" layoutY="-5.0" prefHeight="520.0" prefWidth="600.0" style="-fx-background-color: #F4F4F4;">
+                        <Pane layoutX="-10.0" layoutY="-5.0" prefHeight="560.0" prefWidth="600.0" style="-fx-background-color: #F4F4F4;">
                             <children>
                                 <Label layoutX="31.0" layoutY="14.0" prefHeight="60.0" prefWidth="550.0" text="Gestión de Envíos y Cotización" textFill="#2c3e50">
                                     <font>
@@ -30,51 +30,66 @@
                                 <CheckBox fx:id="chbEmpaqueCarton" layoutX="60.0" layoutY="110.0" mnemonicParsing="false" text="Empaque de cartón" />
                                 <CheckBox fx:id="chbEmbolturaCarton" layoutX="220.0" layoutY="110.0" mnemonicParsing="false" text="Envoltura impermeable" />
                                 <CheckBox fx:id="chbPlasticoBurbujas" layoutX="400.0" layoutY="110.0" mnemonicParsing="false" text="Plástico de burbujas" />
+                                <CheckBox fx:id="chbSeguro" layoutX="60.0" layoutY="140.0" mnemonicParsing="false" text="Seguro de envío" />
+                                <CheckBox fx:id="chbFragil" layoutX="220.0" layoutY="140.0" mnemonicParsing="false" text="Manejo frágil" />
+                                <CheckBox fx:id="chbFirma" layoutX="400.0" layoutY="140.0" mnemonicParsing="false" text="Firma requerida" />
 
-                                <Separator layoutX="31.0" layoutY="145.0" prefWidth="530.0" />
 
-                                <Label layoutX="50.0" layoutY="160.0" text="2. Datos del Trayecto" textFill="#e67e22">
+                                <Separator layoutX="31.0" layoutY="175.0" prefWidth="530.0" />
+
+                                <Label layoutX="50.0" layoutY="190.0" text="2. Datos del Trayecto" textFill="#e67e22">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
                                     </font>
                                 </Label>
 
-                                <Label layoutX="80.0" layoutY="190.0" text="Origen:">
+                                <Label layoutX="80.0" layoutY="220.0" text="Origen:">
                                     <font><Font size="14.0" /></font>
                                 </Label>
-                                <TextField fx:id="txtOrigen" layoutX="150.0" layoutY="188.0" prefWidth="130.0" promptText="Ej: Armenia" />
+                                <TextField fx:id="txtOrigen" layoutX="150.0" layoutY="218.0" prefWidth="130.0" promptText="Ej: Armenia" />
 
-                                <Label layoutX="310.0" layoutY="190.0" text="Destino:">
+                                <Label layoutX="310.0" layoutY="220.0" text="Destino:">
                                     <font><Font size="14.0" /></font>
                                 </Label>
-                                <TextField fx:id="txtDestino" layoutX="380.0" layoutY="188.0" prefWidth="130.0" promptText="Ej: Pereira" />
+                                <TextField fx:id="txtDestino" layoutX="380.0" layoutY="218.0" prefWidth="130.0" promptText="Ej: Pereira" />
 
-                                <Label layoutX="80.0" layoutY="230.0" text="Peso (kg):">
+                                <Label layoutX="80.0" layoutY="260.0" text="Peso (kg):">
                                     <font><Font size="14.0" /></font>
                                 </Label>
-                                <TextField fx:id="txtPeso" layoutX="150.0" layoutY="228.0" prefWidth="130.0" promptText="Ej: 5" />
+                                <TextField fx:id="txtPeso" layoutX="150.0" layoutY="258.0" prefWidth="130.0" promptText="Ej: 5" />
 
-                                <Label layoutX="310.0" layoutY="230.0" text="Distancia (km):">
+                                <Label layoutX="310.0" layoutY="260.0" text="Distancia (km):">
                                     <font><Font size="14.0" /></font>
                                 </Label>
-                                <TextField fx:id="txtDistancia" layoutX="415.0" layoutY="228.0" prefWidth="95.0" promptText="Ej: 50" />
+                                <TextField fx:id="txtDistancia" layoutX="415.0" layoutY="258.0" prefWidth="95.0" promptText="Ej: 50" />
 
-                                <Separator layoutX="31.0" layoutY="275.0" prefWidth="530.0" />
+                                <Label layoutX="80.0" layoutY="300.0" text="Volumen:">
+                                    <font><Font size="14.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtVolumen" layoutX="150.0" layoutY="298.0" prefWidth="130.0" promptText="Ej: 0.5 (m³) o 'pequeño'" />
 
-                                <Button fx:id="btnCalcular" layoutX="150.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCalcular" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #3498db;" text="Cotizar" textFill="WHITE">
+                                <Label layoutX="310.0" layoutY="300.0" text="Prioridad:">
+                                    <font><Font size="14.0" /></font>
+                                </Label>
+                                <ComboBox fx:id="cmbPrioridad" layoutX="380.0" layoutY="298.0" prefWidth="130.0" />
+
+
+                                <Separator layoutX="31.0" layoutY="345.0" prefWidth="530.0" />
+
+                                <Button fx:id="btnCalcular" layoutX="150.0" layoutY="370.0" mnemonicParsing="false" onAction="#onCalcular" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #3498db;" text="Cotizar" textFill="WHITE">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Button>
 
-                                <Button fx:id="btnCrearEnvio" layoutX="280.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCrearEnvio" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60;" text="Confirmar y Crear" textFill="WHITE">
+                                <Button fx:id="btnCrearEnvio" layoutX="280.0" layoutY="370.0" mnemonicParsing="false" onAction="#onCrearEnvio" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60;" text="Confirmar y Crear" textFill="WHITE">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Button>
 
-                                <Label layoutX="180.0" layoutY="370.0" text="Costo Total Estimado:">
+                                <Label layoutX="180.0" layoutY="440.0" text="Costo Total Estimado:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblCosto" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="400.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #bdc3c7; -fx-background-color: #ecf0f1;" text="\$ 0.0" textAlignment="CENTER" textFill="#c0392b">
+                                <Label fx:id="lblCosto" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="470.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #bdc3c7; -fx-background-color: #ecf0f1;" text="\$ 0.0" textAlignment="CENTER" textFill="#c0392b">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>

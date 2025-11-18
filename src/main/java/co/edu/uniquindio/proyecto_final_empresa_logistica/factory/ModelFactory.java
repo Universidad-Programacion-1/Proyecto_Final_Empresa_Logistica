@@ -13,6 +13,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDispon
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class ModelFactory implements IModelFactoryServices {
@@ -29,29 +30,34 @@ public class ModelFactory implements IModelFactoryServices {
                             double costoBase, boolean carton, boolean burbuja, boolean impermeable,
                             String idRepartidor, String idUsuario) {
 
+        IEnvio envioDecorado = new EnvioBase(costoBase);
+        if (carton) envioDecorado = new EmpaqueCartonDecorator(envioDecorado);
+        if (burbuja) envioDecorado = new PlasticoBurbujaDecorator(envioDecorado);
+        if (impermeable) envioDecorado = new EnvolturaImpermeableDecorator(envioDecorado);
+        double costoFinal = envioDecorado.costo();
+
+        Usuario usuarioDelEnvio = null;
+        for (Usuario u : empresaLogistica.getUsuarios()) {
+            if (u.getId().equals(idUsuario)) {
+                usuarioDelEnvio = u;
+                break;
+            }
+        }
+
         Envio envioNuevo = Envio.builder()
                 .idEnvio(id)
                 .origen(origen)
                 .destino(destino)
                 .peso(peso)
                 .dimenciones(dimensiones)
-                .costo(costoBase)
-                .tipoEstadoEnvio(TipoEstadoEnvio.Solicitado)
+                .costo(costoFinal)
+                .tipoEstadoEnvio(TipoEstadoEnvio.Pendiente_Pago)
                 .fechaCreacion(java.time.LocalDate.now())
+                .usuario(usuarioDelEnvio)
                 .build();
 
-        IEnvio envioDecorado = new EnvioBase(costoBase);
-        if (carton) envioDecorado = new EmpaqueCartonDecorator(envioDecorado);
-        if (burbuja) envioDecorado = new PlasticoBurbujaDecorator(envioDecorado);
-        if (impermeable) envioDecorado = new EnvolturaImpermeableDecorator(envioDecorado);
-
-        for(Usuario u : empresaLogistica.getUsuarios()){
-            if(u.getId().equals(idUsuario)){
-                break;
-            }
-        }
         empresaLogistica.getEnvios().add(envioNuevo);
-        guardarResourceXML(); // Guardar en archivo
+        guardarResourceXML();
 
         return envioNuevo;
     }
@@ -64,11 +70,13 @@ public class ModelFactory implements IModelFactoryServices {
             this.empresaLogistica = new EmpresaLogistica("UQ Logistica");
             inicializarDatos();
             guardarResourceXML();
+        } else {
+            if (this.empresaLogistica.getListaPagos() == null) {
+                this.empresaLogistica.setListaPagos(new ArrayList<>());
+            }
         }
 
         this.totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
-
-
     }
 
     private void guardarResourceXML() {
@@ -89,6 +97,8 @@ public class ModelFactory implements IModelFactoryServices {
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
         Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
         Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
+        Usuario usuario2 = new Usuario("2", "Usuario Dos", "usuario2@mail.com", "321", "12345");
+
         Envio envio = new EnvioBuilder()
                 .idEnvio("1")
                 .destino("La Tebaida")
@@ -101,10 +111,15 @@ public class ModelFactory implements IModelFactoryServices {
                 .repartidor(repartidor)
                 .usuario(usuario)
                 .build1();
+
         empresaLogistica.agregarEnvio(envio);
         empresaLogistica.getAdministradores().add(administrador);
         empresaLogistica.getRepartidores().add(repartidor);
         empresaLogistica.getUsuarios().add(usuario);
+        empresaLogistica.getUsuarios().add(usuario2);
+
+        empresaLogistica.setListaPagos(new ArrayList<>());
+
         TotalCriterio totalCriterio = new TotalCriterio(new CriterioPeso(), new CriterioDistancia());
         this.totalCriterio = totalCriterio;
         this.empresaLogistica = empresaLogistica;
@@ -221,6 +236,45 @@ public class ModelFactory implements IModelFactoryServices {
 
     public boolean actualizarEstadoEnvio(String id, TipoEstadoEnvio estado) {
         return empresaLogistica.actualizarEstadoEnvio(id, estado);
+    }
+
+
+    public double cotizarEnvio(String origen, String destino, double peso,
+                               String volumen, String prioridad) {
+
+        return empresaLogistica.cotizarEnvio(origen, destino, peso, volumen, prioridad);
+    }
+
+    public boolean realizarPago(Envio envio, String metodoPago, String idUsuario) {
+        try {
+            String idPago = "P-" + System.currentTimeMillis();
+            double monto = envio.getCosto();
+            LocalDate fecha = LocalDate.now();
+
+            Pago nuevoPago = new Pago(idPago, monto, fecha, metodoPago, envio.getIdEnvio(), idUsuario);
+            empresaLogistica.getListaPagos().add(nuevoPago);
+
+            envio.setTipoEstadoEnvio(TipoEstadoEnvio.Pagado);
+            guardarResourceXML();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Collection<Pago> obtenerPagos(String idUsuario) {
+        ArrayList<Pago> pagosUsuario = new ArrayList<>();
+        if(empresaLogistica.getListaPagos() == null) {
+            return pagosUsuario;
+        }
+
+        for (Pago pago : empresaLogistica.getListaPagos()) {
+            if (pago.getIdUsuario().equals(idUsuario)) {
+                pagosUsuario.add(pago);
+            }
+        }
+        return pagosUsuario;
     }
 
 }

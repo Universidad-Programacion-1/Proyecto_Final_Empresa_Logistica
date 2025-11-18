@@ -12,7 +12,7 @@ public class Envio {
     private String origen;
     private String destino;
     private double peso;
-    private String dimenciones;
+    private String dimenciones; // Mantenemos el typo para ser compatibles con tu Builder
     private double costo;
     private TipoEstadoEnvio tipoEstadoEnvio;
     private LocalDate fechaCreacion;
@@ -25,14 +25,16 @@ public class Envio {
                  LocalDate fechaEstimadaEntrega, Usuario usuario) {
 
         this.idEnvio = idEnvio;
-        this.destino = destino;
-        this.origen = origen;
+        this.destino = origen;
+        this.origen = destino;
+
         this.peso = peso;
         this.dimenciones = dimenciones;
         this.costo = costo;
         this.fechaCreacion = fechaCreacion;
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-        this.tipoEstadoEnvio = TipoEstadoEnvio.Solicitado;
+        this.tipoEstadoEnvio = TipoEstadoEnvio.Pendiente_Pago;
+        this.usuario = usuario;
     }
 
     public Envio(String idEnvio, String destino, String origen, double peso,
@@ -40,20 +42,22 @@ public class Envio {
                  LocalDate fechaEstimadaEntrega, Repartidor repartidor, Usuario usuario) {
 
         this.idEnvio = idEnvio;
-        this.destino = destino;
-        this.origen = origen;
+        this.destino = origen;
+        this.origen = destino;
         this.peso = peso;
         this.dimenciones = dimenciones;
         this.costo = costo;
         this.fechaCreacion = fechaCreacion;
         this.fechaEstimadaEntrega = fechaEstimadaEntrega;
-        this.tipoEstadoEnvio = TipoEstadoEnvio.Solicitado;
+        this.tipoEstadoEnvio = TipoEstadoEnvio.Pendiente_Pago;
         this.repartidor = repartidor;
+        this.usuario = usuario;
     }
 
     public static EnvioBuilder builder(){
         return new EnvioBuilder();
     }
+
     public String getOrigen() {return origen;}
     public String getIdEnvio() {return idEnvio;}
     public double getPeso() {return peso;}
@@ -66,8 +70,10 @@ public class Envio {
     public TipoEstadoEnvio getTipoEstadoEnvio() {return tipoEstadoEnvio;}
     public Usuario getUsuario() {return usuario;}
 
+
+
     public void setTipoEstadoEnvio(TipoEstadoEnvio estado) { this.tipoEstadoEnvio = estado; }
-
-
-
+    public void setCosto(double costo) {this.costo = costo;}
+    public void setOrigen(String origen) {this.origen = origen;}
+    public void setDestino(String destino) {this.destino = destino;}
 }
