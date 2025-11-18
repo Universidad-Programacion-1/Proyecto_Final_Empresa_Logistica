@@ -2,9 +2,11 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.RepartidorController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,33 +16,24 @@ import javafx.scene.control.*;
 public class PaquetesRepartidorViewController {
 
     EnvioController envioController;
-    private Application app;
+    RepartidorController repartidorController;
+
     ObservableList<Envio> envios = FXCollections.observableArrayList();
     Envio selectedEnvio;
 
 
-    @FXML
-    private TableView<Envio> tblListEnvios;
+    @FXML private TableView<Envio> tblListEnvios;
+    @FXML private TableColumn<Envio, String> tbcIdEnvio;
+    @FXML private TableColumn<Envio, String> tbcDestino;
+    @FXML private TableColumn<Envio, String> tbcEstado;
+    @FXML private TableColumn<Envio, String> tbcDescripcion;
+    @FXML private TableColumn<Envio, String> tbcFecha;
+    @FXML private TableColumn<Envio, String> tbcRepartidor;
 
-    @FXML
-    private TableColumn<Envio, String> tbcIdEnvio; // Antes era tbcId
 
-    @FXML
-    private TableColumn<Envio, String> tbcDestino;
-
-    @FXML
-    private TableColumn<Envio, String> tbcEstado;
-
-    @FXML
-    private TableColumn<Envio, String> tbcDescripcion; // Antes era tbcDimencion
-
-    // --- CAMPOS DE GESTIÓN ---
-    @FXML
-    private ComboBox<TipoEstadoEnvio> cbxEstadoEnvio;
-
-    @FXML
-    private Button btnActualizarEstado;
-
+    @FXML private ComboBox<TipoEstadoEnvio> cbxEstadoEnvio;
+    @FXML private ComboBox<Repartidor> cbxRepartidores;
+    @FXML private Button btnActualizarEstado;
 
     @FXML
     void onActualizarEstado() {
@@ -48,105 +41,128 @@ public class PaquetesRepartidorViewController {
     }
 
     private void initDataBinding() {
-        // ID
-        tbcIdEnvio.setCellValueFactory(cellData -> {
+
+        tbcIdEnvio.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getIdEnvio()));
+
+
+        tbcDestino.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDestino()));
+
+
+        tbcDescripcion.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getDimenciones()));
+
+
+        tbcFecha.setCellValueFactory(cellData -> {
             Envio envio = cellData.getValue();
-            return new SimpleStringProperty(envio != null ? envio.getIdEnvio() : "");
+            return new SimpleStringProperty(envio.getFechaEstimadaEntrega() != null
+                    ? envio.getFechaEstimadaEntrega().toString()
+                    : "Pendiente");
         });
 
-        // DESTINO
-        tbcDestino.setCellValueFactory(cellData -> {
-            Envio envio = cellData.getValue();
-            return new SimpleStringProperty(envio != null ? envio.getDestino() : "");
-        });
 
-        // DESCRIPCIÓN / DIMENSIONES
-        tbcDescripcion.setCellValueFactory(cellData -> {
-            Envio envio = cellData.getValue();
-            return new SimpleStringProperty(envio != null ? envio.getDimenciones() : "");
-        });
+        tbcEstado.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getTipoEstadoEnvio().toString()));
 
-        // ESTADO (Convertimos el Enum a String)
-        tbcEstado.setCellValueFactory(cellData -> {
+
+        tbcRepartidor.setCellValueFactory(cellData -> {
             Envio envio = cellData.getValue();
-            return new SimpleStringProperty(envio != null && envio.getTipoEstadoEnvio() != null
-                    ? envio.getTipoEstadoEnvio().toString()
-                    : "");
+            return new SimpleStringProperty(envio.getRepartidor() != null
+                    ? envio.getRepartidor().getNombre()
+                    : "Sin Asignar");
         });
     }
 
-    // Método adaptado para el ADMINISTRADOR (Trae todo)
+
     private void obtenerEnviosAdmin() {
-        System.out.println("Obteniendo todos los envíos para el Admin...");
+        envios.clear();
         if (envioController.obtenerEnvios() != null) {
             envios.addAll(envioController.obtenerEnvios());
         }
+        tblListEnvios.setItems(envios);
     }
 
     private void listenerSelection() {
-        tblListEnvios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            selectedEnvio = newSelection;
-            mostrarInfoEnvio(newSelection);
+        tblListEnvios.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            selectedEnvio = newVal;
+            if (selectedEnvio != null) {
+
+                cbxEstadoEnvio.setValue(selectedEnvio.getTipoEstadoEnvio());
+
+            }
         });
     }
 
-    private void mostrarInfoEnvio(Envio envio) {
-        if (envio != null) {
-            cbxEstadoEnvio.setValue(envio.getTipoEstadoEnvio());
-        }
-    }
-
     private void actualizarEstadoEnvio() {
-        System.out.println("Actualizando estado envio...");
+        if (selectedEnvio != null) {
+            boolean huboCambios = false;
 
-        if (selectedEnvio != null && cbxEstadoEnvio.getValue() != null) {
 
-            // 1. Actualizar el objeto en memoria
-            selectedEnvio.setTipoEstadoEnvio(cbxEstadoEnvio.getValue());
+            if (cbxRepartidores.getValue() != null) {
+                Repartidor repartidorElegido = cbxRepartidores.getValue();
 
-            // 3. Refrescar la tabla visualmente
-            tblListEnvios.refresh();
+                selectedEnvio.builder().repartidor(repartidorElegido);
+                repartidorElegido.setEstadoDisponible(TipoEstadoDisponible.En_Ruta);
+                repartidorElegido.setEstadoDisponible(TipoEstadoDisponible.Inactivo);
 
-            mostrarMensaje("Éxito", "Estado actualizado correctamente.");
-            limpiarSeleccion();
+
+                if(selectedEnvio.getTipoEstadoEnvio() == TipoEstadoEnvio.Solicitado){
+                    selectedEnvio.setTipoEstadoEnvio(TipoEstadoEnvio.Asignado);
+                    cbxEstadoEnvio.setValue(TipoEstadoEnvio.Asignado);
+                }
+                huboCambios = true;
+            }
+
+
+            if (cbxEstadoEnvio.getValue() != null) {
+
+                if (cbxEstadoEnvio.getValue() == TipoEstadoEnvio.Entregado && selectedEnvio.getRepartidor() != null) {
+                    selectedEnvio.getRepartidor().setEstadoDisponible(TipoEstadoDisponible.disponible);
+                    selectedEnvio.getRepartidor().setEstadoDisponible(TipoEstadoDisponible.Activo);
+                }
+
+                selectedEnvio.setTipoEstadoEnvio(cbxEstadoEnvio.getValue());
+                huboCambios = true;
+            }
+
+            if (huboCambios) {
+
+                tblListEnvios.refresh();
+                cargarCombos();
+                limpiarSeleccion();
+                mostrarMensaje("Éxito", "Envío actualizado correctamente.");
+            }
         } else {
-            mostrarMensaje("Error", "Seleccione un envío y un estado.");
+            mostrarMensaje("Error", "Selecciona un envío primero.");
         }
     }
 
+    private void cargarCombos() {
+        cbxEstadoEnvio.setItems(FXCollections.observableArrayList(TipoEstadoEnvio.values()));
+
+        if (envioController.obtenerRepartidoresDisponibles() != null) {
+            cbxRepartidores.setItems(FXCollections.observableArrayList(envioController.obtenerRepartidoresDisponibles()));
+        }
+    }
 
     private void limpiarSeleccion() {
         tblListEnvios.getSelectionModel().clearSelection();
         selectedEnvio = null;
-        // cbxEstadoEnvio.setValue(null); // Opcional
-    }
-
-    private void initView() {
-        // Traer los datos del cliente a la tabla
-        initDataBinding();
-
-        // Obtiene la lista (MODO ADMIN)
-        obtenerEnviosAdmin();
-
-        // Limpiar la tabla
-        tblListEnvios.getItems().clear();
-
-        // Agregar los elementos a la tabla
-        tblListEnvios.setItems(envios);
-
-        // Seleccionar elemento de la tabla
-        listenerSelection();
+        cbxEstadoEnvio.setValue(null);
+        cbxRepartidores.setValue(null);
     }
 
     @FXML
     void initialize() {
-        // Inicializamos el controlador
+
         envioController = new EnvioController(Application.empresaLogistica);
+        repartidorController = new RepartidorController(Application.empresaLogistica);
 
-        // Llenamos el combo con los estados disponibles
-        cbxEstadoEnvio.setItems(FXCollections.observableArrayList(TipoEstadoEnvio.values()));
-
-        initView();
+        initDataBinding();
+        obtenerEnviosAdmin();
+        cargarCombos();
+        listenerSelection();
     }
 
     private void mostrarMensaje(String titulo, String contenido) {
@@ -155,5 +171,4 @@ public class PaquetesRepartidorViewController {
         alert.setContentText(contenido);
         alert.showAndWait();
     }
-
 }

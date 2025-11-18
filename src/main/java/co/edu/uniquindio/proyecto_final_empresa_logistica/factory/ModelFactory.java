@@ -95,7 +95,7 @@ public class ModelFactory implements IModelFactoryServices {
         System.out.println("Inicializando ModelFactory");
         EmpresaLogistica empresaLogistica = new EmpresaLogistica("Repartimos Felicidad");
         Administrador administrador = new Administrador("123", "Carlos", "ruiz", "321", "123");
-        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.Activo, "Quindio");
+        Repartidor repartidor = new Repartidor("123", "Chavez", "chavez", "321", "1234", TipoEstadoDisponible.disponible, "Quindio");
         Usuario usuario = new Usuario("123", "Alejo", "alejo", "321", "12345");
         Usuario usuario2 = new Usuario("2", "Usuario Dos", "usuario2@mail.com", "321", "12345");
 
@@ -160,9 +160,16 @@ public class ModelFactory implements IModelFactoryServices {
     public boolean eliminarRepartidor(String id) {return empresaLogistica.eliminarRepartidor(id);}
 
     @Override
+    public Collection<Repartidor> obtenerRepartidoresDisponibles(){
+        return empresaLogistica.obtenerRepartidoresDisponibles();
+    }
+
+    @Override
     public boolean actualizarRepartidor(String id, Repartidor repartidor ) {return empresaLogistica.actualizarRepartidor(id, repartidor);}
 
-    public Collection<Repartidor> listaRepartidor() {return empresaLogistica.getRepartidores();}
+    public Collection<Repartidor> listaRepartidor() {
+        return empresaLogistica.getRepartidores();
+    }
 
     @Override
     public boolean agregarUsuario(Usuario  usuario) {

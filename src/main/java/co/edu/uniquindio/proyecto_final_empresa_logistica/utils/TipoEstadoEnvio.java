@@ -7,5 +7,5 @@ public enum TipoEstadoEnvio {
     En_Ruta,
     Entregado,
     Incidencia,
-    Cancelado
+    Solicitado, Cancelado
 }

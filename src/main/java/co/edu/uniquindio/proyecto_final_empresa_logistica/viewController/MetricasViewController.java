@@ -31,7 +31,7 @@ public class MetricasViewController {
     }
 
     private void cargarMetricas() {
-        // 1. KPIs Numéricos
+
         int total = envioController.obtenerCantidadTotalEnvios();
         lblTotalEnvios.setText(String.valueOf(total));
 
@@ -41,7 +41,7 @@ public class MetricasViewController {
         double diasPromedio = envioController.calcularTiempoPromedioEntrega();
         lblTiempoPromedio.setText(String.format("%.1f Días", diasPromedio));
 
-        // 2. Cargar Gráficas
+
         cargarGraficaEstados();
         cargarGraficaServicios();
         cargarGraficaIngresos();

@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.util.ArrayList;
@@ -58,6 +59,20 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
     public void setListaPagos(Collection<Pago> listaPagos) {
         this.listaPagos = listaPagos;
+    }
+
+
+    public Collection<Repartidor> obtenerRepartidoresDisponibles() {
+        Collection<Repartidor> disponibles = new ArrayList<>();
+        if (repartidores != null) {
+            for (Repartidor r : repartidores) {
+                // Comparamos con el ENUM
+                if (r.getEstadoDisponible() == TipoEstadoDisponible.disponible) {
+                    disponibles.add(r);
+                }
+            }
+        }
+        return disponibles;
     }
 
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
@@ -339,4 +354,5 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
         return tarifa.calcularTarifa();
     }
+
 }

@@ -2,12 +2,8 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.RepartidorController;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.UsuarioController;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,59 +17,27 @@ public class RepartidorViewController {
     ObservableList<Repartidor> repartidores = FXCollections.observableArrayList();
     Repartidor selectedRepartidor;
 
+    @FXML private TableView<Repartidor> tblListRepartidor;
+    @FXML private TableColumn<Repartidor, String> tbcNombre;
+    @FXML private TableColumn<Repartidor, String> tbcIdRepartidor;
+    @FXML private TableColumn<Repartidor, String> tbcTelefono;
+    @FXML private TableColumn<Repartidor, String> tbcCorreo;
+    @FXML private TableColumn<Repartidor, String> tbcZonaCobertura;
+    @FXML private TableColumn<Repartidor, String> tbcEstado;
 
-    @FXML
-    private TableColumn<Repartidor, String> tbcEstado;
+    @FXML private TextField txtNombreCompleto;
+    @FXML private TextField txtIdRepartidor;
+    @FXML private TextField txtNumeroTelefono;
+    @FXML private TextField txtCorreoElectronico;
+    @FXML private TextField txtPassword;
+    @FXML private TextField txtZonaCobertura;
 
-    @FXML
-    private Button btnEliminarRepartidor;
+    // CAMBIO: Usamos el Enum directamente en el ComboBox
+    @FXML private ComboBox<TipoEstadoDisponible> cbxEstado;
 
-    @FXML
-    private TextField txtIdRepartidor;
-
-    @FXML
-    private TableColumn<Repartidor, String> tbcIdRepartidor;
-
-    @FXML
-    private Button btnAgregarRepartidor;
-
-    @FXML
-    private TableView<Repartidor> tblListRepartidor;
-
-    @FXML
-    private TableColumn<Repartidor, String> tbcCorreo;
-
-    @FXML
-    private TableColumn<Repartidor, String> tbcTelefono;
-
-    @FXML
-    private TableColumn<Repartidor, String> tbcZonaCobertura;
-
-    @FXML
-    private TextField txtNombreCompleto;
-
-    @FXML
-    private TableColumn<Repartidor, String> tbcNombre;
-
-    @FXML
-    private TextField txtNumeroTelefono;
-
-    @FXML
-    private ComboBox<TipoEstadoDisponible> cbxEstado;
-
-    @FXML
-    private TextField txtZonaCobertura;
-
-    @FXML
-    private TextField txtCorreoElectronico;
-
-    @FXML
-    private TextField txtPassword;
-
-    @FXML
-    private Button btnActualizarRepartidor;
-
-
+    @FXML private Button btnAgregarRepartidor;
+    @FXML private Button btnActualizarRepartidor;
+    @FXML private Button btnEliminarRepartidor;
 
     @FXML
     void onActualizarRepartidor() {
@@ -88,39 +52,45 @@ public class RepartidorViewController {
     @FXML
     void onEliminarRepartidor() {
         eliminarRepartidor();
-
     }
 
     public void setApp(Application app) {this.app = app;}
 
     @FXML
     void initialize() {
-        repartidorController = new RepartidorController(app.empresaLogistica);
+        if(app != null) {
+            repartidorController = new RepartidorController(app.empresaLogistica);
+        }
+
+        // CAMBIO: Llenamos el combo con los valores del Enum
         cbxEstado.getItems().addAll(TipoEstadoDisponible.values());
+
         initView();
     }
+
     private void actualizarRepartidor() {
-        System.out.println("RepartidorViewController.actualizarRepartidor()");
-        if (selectedRepartidor != null && repartidorController.actualizarRepartidor(selectedRepartidor.getId(), buildRepartidor())) {
+        if (selectedRepartidor != null) {
+            Repartidor repartidorActualizado = buildRepartidor();
 
-            int index = repartidores.indexOf(selectedRepartidor);
-            if (index >= 0) {
-                repartidores.set(index, buildRepartidor());
+            if(repartidorController.actualizarRepartidor(selectedRepartidor.getId(), repartidorActualizado)){
+                int index = repartidores.indexOf(selectedRepartidor);
+                if (index >= 0) {
+                    repartidores.set(index, repartidorActualizado);
+                }
+                tblListRepartidor.refresh();
+                limpiarSeleccion();
+                limpiarCamposRepartidor();
             }
-
-            tblListRepartidor.refresh();
-            limpiarSeleccion();
-            limpiarCamposRepartidor();
         }
     }
 
     private void limpiarSeleccion() {
         tblListRepartidor.getSelectionModel().clearSelection();
+        selectedRepartidor = null;
         limpiarCamposRepartidor();
     }
 
     private void limpiarCamposRepartidor() {
-        System.out.println("RepartidorViewController.limpiarCamposRepartidor()");
         txtNumeroTelefono.clear();
         txtIdRepartidor.clear();
         txtPassword.clear();
@@ -131,15 +101,25 @@ public class RepartidorViewController {
     }
 
     private Repartidor buildRepartidor() {
-        Repartidor repartidor = new Repartidor(txtIdRepartidor.getText(), txtNombreCompleto.getText(), txtCorreoElectronico.getText(),  txtNumeroTelefono.getText(), txtPassword.getText(), cbxEstado.getValue(), txtZonaCobertura.getText());
-        return repartidor;
+
+        return new Repartidor(
+                txtIdRepartidor.getText(),
+                txtNombreCompleto.getText(),
+                txtCorreoElectronico.getText(),
+                txtNumeroTelefono.getText(),
+                txtPassword.getText(),
+                cbxEstado.getValue(),
+                txtZonaCobertura.getText()
+        );
     }
 
     private void eliminarRepartidor() {
-        if (repartidorController.eliminarRepartidor(txtIdRepartidor.getText())) {
-            repartidores.remove(selectedRepartidor);
-            limpiarCamposRepartidor();
-            limpiarSeleccion();
+        if (selectedRepartidor != null) {
+            if (repartidorController.eliminarRepartidor(selectedRepartidor.getId())) {
+                repartidores.remove(selectedRepartidor);
+                limpiarCamposRepartidor();
+                limpiarSeleccion();
+            }
         }
     }
 
@@ -152,18 +132,20 @@ public class RepartidorViewController {
     }
 
     private void obtenerRepartidores() {
-        repartidores.addAll(repartidorController.obtenerRepartidores());
-        System.out.println("repartidores: " + repartidores);
+        if(repartidorController != null) {
+            repartidores.clear();
+            repartidores.addAll(repartidorController.obtenerRepartidores());
+        }
     }
 
     private void mostrarInfoRepartidor(Repartidor repartidor) {
         if (repartidor != null) {
-            txtIdRepartidor.setText(String.valueOf(repartidor.getId()));
-            txtNombreCompleto.setText(String.valueOf(repartidor.getNombre()));
-            txtPassword.setText(String.valueOf(repartidor.getPassword()));
-            txtCorreoElectronico.setText(String.valueOf(repartidor.getCorreo()));
-            txtNumeroTelefono.setText(String.valueOf(repartidor.getTelefono()));
-            txtZonaCobertura.setText(String.valueOf(repartidor.getZonaCobertura()));
+            txtIdRepartidor.setText(repartidor.getId());
+            txtNombreCompleto.setText(repartidor.getNombre());
+            txtPassword.setText(repartidor.getPassword());
+            txtCorreoElectronico.setText(repartidor.getCorreo());
+            txtNumeroTelefono.setText(repartidor.getTelefono());
+            txtZonaCobertura.setText(repartidor.getZonaCobertura());
             cbxEstado.setValue(repartidor.getEstadoDisponible());
         }
     }
@@ -174,9 +156,15 @@ public class RepartidorViewController {
         tbcTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelefono()));
         tbcCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCorreo()));
         tbcZonaCobertura.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getZonaCobertura()));
+
+
         tbcEstado.setCellValueFactory(cellData -> {
             Repartidor repartidor = cellData.getValue();
-            return new SimpleObjectProperty(repartidor != null ? repartidor.getEstadoDisponible() : "");
+            return new SimpleStringProperty(
+                    (repartidor != null && repartidor.getEstadoDisponible() != null)
+                            ? repartidor.getEstadoDisponible().toString()
+                            : ""
+            );
         });
     }
 
@@ -188,20 +176,9 @@ public class RepartidorViewController {
     }
 
     private void initView() {
-        // Traer los datos del cliente a la tabla
         initDataBinding();
-
-        // Obtiene la lista
         obtenerRepartidores();
-
-        // Limpiar la tabla
-        tblListRepartidor.getItems().clear();
-
-        // Agregar los elementos a la tabla
         tblListRepartidor.setItems(repartidores);
-
-        // Seleccionar elemento de la tabla
         listenerSelection();
     }
-
 }

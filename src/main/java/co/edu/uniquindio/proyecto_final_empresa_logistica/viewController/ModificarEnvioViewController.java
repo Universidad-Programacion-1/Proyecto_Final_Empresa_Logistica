@@ -18,13 +18,11 @@ public class ModificarEnvioViewController {
     @FXML
     private TextField txtDestino;
 
-    // Método para recibir los datos desde el controlador de historial
+
     public void initData(Envio envio, Stage modalStage, EnvioController envioController) {
         this.envioSeleccionado = envio;
         this.modalStage = modalStage;
         this.envioController = envioController;
-
-        // Poblar los campos con los datos actuales
         txtOrigen.setText(envio.getOrigen());
         txtDestino.setText(envio.getDestino());
     }
@@ -44,7 +42,6 @@ public class ModificarEnvioViewController {
 
         mostrarMensaje("Éxito", "Cambios Guardados", "Los cambios han sido guardados (en memoria).", Alert.AlertType.INFORMATION);
 
-        // 4. Cerrar la ventana modal
         modalStage.close();
     }
 

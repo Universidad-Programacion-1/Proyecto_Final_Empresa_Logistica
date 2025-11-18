@@ -10,15 +10,18 @@ public class Repartidor extends Persona {
     public Repartidor() {
     }
 
+
     public Repartidor(String id, String nombre, String correo, String telefono, String password, TipoEstadoDisponible estadoDisponible, String zonaCobertura) {
         super(id, nombre, correo, telefono, password);
         this.estadoDisponible = estadoDisponible;
         this.zonaCobertura = zonaCobertura;
     }
 
+
     public TipoEstadoDisponible getEstadoDisponible() {
         return estadoDisponible;
     }
+
 
     public void setEstadoDisponible(TipoEstadoDisponible estadoDisponible) {
         this.estadoDisponible = estadoDisponible;
@@ -30,5 +33,11 @@ public class Repartidor extends Persona {
 
     public void setZonaCobertura(String zonaCobertura) {
         this.zonaCobertura = zonaCobertura;
+    }
+
+
+    @Override
+    public String toString() {
+        return getNombre();
     }
 }

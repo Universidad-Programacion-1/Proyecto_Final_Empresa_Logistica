@@ -10,7 +10,11 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class EnvioController {
     ModelFactory modelFactory = ModelFactory.getInstance();
@@ -131,6 +135,9 @@ public class EnvioController {
             }
         }
         return ingresos;
+    }
+    public Collection<Repartidor> obtenerRepartidoresDisponibles() {
+        return modelFactory.listaRepartidor();
     }
 
 
