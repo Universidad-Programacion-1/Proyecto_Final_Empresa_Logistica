@@ -21,6 +21,8 @@
                 <DatePicker fx:id="dpFechaInicio" prefWidth="120.0" />
                 <Label text="Hasta:" />
                 <DatePicker fx:id="dpFechaFin" prefWidth="120.0" />
+                <Button fx:id="btnFiltrar" mnemonicParsing="false" onAction="#onFiltrar" text="Filtrar" />
+                <Button fx:id="btnLimpiarFiltros" mnemonicParsing="false" onAction="#onLimpiarFiltros" text="Limpiar" />
             </children>
         </HBox>
 
@@ -33,9 +35,6 @@
                 <TableColumn fx:id="colEstado" prefWidth="150.0" text="Estado" />
             </columns>
         </TableView>
-
-        <Button fx:id="btnFiltrar" layoutX="430.0" layoutY="60.0" mnemonicParsing="false" onAction="#onFiltrar" text="Filtrar" />
-        <Button fx:id="btnLimpiarFiltros" layoutX="490.0" layoutY="60.0" mnemonicParsing="false" onAction="#onLimpiarFiltros" text="Limpiar" />
 
         <Button fx:id="btnRastrear" layoutX="140.0" layoutY="470.0" mnemonicParsing="false" onAction="#onRastrear" prefWidth="80.0" text="Rastrear" />
         <Button fx:id="btnPagar" layoutX="230.0" layoutY="470.0" mnemonicParsing="false" onAction="#onPagar" prefWidth="80.0" text="Pagar" />

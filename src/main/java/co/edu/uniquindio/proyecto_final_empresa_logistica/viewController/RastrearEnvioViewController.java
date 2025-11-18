@@ -13,7 +13,7 @@ public class RastrearEnvioViewController {
     @FXML
     private ProgressBar progressBar;
     @FXML
-    private Label lblPagado;
+    private Label lblSolicitado;
     @FXML
     private Label lblAsignado;
     @FXML
@@ -29,56 +29,66 @@ public class RastrearEnvioViewController {
 
     public void initData(Envio envio) {
         lblIdEnvio.setText(envio.getIdEnvio());
-        lblEstadoActual.setText(envio.getTipoEstadoEnvio().name());
-
         actualizarProgreso(envio.getTipoEstadoEnvio());
     }
 
     private void actualizarProgreso(TipoEstadoEnvio estado) {
 
-        lblPagado.setStyle(stylePendiente);
+        lblSolicitado.setStyle(stylePendiente);
         lblAsignado.setStyle(stylePendiente);
         lblEnRuta.setStyle(stylePendiente);
         lblEntregado.setStyle(stylePendiente);
 
+        lblEstadoActual.setText(estado.name());
+        lblEstadoActual.setStyle(stylePendiente);
+
+
         switch (estado) {
             case Pendiente_Pago:
                 progressBar.setProgress(0.0);
+                lblSolicitado.setStyle(styleCompletado);
+                lblEstadoActual.setText("Solicitado");
                 lblEstadoActual.setStyle(stylePendiente);
                 break;
             case Pagado:
                 progressBar.setProgress(0.25);
-                lblPagado.setStyle(styleCompletado);
+                lblSolicitado.setStyle(styleCompletado);
+                lblEstadoActual.setText("Solicitado");
                 lblEstadoActual.setStyle(styleCompletado);
                 break;
             case Asignado:
                 progressBar.setProgress(0.5);
-                lblPagado.setStyle(styleCompletado);
+                lblSolicitado.setStyle(styleCompletado);
                 lblAsignado.setStyle(styleCompletado);
+                lblEstadoActual.setText("Asignado");
                 lblEstadoActual.setStyle(styleCompletado);
                 break;
             case En_Ruta:
                 progressBar.setProgress(0.75);
-                lblPagado.setStyle(styleCompletado);
+                lblSolicitado.setStyle(styleCompletado);
                 lblAsignado.setStyle(styleCompletado);
                 lblEnRuta.setStyle(styleCompletado);
+                lblEstadoActual.setText("En Ruta");
                 lblEstadoActual.setStyle(styleCompletado);
                 break;
             case Entregado:
                 progressBar.setProgress(1.0);
-                lblPagado.setStyle(styleCompletado);
+                lblSolicitado.setStyle(styleCompletado);
                 lblAsignado.setStyle(styleCompletado);
                 lblEnRuta.setStyle(styleCompletado);
                 lblEntregado.setStyle(styleCompletado);
+                lblEstadoActual.setText("Entregado");
                 lblEstadoActual.setStyle(styleCompletado);
                 break;
             case Cancelado:
                 progressBar.setProgress(0.0);
                 progressBar.setStyle("-fx-accent: #c0392b;");
+                lblEstadoActual.setText("Cancelado");
                 lblEstadoActual.setStyle(styleIncidencia);
                 break;
             case Incidencia:
                 progressBar.setStyle("-fx-accent: #e67e22;");
+                lblEstadoActual.setText("Incidencia");
                 lblEstadoActual.setStyle(styleIncidencia);
                 break;
         }

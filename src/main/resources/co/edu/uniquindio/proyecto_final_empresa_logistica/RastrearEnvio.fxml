@@ -20,9 +20,9 @@
 
         <ProgressBar fx:id="progressBar" layoutX="40.0" layoutY="100.0" prefHeight="30.0" prefWidth="420.0" progress="0.0" />
 
-        <HBox alignment="CENTER" layoutX="40.0" layoutY="140.0" prefHeight="40.0" prefWidth="420.0" spacing="50.0">
+        <HBox alignment="CENTER" layoutX="40.0" layoutY="140.0" prefHeight="40.0" prefWidth="420.0" spacing="60.0">
             <children>
-                <Label fx:id="lblPagado" text="Pagado" />
+                <Label fx:id="lblSolicitado" text="Solicitado" />
                 <Label fx:id="lblAsignado" text="Asignado" />
                 <Label fx:id="lblEnRuta" text="En Ruta" />
                 <Label fx:id="lblEntregado" text="Entregado" />

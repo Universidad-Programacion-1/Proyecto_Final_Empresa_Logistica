@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.viewController;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -9,7 +10,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 
 public class PasarelaPagoViewController {
 
@@ -55,7 +55,14 @@ public class PasarelaPagoViewController {
         }
 
         String metodo = cmbMetodoPago.getValue();
-        String idUsuario = envioSeleccionado.getUsuario().getId();
+
+        Usuario usuarioLogueado = envioController.getUsuario();
+        if (usuarioLogueado == null) {
+            mostrarMensaje("Error", "Error de Sesión", "No se pudo identificar al usuario. Inicie sesión de nuevo.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        String idUsuario = usuarioLogueado.getId();
 
         boolean pagado = envioController.realizarPago(envioSeleccionado, metodo, idUsuario);
 

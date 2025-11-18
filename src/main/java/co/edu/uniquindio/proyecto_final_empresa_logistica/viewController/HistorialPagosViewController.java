@@ -65,9 +65,7 @@ public class HistorialPagosViewController {
     @FXML
     void onRefrescar() {
         tblPagos.getItems().clear();
-
         Usuario usuarioLogueado = envioController.getUsuario();
-
         if (usuarioLogueado != null) {
             String idUsuario = usuarioLogueado.getId();
             Collection<Pago> pagos = envioController.obtenerPagos(idUsuario);
@@ -76,7 +74,6 @@ public class HistorialPagosViewController {
         } else {
             mostrarMensaje("Error", "Error de Sesión", "No se pudo identificar al usuario logueado.", Alert.AlertType.ERROR);
         }
-
         tblPagos.refresh();
     }
 

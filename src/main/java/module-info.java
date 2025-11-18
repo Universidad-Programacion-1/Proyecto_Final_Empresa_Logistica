@@ -3,6 +3,7 @@ module co.edu.uniquindio.proyecto_final_empresa_logistica {
     requires javafx.fxml;
     requires javafx.graphics;
     requires java.desktop;
+    requires jdk.javadoc;
 
 
     opens co.edu.uniquindio.proyecto_final_empresa_logistica to javafx.fxml;

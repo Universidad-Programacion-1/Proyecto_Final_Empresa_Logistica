@@ -4,6 +4,7 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
+
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
