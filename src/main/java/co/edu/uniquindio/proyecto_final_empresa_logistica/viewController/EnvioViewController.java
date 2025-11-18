@@ -4,10 +4,8 @@ import co.edu.uniquindio.proyecto_final_empresa_logistica.Application;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.controller.EnvioController;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.*;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
-// IMPORTAMOS LOS NUEVOS STRATEGY
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.CalculoTarifaCompletaStrategy;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.ICalculoTarifaStrategy;
-// ---------------------------------
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -17,7 +15,6 @@ public class EnvioViewController {
     private Application application;
     Envio selectedEnvio;
 
-    // Instancia de nuestro nuevo Strategy
     private ICalculoTarifaStrategy calculoStrategy;
 
     @FXML
@@ -40,13 +37,17 @@ public class EnvioViewController {
     private CheckBox chbEmbolturaCarton;
     @FXML
     private Label lblCosto;
-
-    // --- NUEVOS CAMPOS FXML ---
     @FXML
     private TextField txtVolumen;
     @FXML
     private ComboBox<String> cmbPrioridad;
-    // -------------------------
+
+    @FXML
+    private CheckBox chbSeguro;
+    @FXML
+    private CheckBox chbFragil;
+    @FXML
+    private CheckBox chbFirma;
 
 
     @FXML
@@ -58,12 +59,10 @@ public class EnvioViewController {
     void initialize() {
         envioController = new EnvioController(Application.empresaLogistica);
 
-        // Instanciamos el Strategy que sí calcula todo
         calculoStrategy = new CalculoTarifaCompletaStrategy();
 
-        // Poblar el ComboBox de Prioridad
         cmbPrioridad.getItems().addAll("Baja", "Normal", "Alta", "Express");
-        cmbPrioridad.setValue("Normal"); // Valor por defecto
+        cmbPrioridad.setValue("Normal");
     }
 
     public void setApp(Application application) {
@@ -72,22 +71,18 @@ public class EnvioViewController {
 
     private void mostrarCostoTotal() {
         try {
-            // 1. LEER TODOS LOS CAMPOS
             long peso = Long.parseLong(txtPeso.getText());
             long distancia = Long.parseLong(txtDistancia.getText());
-            String volumen = txtVolumen.getText(); // Puede ser "0.5" o "pequeño"
+            String volumen = txtVolumen.getText();
             String prioridad = cmbPrioridad.getValue();
 
-            // 2. VALIDACIÓN SIMPLE
             if (volumen.isEmpty()) {
                 lblCosto.setText("Volumen requerido");
                 return;
             }
 
-            // 3. CALCULAR COSTO BASE (Usando el Strategy correcto)
             double costoBase = calculoStrategy.calcularCostoBase(peso, distancia, volumen, prioridad);
 
-            // 4. APLICAR DECORATORS (Tu lógica actual)
             IEnvio envio = new EnvioBase(costoBase);
 
             if (chbEmpaqueCarton.isSelected()) {
@@ -99,15 +94,23 @@ public class EnvioViewController {
             if (chbEmbolturaCarton.isSelected()) {
                 envio = new EnvolturaImpermeableDecorator(envio);
             }
+            if (chbSeguro.isSelected()) {
+                envio = new SeguroEnvioDecorator(envio);
+            }
+            if (chbFragil.isSelected()) {
+                envio = new ManejoFragilDecorator(envio);
+            }
+            if (chbFirma.isSelected()) {
+                envio = new FirmaRequeridaDecorator(envio);
+            }
 
-            // 5. MOSTRAR RESULTADO
             lblCosto.setText("$ " + String.format("%.2f", envio.costo()));
 
         } catch (NumberFormatException e) {
             lblCosto.setText("Datos numéricos inválidos");
         } catch (Exception e) {
             lblCosto.setText("Error en datos");
-            e.printStackTrace(); // Bueno para depurar
+            e.printStackTrace();
         }
     }
 
@@ -115,7 +118,6 @@ public class EnvioViewController {
     @FXML
     void onCrearEnvio() {
         try {
-            // 1. VALIDACIÓN
             if (txtOrigen.getText().isEmpty() || txtDestino.getText().isEmpty() ||
                     txtPeso.getText().isEmpty() || txtDistancia.getText().isEmpty() ||
                     txtVolumen.getText().isEmpty()) {
@@ -124,7 +126,6 @@ public class EnvioViewController {
                 return;
             }
 
-            // 2. RECOLECCIÓN DE DATOS
             String origen = txtOrigen.getText();
             String destino = txtDestino.getText();
             long peso = Long.parseLong(txtPeso.getText());
@@ -133,13 +134,15 @@ public class EnvioViewController {
             String prioridad = cmbPrioridad.getValue();
             String idUsuario = "2";
 
-            // 3. CÁLCULOS
             double costoBase = calculoStrategy.calcularCostoBase(peso, distancia, volumen, prioridad);
 
             IEnvio envioCalculado = new EnvioBase(costoBase);
             if (chbEmpaqueCarton.isSelected()) envioCalculado = new EmpaqueCartonDecorator(envioCalculado);
             if (chbPlasticoBurbujas.isSelected()) envioCalculado = new PlasticoBurbujaDecorator(envioCalculado);
             if (chbEmbolturaCarton.isSelected()) envioCalculado = new EnvolturaImpermeableDecorator(envioCalculado);
+            if (chbSeguro.isSelected()) envioCalculado = new SeguroEnvioDecorator(envioCalculado);
+            if (chbFragil.isSelected()) envioCalculado = new ManejoFragilDecorator(envioCalculado);
+            if (chbFirma.isSelected()) envioCalculado = new FirmaRequeridaDecorator(envioCalculado);
 
             double costoFinal = envioCalculado.costo();
 
@@ -149,9 +152,6 @@ public class EnvioViewController {
 
             String idEnvio = String.valueOf(System.currentTimeMillis());
 
-            // 4. LLAMADA AL CONTROLADOR
-            // Pasamos 'volumen' como 'dimensiones'. Asumo que tu crearEnvio lo maneja.
-            // Y pasamos el 'costoFinal' (base + decorators).
             Envio nuevoEnvio = envioController.crearEnvio(
                     idEnvio, origen, destino, peso, volumen,
                     costoFinal,
@@ -159,10 +159,8 @@ public class EnvioViewController {
                     "0", idUsuario
             );
 
-            if (nuevoEnvio != null) {
-                // ¡LÍNEA ELIMINADA!
-                // Ya no llamamos a 'nuevoEnvio.setCosto()'
-                // Asumimos que el 'costoFinal' se guardó bien en el 'crearEnvio'
+            if(nuevoEnvio != null){
+                nuevoEnvio.setCosto(costoFinal);
                 mostrarMensaje("Éxito", "Envío Creado", "El envío se ha guardado con éxito.\nCosto Total: $" + String.format("%.2f", nuevoEnvio.getCosto()), Alert.AlertType.INFORMATION);
                 limpiarCampos();
             }
@@ -177,11 +175,14 @@ public class EnvioViewController {
         txtDistancia.setText("");
         txtOrigen.setText("");
         txtDestino.setText("");
-        txtVolumen.setText(""); // <-- NUEVO
-        cmbPrioridad.setValue("Normal"); // <-- NUEVO
+        txtVolumen.setText("");
+        cmbPrioridad.setValue("Normal");
         chbEmpaqueCarton.setSelected(false);
         chbPlasticoBurbujas.setSelected(false);
         chbEmbolturaCarton.setSelected(false);
+        chbSeguro.setSelected(false);
+        chbFragil.setSelected(false);
+        chbFirma.setSelected(false);
         lblCosto.setText("$ 0.0");
     }
 
