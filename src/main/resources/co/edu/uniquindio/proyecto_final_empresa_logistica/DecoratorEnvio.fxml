@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+        <?import javafx.scene.effect.*?>
+        <?import javafx.scene.text.*?>
+        <?import javafx.scene.control.*?>
+        <?import java.lang.*?>
+        <?import javafx.scene.layout.*?>
+        <?import javafx.scene.shape.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.EnvioViewController">
     <children>
@@ -59,22 +59,33 @@
                                 </Label>
                                 <TextField fx:id="txtDistancia" layoutX="415.0" layoutY="228.0" prefWidth="95.0" promptText="Ej: 50" />
 
-                                <Separator layoutX="31.0" layoutY="275.0" prefWidth="530.0" />
+                                <Label layoutX="80.0" layoutY="270.0" text="Volumen:">
+                                    <font><Font size="14.0" /></font>
+                                </Label>
+                                <TextField fx:id="txtVolumen" layoutX="150.0" layoutY="268.0" prefWidth="130.0" promptText="Ej: 0.5 (m³) o 'pequeño'" />
 
-                                <Button fx:id="btnCalcular" layoutX="150.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCalcular" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #3498db;" text="Cotizar" textFill="WHITE">
+                                <Label layoutX="310.0" layoutY="270.0" text="Prioridad:">
+                                    <font><Font size="14.0" /></font>
+                                </Label>
+                                <ComboBox fx:id="cmbPrioridad" layoutX="380.0" layoutY="268.0" prefWidth="130.0" />
+
+
+                                <Separator layoutX="31.0" layoutY="315.0" prefWidth="530.0" />
+
+                                <Button fx:id="btnCalcular" layoutX="150.0" layoutY="340.0" mnemonicParsing="false" onAction="#onCalcular" prefHeight="35.0" prefWidth="100.0" style="-fx-background-color: #3498db;" text="Cotizar" textFill="WHITE">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Button>
 
-                                <Button fx:id="btnCrearEnvio" layoutX="280.0" layoutY="300.0" mnemonicParsing="false" onAction="#onCrearEnvio" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60;" text="Confirmar y Crear" textFill="WHITE">
+                                <Button fx:id="btnCrearEnvio" layoutX="280.0" layoutY="340.0" mnemonicParsing="false" onAction="#onCrearEnvio" prefHeight="35.0" prefWidth="150.0" style="-fx-background-color: #27ae60;" text="Confirmar y Crear" textFill="WHITE">
                                     <font><Font name="System Bold" size="14.0" /></font>
                                 </Button>
 
-                                <Label layoutX="180.0" layoutY="370.0" text="Costo Total Estimado:">
+                                <Label layoutX="180.0" layoutY="410.0" text="Costo Total Estimado:">
                                     <font>
                                         <Font size="16.0" />
                                     </font>
                                 </Label>
-                                <Label fx:id="lblCosto" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="400.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #bdc3c7; -fx-background-color: #ecf0f1;" text="\$ 0.0" textAlignment="CENTER" textFill="#c0392b">
+                                <Label fx:id="lblCosto" alignment="CENTER" contentDisplay="CENTER" layoutX="180.0" layoutY="440.0" prefHeight="40.0" prefWidth="200.0" style="-fx-border-color: #bdc3c7; -fx-background-color: #ecf0f1;" text="\$ 0.0" textAlignment="CENTER" textFill="#c0392b">
                                     <font>
                                         <Font name="System Bold" size="24.0" />
                                     </font>
