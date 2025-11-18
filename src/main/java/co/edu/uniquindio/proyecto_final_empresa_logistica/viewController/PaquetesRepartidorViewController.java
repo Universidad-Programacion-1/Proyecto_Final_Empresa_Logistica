@@ -189,6 +189,16 @@ public class PaquetesRepartidorViewController {
             TipoEstadoEnvio.Incidencia
         );
         initView();
+
+
     }
+
+    public void actualizarTablaEnvios() {
+        obtenerEnviosRepartidor(); // Vuelve a cargar y filtrar la lista local 'envios'
+        tblListEnvios.refresh();   // Fuerza a la TableView a redibujarse
+        System.out.println("Tabla de envíos del repartidor actualizada por evento externo.");
+    }
+
+
 
 }

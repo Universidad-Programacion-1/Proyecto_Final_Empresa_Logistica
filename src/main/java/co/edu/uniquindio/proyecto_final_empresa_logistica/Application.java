@@ -60,7 +60,7 @@ public class Application extends javafx.application.Application {
         Stage newStage = new Stage();
         newStage.setTitle(title);
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(nombrefxml));
-        Scene scene = new Scene((Parent)fxmlLoader.load(), (double)500.0F, (double)500.0F);
+        Scene scene = new Scene((Parent)fxmlLoader.load(), (double)900.0F, (double)750.0F);
         newStage.setScene(scene);
         newStage.show();
     }

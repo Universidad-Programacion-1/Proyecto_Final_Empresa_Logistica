@@ -3,6 +3,8 @@ package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     private Collection<Administrador> administradores;
     private Collection<Usuario> usuarios;
     private Collection<Repartidor> repartidores;
-    private Collection<Envio> envios;
+    //private Collection<Envio> envios;
+    private ObservableList<Envio> envios;
     private Collection<Pago> listaPagos;
     int tipoPersona;
     Usuario usuario1;
@@ -31,7 +34,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         this.administradores = new LinkedList<>();
         this.usuarios = new LinkedList<>();
         this.repartidores = new LinkedList<>();
-        this.envios = new LinkedList<>();
+        this.envios = FXCollections.observableArrayList();
         this.listaPagos = new LinkedList<>();
     }
 
@@ -52,7 +55,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return repartidores;
     }
 
-    public Collection<Envio> getEnvios() {return envios;}
+    public ObservableList<Envio> getEnvios() {return envios;}
 
     public Collection<Pago> getListaPagos() {
         return listaPagos;
