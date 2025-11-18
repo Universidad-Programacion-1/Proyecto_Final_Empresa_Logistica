@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -24,7 +26,9 @@ public class HistorialEnviosViewController {
 
     EnvioController envioController;
     private Application application;
+
     private ObservableList<Envio> enviosObservableList = FXCollections.observableArrayList();
+    private FilteredList<Envio> filteredData;
 
     @FXML
     private TableView<Envio> tblEnvios;
@@ -38,6 +42,18 @@ public class HistorialEnviosViewController {
     private TableColumn<Envio, Double> colCosto;
     @FXML
     private TableColumn<Envio, String> colEstado;
+
+    @FXML
+    private ComboBox<String> cmbEstadoFiltro;
+    @FXML
+    private DatePicker dpFechaInicio;
+    @FXML
+    private DatePicker dpFechaFin;
+    @FXML
+    private Button btnFiltrar;
+    @FXML
+    private Button btnLimpiarFiltros;
+
     @FXML
     private Button btnRastrear;
     @FXML
@@ -53,6 +69,17 @@ public class HistorialEnviosViewController {
     void initialize() {
         envioController = new EnvioController(Application.empresaLogistica);
 
+        configurarColumnas();
+        configurarFiltros();
+
+        filteredData = new FilteredList<>(enviosObservableList, p -> true);
+        tblEnvios.setItems(filteredData);
+
+        configurarListenersBotones();
+        onRefrescar();
+    }
+
+    private void configurarColumnas() {
         this.colId.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getIdEnvio())
         );
@@ -68,7 +95,17 @@ public class HistorialEnviosViewController {
         this.colEstado.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTipoEstadoEnvio().name())
         );
+    }
 
+    private void configurarFiltros() {
+        cmbEstadoFiltro.getItems().add("Todos");
+        for (TipoEstadoEnvio estado : TipoEstadoEnvio.values()) {
+            cmbEstadoFiltro.getItems().add(estado.name());
+        }
+        cmbEstadoFiltro.setValue("Todos");
+    }
+
+    private void configurarListenersBotones() {
         btnRastrear.setDisable(true);
         btnPagar.setDisable(true);
         btnModificar.setDisable(true);
@@ -83,8 +120,6 @@ public class HistorialEnviosViewController {
             btnModificar.setDisable(!isPending);
             btnCancelar.setDisable(!isPending);
         });
-
-        onRefrescar();
     }
 
     public void setApp(Application application) {
@@ -93,16 +128,46 @@ public class HistorialEnviosViewController {
 
     @FXML
     void onRefrescar() {
-        tblEnvios.getItems().clear();
+        enviosObservableList.clear();
         Collection<Envio> envios = envioController.obtenerEnvios();
         enviosObservableList.setAll(envios);
-        tblEnvios.setItems(enviosObservableList);
         tblEnvios.refresh();
+        onLimpiarFiltros();
+    }
 
-        btnRastrear.setDisable(true);
-        btnPagar.setDisable(true);
-        btnModificar.setDisable(true);
-        btnCancelar.setDisable(true);
+    @FXML
+    void onFiltrar() {
+        filteredData.setPredicate(envio -> {
+            boolean estadoCoincide = true;
+            boolean fechaCoincide = true;
+
+            String estadoFiltro = cmbEstadoFiltro.getValue();
+            if (estadoFiltro != null && !estadoFiltro.equals("Todos")) {
+                estadoCoincide = envio.getTipoEstadoEnvio().name().equals(estadoFiltro);
+            }
+
+            LocalDate fechaInicio = dpFechaInicio.getValue();
+            LocalDate fechaFin = dpFechaFin.getValue();
+            LocalDate fechaEnvio = envio.getFechaCreacion();
+
+            if (fechaInicio != null && fechaFin != null) {
+                fechaCoincide = !fechaEnvio.isBefore(fechaInicio) && !fechaEnvio.isAfter(fechaFin);
+            } else if (fechaInicio != null) {
+                fechaCoincide = !fechaEnvio.isBefore(fechaInicio);
+            } else if (fechaFin != null) {
+                fechaCoincide = !fechaEnvio.isAfter(fechaFin);
+            }
+
+            return estadoCoincide && fechaCoincide;
+        });
+    }
+
+    @FXML
+    void onLimpiarFiltros() {
+        cmbEstadoFiltro.setValue("Todos");
+        dpFechaInicio.setValue(null);
+        dpFechaFin.setValue(null);
+        filteredData.setPredicate(p -> true);
     }
 
     @FXML
