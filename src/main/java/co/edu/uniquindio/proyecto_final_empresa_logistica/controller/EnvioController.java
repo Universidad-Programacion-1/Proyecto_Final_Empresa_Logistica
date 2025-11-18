@@ -1,12 +1,11 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.controller;
 
-import co.edu.uniquindio.proyecto_final_empresa_logistica.decorator.EnvioDecorator;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.factory.ModelFactory;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.EmpresaLogistica;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Envio;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Pago;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Repartidor;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.model.Usuario;
-import co.edu.uniquindio.proyecto_final_empresa_logistica.strategy.TotalCriterio;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.util.Collection;
@@ -33,8 +32,8 @@ public class EnvioController {
                             double costoBase, boolean carton, boolean burbuja, boolean impermeable,
                             String idRepartidor, String idUsuario){
         return modelFactory.crearEnvio( id,  origen,  destino,  peso, dimensiones,
-         costoBase,  carton,  burbuja,  impermeable,
-         idRepartidor, idUsuario);
+                costoBase,  carton,  burbuja,  impermeable,
+                idRepartidor, idUsuario);
     }
 
     public Collection<Envio> obtenerEnvios() {
@@ -53,7 +52,15 @@ public class EnvioController {
         return modelFactory.actualizarEstadoEnvio(id, estado);
     }
 
+    public boolean realizarPago(Envio envio, String metodoPago, String idUsuario) {
+        return modelFactory.realizarPago(envio, metodoPago, idUsuario);
+    }
 
+    public Collection<Pago> obtenerPagos(String idUsuario) {
+        return modelFactory.obtenerPagos(idUsuario);
+    }
 
-
+    public Usuario getUsuario() {
+        return modelFactory.getUsuario();
+    }
 }

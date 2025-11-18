@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.HistorialPagosViewController">
+    <children>
+        <Label layoutX="26.0" layoutY="20.0" text="Mis Comprobantes de Pago">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tblPagos" layoutX="26.0" layoutY="60.0" prefHeight="350.0" prefWidth="550.0">
+            <columns>
+                <TableColumn fx:id="colIdPago" prefWidth="120.0" text="ID Pago" />
+                <TableColumn fx:id="colIdEnvio" prefWidth="120.0" text="ID Envío" />
+                <TableColumn fx:id="colFecha" prefWidth="100.0" text="Fecha" />
+                <TableColumn fx:id="colMonto" prefWidth="100.0" text="Monto" />
+                <TableColumn fx:id="colMetodo" prefWidth="110.0" text="Método" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnRefrescar" layoutX="500.0" layoutY="430.0" mnemonicParsing="false" onAction="#onRefrescar" prefWidth="80.0" text="Refrescar" />
+    </children>
+</AnchorPane>

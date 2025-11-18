@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.PasarelaPagoViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="30.0" text="Pasarela de Pago">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        <Label layoutX="30.0" layoutY="80.0" text="Monto a Pagar:">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblMonto" layoutX="150.0" layoutY="80.0" text="\$ 0.0" textFill="#c0392b">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <GridPane hgap="10.0" layoutX="30.0" layoutY="130.0" prefHeight="180.0" prefWidth="390.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="130.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="260.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Método de Pago:" />
+                <ComboBox fx:id="cmbMetodoPago" prefWidth="260.0" GridPane.columnIndex="1" />
+                <Label text="Nombre en Tarjeta:" GridPane.rowIndex="1" />
+                <TextField fx:id="txtNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Número de Tarjeta:" GridPane.rowIndex="2" />
+                <TextField fx:id="txtNumero" promptText="0000 0000 0000 0000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Fecha Exp. (MM/AA):" GridPane.rowIndex="3" />
+                <TextField fx:id="txtFechaExp" promptText="12/26" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="CVV:" GridPane.rowIndex="4" />
+                <TextField fx:id="txtCvv" promptText="123" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </children>
+        </GridPane>
+        <Button fx:id="btnConfirmarPago" layoutX="310.0" layoutY="340.0" mnemonicParsing="false" onAction="#onConfirmarPago" prefWidth="110.0" text="Confirmar Pago" />
+    </children>
+</AnchorPane>

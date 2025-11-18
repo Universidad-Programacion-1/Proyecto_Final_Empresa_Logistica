@@ -15,6 +15,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     private Collection<Usuario> usuarios;
     private Collection<Repartidor> repartidores;
     private Collection<Envio> envios;
+    private Collection<Pago> listaPagos;
     int tipoPersona;
     Usuario usuario1;
     Administrador administrador1;
@@ -29,6 +30,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         this.usuarios = new LinkedList<>();
         this.repartidores = new LinkedList<>();
         this.envios = new LinkedList<>();
+        this.listaPagos = new LinkedList<>();
     }
 
 
@@ -49,6 +51,14 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     }
 
     public Collection<Envio> getEnvios() {return envios;}
+
+    public Collection<Pago> getListaPagos() {
+        return listaPagos;
+    }
+
+    public void setListaPagos(Collection<Pago> listaPagos) {
+        this.listaPagos = listaPagos;
+    }
 
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
 
@@ -291,10 +301,10 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         Map<String, Long> destinos = DISTANCIAS.get(origen);
 
         if (destinos != null) {
-            return destinos.getOrDefault(destino, 100L); // si no existe, valor por defecto
+            return destinos.getOrDefault(destino, 100L);
         }
 
-        return 100L; // origen no encontrado
+        return 100L;
     }
 
     private static final Map<String, Map<String, Long>> DISTANCIAS = Map.of(
