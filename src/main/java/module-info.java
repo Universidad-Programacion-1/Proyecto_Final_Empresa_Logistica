@@ -6,6 +6,7 @@ module co.edu.uniquindio.proyecto_final_empresa_logistica {
     requires java.desktop;
     requires kernel;
     requires layout;
+   // requires co.edu.uniquindio.proyecto_final_empresa_logistica;
     //requires jdk.javadoc; duda
 
 

@@ -231,8 +231,8 @@ public class ModelFactory implements IModelFactoryServices {
         return empresaLogistica.getEnvios();
     }
 
-    public Collection<Envio> obtenerEnviosRepartidor(String idRepartidor) {
-        return empresaLogistica.obtenerEnviosRepartidor(idRepartidor);
+    public Collection<Envio> obtenerEnviosRepartidor(String id) {
+        return empresaLogistica.obtenerEnviosRepartidor(id);
     }
 
     public Collection<Envio> obtenerEnviosUsuario(String idUsuario) {
