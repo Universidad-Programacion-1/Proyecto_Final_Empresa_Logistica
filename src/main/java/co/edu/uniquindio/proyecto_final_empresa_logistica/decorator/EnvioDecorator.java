@@ -1,12 +1,11 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.decorator;
 
 public abstract class EnvioDecorator implements IEnvio {
+
     protected IEnvio envioDecorado;
 
-    EmpaqueCartonDecorator empaqueCartonDecorator;
-
-    public EnvioDecorator(IEnvio envio) {
-        this.envioDecorado = envio;
+    public EnvioDecorator(IEnvio envioDecorado) {
+        this.envioDecorado = envioDecorado; // <--- ¡ESTO FALTABA!
     }
 
     @Override

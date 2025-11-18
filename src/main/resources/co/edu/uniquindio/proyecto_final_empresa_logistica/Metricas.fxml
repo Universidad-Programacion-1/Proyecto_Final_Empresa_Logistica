@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane fitToWidth="true" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.MetricasViewController">
+    <content>
+        <VBox spacing="20.0" style="-fx-background-color: white;">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <children>
+                <Label text="Dashboard Ejecutivo" textFill="#2c3e50">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+
+                <HBox spacing="15.0" alignment="CENTER_LEFT">
+                    <children>
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: #3498db; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);">
+                            <children>
+                                <Label text="Total Envíos" textFill="WHITE"><font><Font size="14.0" /></font></Label>
+                                <Label fx:id="lblTotalEnvios" text="0" textFill="WHITE"><font><Font name="System Bold" size="32.0" /></font></Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="220.0" style="-fx-background-color: #27ae60; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);">
+                            <children>
+                                <Label text="Ingresos Totales" textFill="WHITE"><font><Font size="14.0" /></font></Label>
+                                <Label fx:id="lblTotalFacturado" text="\$ 0.0" textFill="WHITE"><font><Font name="System Bold" size="32.0" /></font></Label>
+                            </children>
+                        </VBox>
+
+                        <VBox alignment="CENTER" prefHeight="100.0" prefWidth="180.0" style="-fx-background-color: #e67e22; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);">
+                            <children>
+                                <Label text="Tiempo Promedio" textFill="WHITE"><font><Font size="14.0" /></font></Label>
+                                <Label fx:id="lblTiempoPromedio" text="0 Días" textFill="WHITE"><font><Font name="System Bold" size="28.0" /></font></Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <Separator />
+
+                <HBox spacing="20.0" prefHeight="300.0">
+                    <children>
+                        <VBox HBox.hgrow="ALWAYS" alignment="TOP_CENTER">
+                            <children>
+                                <Label text="Servicios Adicionales Más Usados" textFill="#7f8c8d"><font><Font name="System Bold" size="14.0" /></font></Label>
+                                <PieChart fx:id="graficaServicios" labelsVisible="true" />
+                            </children>
+                        </VBox>
+
+                        <VBox HBox.hgrow="ALWAYS" alignment="TOP_CENTER">
+                            <children>
+                                <Label text="Estado de Envíos Actuales" textFill="#7f8c8d"><font><Font name="System Bold" size="14.0" /></font></Label>
+                                <BarChart fx:id="graficaEstados" legendVisible="false">
+                                    <xAxis><CategoryAxis label="Estado" side="BOTTOM" /></xAxis>
+                                    <yAxis><NumberAxis label="Cantidad" side="LEFT" /></yAxis>
+                                </BarChart>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <Separator />
+
+                <VBox prefHeight="250.0" alignment="TOP_CENTER">
+                    <children>
+                        <Label text="Tendencia de Ingresos por Periodo" textFill="#7f8c8d"><font><Font name="System Bold" size="14.0" /></font></Label>
+                        <AreaChart fx:id="graficaIngresos" legendVisible="false">
+                            <xAxis><CategoryAxis label="Mes" side="BOTTOM" /></xAxis>
+                            <yAxis><NumberAxis label="Ingresos ($)" side="LEFT" /></yAxis>
+                        </AreaChart>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

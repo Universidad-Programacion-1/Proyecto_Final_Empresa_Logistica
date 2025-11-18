@@ -4,10 +4,10 @@ module co.edu.uniquindio.proyecto_final_empresa_logistica {
     requires javafx.graphics;
     requires java.mail;
     requires java.desktop;
-
-    // iText 7
     requires kernel;
     requires layout;
+    //requires jdk.javadoc; duda
+
 
     opens co.edu.uniquindio.proyecto_final_empresa_logistica to javafx.fxml;
     exports co.edu.uniquindio.proyecto_final_empresa_logistica;

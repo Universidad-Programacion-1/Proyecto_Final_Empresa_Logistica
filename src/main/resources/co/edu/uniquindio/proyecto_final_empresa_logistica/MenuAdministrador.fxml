@@ -1,77 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" prefHeight="539.0" prefWidth="511.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-       <children>
-       <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE">
-           <tabs>
-               <Tab text="Crear Usuario">
-                   <content>
-                       <AnchorPane>
-                           <children>
-                               <SplitPane orientation="VERTICAL">
-                                   <items>
-                                       <fx:include source="CrearUsuario.fxml" />
-                                   </items>
-                               </SplitPane>
-                           </children>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab text="Decorador">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
-                           <children>
-                               <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
-                                   <items>
-                                       <fx:include source="DecoratorEnvio.fxml" />
-                                   </items>
-                               </SplitPane>
-                           </children>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab text="Crear Repartidor">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
-                           <children>
-                               <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
-                                   <items>
-                                       <fx:include source="CrearRepartidor.fxml" />
-                                   </items>
-                               </SplitPane>
-                           </children>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab text="">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
-                           <children>
-                               <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
-                                   <items>
-                                       <fx:include source="CrearUsuario.fxml" />
-                                   </items>
-                               </SplitPane>
-                           </children>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-               <Tab text="Generar Reportes">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
-                           <children>
-                               <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
-                                   <items>
-                                       <fx:include source="GenerarReportesAdministrador.fxml" />
-                                   </items>
-                               </SplitPane>
-                           </children>
-                       </AnchorPane>
-                   </content>
-               </Tab>
-           </tabs>
-       </TabPane>
-   </children>
+
+<VBox alignment="CENTER" prefHeight="539.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane layoutX="14.0" layoutY="14.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="Dashboard y Métricas">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="600.0">
+                                    <items>
+                                        <fx:include source="Metricas.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Crear Usuario">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <SplitPane orientation="VERTICAL">
+                                    <items>
+                                        <fx:include source="CrearUsuario.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Decorador">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
+                                    <items>
+                                        <fx:include source="DecoratorEnvio.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Crear Repartidor">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
+                                    <items>
+                                        <fx:include source="CrearRepartidor.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <Tab text="Gestión de Envíos">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="550.0">
+                                    <items>
+                                        <fx:include source="PaquetesRepartidor.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Generar Reportes">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0">
+                            <children>
+                                <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="471.0">
+                                    <items>
+                                        <fx:include source="GenerarReportesAdministrador.fxml" />
+                                    </items>
+                                </SplitPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </VBox>

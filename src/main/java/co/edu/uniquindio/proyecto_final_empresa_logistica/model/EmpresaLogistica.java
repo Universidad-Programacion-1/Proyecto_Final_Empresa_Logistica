@@ -1,12 +1,14 @@
 package co.edu.uniquindio.proyecto_final_empresa_logistica.model;
 
 import co.edu.uniquindio.proyecto_final_empresa_logistica.services.IEmpresaLogisticaServices;
+import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoDisponible;
 import co.edu.uniquindio.proyecto_final_empresa_logistica.utils.TipoEstadoEnvio;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.Map;
 
 public class EmpresaLogistica implements IEmpresaLogisticaServices {
 
@@ -15,6 +17,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     private Collection<Usuario> usuarios;
     private Collection<Repartidor> repartidores;
     private Collection<Envio> envios;
+    private Collection<Pago> listaPagos;
     int tipoPersona;
     Usuario usuario1;
     Administrador administrador1;
@@ -29,6 +32,7 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         this.usuarios = new LinkedList<>();
         this.repartidores = new LinkedList<>();
         this.envios = new LinkedList<>();
+        this.listaPagos = new LinkedList<>();
     }
 
 
@@ -49,6 +53,28 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
     }
 
     public Collection<Envio> getEnvios() {return envios;}
+
+    public Collection<Pago> getListaPagos() {
+        return listaPagos;
+    }
+
+    public void setListaPagos(Collection<Pago> listaPagos) {
+        this.listaPagos = listaPagos;
+    }
+
+
+    public Collection<Repartidor> obtenerRepartidoresDisponibles() {
+        Collection<Repartidor> disponibles = new ArrayList<>();
+        if (repartidores != null) {
+            for (Repartidor r : repartidores) {
+                // Comparamos con el ENUM
+                if (r.getEstadoDisponible() == TipoEstadoDisponible.disponible) {
+                    disponibles.add(r);
+                }
+            }
+        }
+        return disponibles;
+    }
 
     public boolean agregarAdministrador(String id, String nombre, String correo, String telefono, String password) {
 
@@ -281,6 +307,21 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         return centinela;
     }
 
+    public long calcularDistancia(String origen, String destino) {
+
+        if (origen.equalsIgnoreCase(destino)) {
+            return 5;
+        }
+
+        Map<String, Long> destinos = DISTANCIAS.get(origen);
+
+        if (destinos != null) {
+            return destinos.getOrDefault(destino, 100L);
+        }
+
+        return 100L;
+    }
+
     public boolean validarCorreoTelefono(String correo, String telefono) {
         boolean centinela = false;
         for (Usuario usuario : usuarios) {
@@ -343,4 +384,38 @@ public class EmpresaLogistica implements IEmpresaLogisticaServices {
         }
         return enviosRepartidor;
     }
+
+    private static final Map<String, Map<String, Long>> DISTANCIAS = Map.of(
+            "Armenia", Map.of(
+                    "Cali", 180L,
+                    "Medellin", 250L,
+                    "Bogota", 290L
+            ),
+            "Cali", Map.of(
+                    "Armenia", 180L,
+                    "Medellin", 420L,
+                    "Bogota", 460L
+            ),
+            "Medellin", Map.of(
+                    "Armenia", 250L,
+                    "Cali", 420L,
+                    "Bogota", 420L
+            ),
+            "Bogota", Map.of(
+                    "Armenia", 290L,
+                    "Cali", 460L,
+                    "Medellin", 420L
+            )
+    );
+
+
+    public double cotizarEnvio(String origen, String destino, double peso, String volumen, String prioridad) {
+
+        long distancia = calcularDistancia(origen, destino);
+
+        Tarifa tarifa = new Tarifa(distancia, prioridad, volumen, (long) peso);
+
+        return tarifa.calcularTarifa();
+    }
+
 }

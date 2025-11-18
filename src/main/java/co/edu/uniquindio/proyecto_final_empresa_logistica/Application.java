@@ -39,7 +39,6 @@ public class Application extends javafx.application.Application {
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

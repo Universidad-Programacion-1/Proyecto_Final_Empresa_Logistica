@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.RastrearEnvioViewController">
+    <children>
+        <Label layoutX="30.0" layoutY="30.0" text="Rastreo del Envío:">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblIdEnvio" layoutX="210.0" layoutY="30.0" text="ID-000000000">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <ProgressBar fx:id="progressBar" layoutX="40.0" layoutY="100.0" prefHeight="30.0" prefWidth="420.0" progress="0.0" />
+
+        <HBox alignment="CENTER" layoutX="40.0" layoutY="140.0" prefHeight="40.0" prefWidth="420.0" spacing="60.0">
+            <children>
+                <Label fx:id="lblSolicitado" text="Solicitado" />
+                <Label fx:id="lblAsignado" text="Asignado" />
+                <Label fx:id="lblEnRuta" text="En Ruta" />
+                <Label fx:id="lblEntregado" text="Entregado" />
+            </children>
+        </HBox>
+
+        <Label layoutX="40.0" layoutY="220.0" text="Estado Actual:">
+            <font>
+                <Font size="16.0" />
+            </font>
+        </Label>
+        <Label fx:id="lblEstadoActual" layoutX="150.0" layoutY="220.0" text="PENDIENTE_PAGO" textFill="#e67e22">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>

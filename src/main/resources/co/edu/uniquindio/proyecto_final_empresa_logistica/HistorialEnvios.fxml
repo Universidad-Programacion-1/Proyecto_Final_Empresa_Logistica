@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.HistorialEnviosViewController">
+    <children>
+        <Label layoutX="26.0" layoutY="20.0" text="Mis Envíos">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+
+        <HBox layoutX="26.0" layoutY="60.0" prefWidth="550.0" spacing="10.0" alignment="CENTER_LEFT">
+            <children>
+                <Label text="Estado:" />
+                <ComboBox fx:id="cmbEstadoFiltro" prefWidth="120.0" />
+                <Label text="Desde:" />
+                <DatePicker fx:id="dpFechaInicio" prefWidth="120.0" />
+                <Label text="Hasta:" />
+                <DatePicker fx:id="dpFechaFin" prefWidth="120.0" />
+                <Button fx:id="btnFiltrar" mnemonicParsing="false" onAction="#onFiltrar" text="Filtrar" />
+                <Button fx:id="btnLimpiarFiltros" mnemonicParsing="false" onAction="#onLimpiarFiltros" text="Limpiar" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tblEnvios" layoutX="26.0" layoutY="100.0" prefHeight="350.0" prefWidth="550.0">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="100.0" text="ID Envío" />
+                <TableColumn fx:id="colOrigen" prefWidth="100.0" text="Origen" />
+                <TableColumn fx:id="colDestino" prefWidth="100.0" text="Destino" />
+                <TableColumn fx:id="colCosto" prefWidth="100.0" text="Costo Total" />
+                <TableColumn fx:id="colEstado" prefWidth="150.0" text="Estado" />
+            </columns>
+        </TableView>
+
+        <Button fx:id="btnRastrear" layoutX="140.0" layoutY="470.0" mnemonicParsing="false" onAction="#onRastrear" prefWidth="80.0" text="Rastrear" />
+        <Button fx:id="btnPagar" layoutX="230.0" layoutY="470.0" mnemonicParsing="false" onAction="#onPagar" prefWidth="80.0" text="Pagar" />
+        <Button fx:id="btnModificar" layoutX="320.0" layoutY="470.0" mnemonicParsing="false" onAction="#onModificar" prefWidth="80.0" text="Modificar" />
+        <Button fx:id="btnCancelar" layoutX="410.0" layoutY="470.0" mnemonicParsing="false" onAction="#onCancelar" prefWidth="80.0" text="Cancelar" />
+        <Button fx:id="btnRefrescar" layoutX="500.0" layoutY="470.0" mnemonicParsing="false" onAction="#onRefrescar" prefWidth="80.0" text="Refrescar" />
+    </children>
+</AnchorPane>
