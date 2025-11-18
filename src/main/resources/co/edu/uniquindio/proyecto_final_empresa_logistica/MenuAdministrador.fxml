@@ -71,7 +71,7 @@
                             <children>
                                 <SplitPane orientation="VERTICAL" prefHeight="465.0" prefWidth="550.0">
                                     <items>
-                                        <fx:include source="PaquetesRepartidor.fxml" />
+                                        <fx:include source="PaquetesAdministrador.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>

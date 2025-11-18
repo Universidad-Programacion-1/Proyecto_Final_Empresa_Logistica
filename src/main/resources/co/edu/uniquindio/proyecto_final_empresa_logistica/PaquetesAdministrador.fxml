@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="717.0" prefWidth="883.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyecto_final_empresa_logistica.viewController.PaquetesAdministradorViewController">
+    <children>
+        <SplitPane layoutX="-3.0" orientation="VERTICAL" prefHeight="746.0" prefWidth="891.0">
+            <items>
+                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="726.0" prefWidth="889.0">
+                    <children>
+                        <Pane prefHeight="380.0" prefWidth="888.0" style="-fx-background-color: #f4f4f4;">
+                            <effect>
+                                <Blend />
+                            </effect>
+                            <children>
+                                <Label layoutX="306.0" layoutY="14.0" text="Paquetes" textFill="#2c3e50">
+                                    <font>
+                                        <Font name="System Bold" size="64.0" />
+                                    </font>
+                                </Label>
+
+                                <Label layoutX="150.0" layoutY="143.0" text="1. Asignar Repartidor:" textFill="#e67e22">
+                                    <font><Font name="System Bold" size="16.0" /></font>
+                                </Label>
+                                <ComboBox fx:id="cbxRepartidores" layoutX="150.0" layoutY="175.0" prefWidth="200.0" promptText="Seleccionar Repartidor" />
+
+                                <Label layoutX="450.0" layoutY="143.0" text="2. Estado del Envio:" textFill="#e67e22">
+                                    <font><Font name="System Bold" size="16.0" /></font>
+                                </Label>
+                                <ComboBox fx:id="cbxEstadoEnvio" layoutX="450.0" layoutY="175.0" prefWidth="200.0" promptText="Seleccionar Estado" />
+
+                                <Button fx:id="btnActualizarEstado" layoutX="344.0" layoutY="250.0" mnemonicParsing="false" onAction="#onActualizarEstado" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #27ae60;" text="Guardar Cambios" textFill="WHITE">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Button>
+                            </children>
+                        </Pane>
+
+                        <TableView fx:id="tblListEnvios" layoutX="14.0" layoutY="388.0" prefHeight="340.0" prefWidth="866.0">
+                            <columns>
+                                <TableColumn fx:id="tbcIdEnvio" prefWidth="72.0" text="Id" />
+                                <TableColumn fx:id="tbcDestino" prefWidth="106.0" text="Destino" />
+                                <TableColumn fx:id="tbcDescripcion" prefWidth="150.0" text="Descripción/Dim." />
+                                <TableColumn fx:id="tbcFecha" prefWidth="120.0" text="Fecha Entrega" />
+                                <TableColumn fx:id="tbcRepartidor" prefWidth="150.0" text="Repartidor Asignado" />
+                                <TableColumn fx:id="tbcEstado" prefWidth="105.0" text="Estado" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
+</AnchorPane>

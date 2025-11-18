@@ -23,36 +23,6 @@
                        </AnchorPane>
                    </content>
                </Tab>
-               <Tab text="Reproducir Video">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                       <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL" prefHeight="621.0" prefWidth="931.0">
-                           <items>
-                               <fx:include source="PaquetesRepartidor.fxml" />
-                           </items>
-                       </SplitPane>
-                   </content>
-               </Tab>
-               <Tab text="Stok">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                       <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL" prefHeight="621.0" prefWidth="931.0">
-                           <items>
-                               <fx:include source="PaquetesRepartidor.fxml" />
-                           </items>
-                       </SplitPane>
-                   </content>
-               </Tab>
-               <Tab text="Inventario 1">
-                   <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                       <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL" prefHeight="621.0" prefWidth="931.0">
-                           <items>
-                               <fx:include source="PaquetesRepartidor.fxml" />
-                           </items>
-                       </SplitPane>
-                   </content>
-               </Tab>
                <Tab text="Editar Perfil">
                    <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
